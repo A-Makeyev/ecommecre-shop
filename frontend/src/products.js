@@ -1,0 +1,40 @@
+const products = [
+    {
+        _id: '1',
+        name: 'Airpods pro',
+        image: '/images/airpods.jpg',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur',
+        brand: 'Apple',
+        category: 'Electronics',
+        price: '89.99',
+        countInStock: 0,
+        rating: 4.5,
+        numReviews: 12,
+    },
+    {
+        _id: '2',
+        name: 'Alexa',
+        image: '/images/alexa.jpg',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur',
+        brand: 'Apple',
+        category: 'Electronics',
+        price: '189.99',
+        countInStock: 30,
+        rating: 3,
+        numReviews: 22,
+    },
+    {
+        _id: '3',
+        name: 'Camera',
+        image: '/images/camera.jpg',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur',
+        brand: 'Apple',
+        category: 'Electronics',
+        price: '849.99',
+        countInStock: 11,
+        rating: 2.5,
+        numReviews: 124,
+    },
+]
+
+export default products
