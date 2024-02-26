@@ -1,6 +1,5 @@
 const products = [
     {
-        _id: '1',
         name: 'Airpods pro',
         image: '/images/airpods.jpg',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur',
@@ -12,7 +11,6 @@ const products = [
         numReviews: 12,
     },
     {
-        _id: '2',
         name: 'Alexa',
         image: '/images/alexa.jpg',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur',
@@ -24,7 +22,6 @@ const products = [
         numReviews: 22,
     },
     {
-        _id: '3',
         name: 'Camera',
         image: '/images/camera.jpg',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur',
@@ -34,6 +31,39 @@ const products = [
         countInStock: 11,
         rating: 2.5,
         numReviews: 124,
+    },
+    {
+        name: 'Playstation',
+        image: '/images/playstation.jpg',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur',
+        brand: 'Apple',
+        category: 'Electronics',
+        price: '489.99',
+        countInStock: 0,
+        rating: 4.5,
+        numReviews: 112,
+    },
+    {
+        name: 'Phone',
+        image: '/images/phone.jpg',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur',
+        brand: 'Apple',
+        category: 'Electronics',
+        price: '229.99',
+        countInStock: 302,
+        rating: 1.3,
+        numReviews: 122,
+    },
+    {
+        name: 'Mouse',
+        image: '/images/mouse.jpg',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur',
+        brand: 'Apple',
+        category: 'Electronics',
+        price: '119.99',
+        countInStock: 41,
+        rating: 5,
+        numReviews: 1214,
     },
 ]
 
