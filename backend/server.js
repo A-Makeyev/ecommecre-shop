@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000
 const app = express()
 
 app.get('/', (request, response) => {
-    response.send('<h1>Server is running..</h1>')
+    response.send('<h1 style="text-align: center; margin-top: 20%;">Server is Running</h1>')
 })
 
 app.use('/api/products', productRoutes)

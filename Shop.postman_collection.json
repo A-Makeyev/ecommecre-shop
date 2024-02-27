@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "1302d2cd-c818-4166-9166-68067f08dc8d",
+		"name": "Shop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9123995"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Get All Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/products",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products"
+							]
+						},
+						"description": "get all products"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/products/:id",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "65dcf9d5b1e67b472b4c147f"
+								}
+							]
+						},
+						"description": "get single product"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
