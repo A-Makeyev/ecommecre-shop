@@ -1,3 +1,7 @@
+*:focus {
+  outline: none !important;
+}
+
 a {
   text-decoration: none;
 }
@@ -11,7 +15,7 @@ main {
 }
 
 .rating svg {
-  color: #f8e825;
+  color: #F8E825;
 }
 
 .rating-text {
@@ -21,10 +25,14 @@ main {
 }
 
 .product-title {
-  height: 2.5em; /* Set a fixed height */
-  overflow: hidden; /* Hide overflow content */
-  text-overflow: ellipsis; /* Add ellipsis for long text */
-  white-space: nowrap; /* Prevent wrapping */
+  height: 2.5em;
+  /* Set a fixed height */
+  overflow: hidden;
+  /* Hide overflow content */
+  text-overflow: ellipsis;
+  /* Add ellipsis for long text */
+  white-space: nowrap;
+  /* Prevent wrapping */
 }
 
 table td,
@@ -38,9 +46,9 @@ table th {
 
 .review h2 {
   font-size: 24px;
-  background: #f4f4f4;
+  background: #F4F4F4;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #DDD;
 }
 
 .review button {
@@ -55,3 +63,83 @@ table th {
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
 }
+
+.cart-item-count:after {
+  content: attr(value);
+  display: inline-block;
+  position: absolute;
+  position: relative;
+  height: 19px;
+  width: 19px;
+  right: 56px;
+  top: -15px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  background: #FF0000;
+  color: #DDD;
+  border-radius: 50%;
+  opacity: 0.9;
+}
+
+.cart-item-count-invisible:after {
+  content: attr(value);
+  display: inline-block;
+  position: absolute;
+  text-align: center;
+  position: relative;
+  height: 19px;
+  width: 19px;
+  right: 56px;
+  top: -15px;
+}
+
+.qty-select {
+  font-weight: 600;
+  margin-top: 7px;
+  margin-left: 4px;
+  height: 27px;
+  width: 40px;
+  padding: 0 0 1px;
+  text-align: center;
+  scrollbar-width: none;
+  -ms-overflow-style: none;  
+}
+
+.qty-select::-webkit-scrollbar { 
+  display: none; 
+}
+
+.out-of-stock:after {
+  content: 'Out of Stock';
+  display: block;
+  position: absolute;
+  font-size: 12px;
+  font-weight: 600;
+  color: #FF0000;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: inherit;
+  -webkit-box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .qty-select {
+    margin-top: 7px;
+    margin-left: -7px;
+  }
+}
+
+@media (max-width: 490px) {
+  .qty-select {
+    margin-top: 6px;
+    margin-left: 3px;
+  }
+  
+  .xs-price-width-120 {
+    width: 120px !important;
+  }
+}
+

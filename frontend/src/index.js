@@ -4,6 +4,7 @@ import './assets/styles/index.css'
 import reportWebVitals from './reportWebVitals'
 import HomeScreen from './screens/HomeScreen'
 import ProductScreen from './screens/ProductScreen'
+import CartScreen from './screens/CartScreen'
 import App from './App'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route path="/" index={true} element={<HomeScreen />}></Route>
       <Route path="/product/:id" element={<ProductScreen />}></Route>
+      <Route path="/cart" element={<CartScreen />}></Route>
     </Route>
   )
 )

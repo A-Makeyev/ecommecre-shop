@@ -1,11 +1,14 @@
-import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
+import { useParams, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import Rating from '../components/Rating'
 import { FaArrowLeft } from 'react-icons/fa'
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
-import Loader from '../components/Loader'
+import { addToCart } from '../slices/cartSlice'
 import Message from '../components/Message'
+import Loader from '../components/Loader'
 // import { useEffect, useState } from 'react'
 // import axios from 'axios'
 
@@ -20,8 +23,20 @@ const ProductScreen = () => {
     //     fetchProduct()
     // }, [productId])
 
+    const [ qty, setQty ] = useState(1)
     const { id: productId } = useParams()
     const { data: product, isLoading, error } = useGetProductDetailsQuery(productId)
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const addToCartHandler = () => {
+        dispatch(addToCart({ ...product, qty }))
+    }
+    const buyNowHandler = () => {
+        dispatch(addToCart({ ...product, qty }))
+        navigate('/cart')
+    }
 
     return (
         <>
@@ -63,9 +78,7 @@ const ProductScreen = () => {
                                 <ListGroup variant="flush">
                                     <ListGroup.Item>
                                         <Row>
-                                            <Col>
-                                                Price:
-                                            </Col>
+                                            <Col>Price:</Col>
                                             <Col>
                                                 <strong>${product.price}</strong>
                                             </Col>
@@ -73,9 +86,7 @@ const ProductScreen = () => {
                                     </ListGroup.Item>
                                     <ListGroup.Item>
                                         <Row>
-                                            <Col>
-                                                Status:
-                                            </Col>
+                                            <Col>Status:</Col>
                                             <Col>
                                                 <strong>
                                                     {product.countInStock > 0
@@ -86,10 +97,52 @@ const ProductScreen = () => {
                                             </Col>
                                         </Row>
                                     </ListGroup.Item>
+
+                                    {product.countInStock > 0 && (
+                                        <ListGroup.Item>
+                                            <Row>
+                                                <Col className="mt-2">Quantity:</Col>
+                                                <Col>
+                                                    <Form.Control
+                                                        as="select"
+                                                        value={qty}
+                                                        role="button"
+                                                        onChange={(event) => setQty(Number(event.target.value))}
+                                                    >
+                                                        {[...Array(product.countInStock).keys()].map((item) => (
+                                                            <option key={item + 1} value={item + 1}>
+                                                                {item + 1}
+                                                            </option>
+                                                        ))}
+                                                    </Form.Control>
+                                                </Col>
+                                            </Row>
+                                        </ListGroup.Item>
+                                    )}
+
                                     <ListGroup.Item>
-                                        <Button type="button" className="w-100 btn-block" disabled={product.countInStock === 0}>
-                                            Add To Cart
-                                        </Button>
+                                        <Row>
+                                            <Col className="pe-0">
+                                                <Button 
+                                                    type="button" 
+                                                    className="w-100 btn-block" 
+                                                    disabled={product.countInStock === 0}
+                                                    onClick={addToCartHandler}
+                                                >
+                                                    Add To Cart
+                                                </Button>
+                                            </Col>
+                                            <Col>
+                                                <Button 
+                                                    type="button" 
+                                                    className="w-100 btn-block" 
+                                                    disabled={product.countInStock === 0}
+                                                    onClick={buyNowHandler}
+                                                >
+                                                    Buy Now
+                                                </Button>
+                                            </Col>
+                                        </Row>
                                     </ListGroup.Item>
                                 </ListGroup>
                             </Card>
