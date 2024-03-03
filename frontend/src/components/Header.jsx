@@ -22,7 +22,7 @@ const Header = () => {
         try {
             await logoutApiCall().unwrap()
             dispatch(logout())
-            navigate('/login')
+            navigate('/')
             toast('Loggout out')
         } catch (error) {
             toast.error(error?.data?.message || error.error)
@@ -30,7 +30,7 @@ const Header = () => {
     }
 
     return (
-        <header>
+        <header className="sticky-top">
             <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
                 <Container>
                     <LinkContainer to="/">

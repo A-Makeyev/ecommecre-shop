@@ -2,13 +2,14 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import { useParams, useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
-import Rating from '../components/Rating'
-import { FaArrowLeft } from 'react-icons/fa'
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
 import { addToCart } from '../slices/cartSlice'
+import { addedToCartToastOptions } from '../utils/cartUtils'
+import { toast } from 'react-toastify'
+import GoBackButton from '../components/GoBackButton'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import Rating from '../components/Rating'
 // import { useEffect, useState } from 'react'
 // import axios from 'axios'
 
@@ -31,6 +32,10 @@ const ProductScreen = () => {
 
     const addToCartHandler = () => {
         dispatch(addToCart({ ...product, qty }))
+        toast.success(
+            `${qty > 1 ? `${qty} ${product.name}s were` : `${qty} ${product.name} was`} added to your cart`,
+            addedToCartToastOptions
+        )
     }
     
     const buyNowHandler = () => {
@@ -40,11 +45,7 @@ const ProductScreen = () => {
 
     return (
         <>
-            <Link to="/" className='btn btn-light my-3'>
-                <FaArrowLeft className='mb-1' />
-                {' '}
-                <span>Go Back</span>
-            </Link>
+            <GoBackButton />
 
             {isLoading ? (
                 <Loader />

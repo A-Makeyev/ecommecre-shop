@@ -6,7 +6,9 @@ import { useRegisterMutation } from '../slices/usersApiSlice'
 import { setCredentials } from '../slices/authSlice'
 import { toast } from 'react-toastify'
 import FormContainer from '../components/FormContainer'
+import GoBackButton from '../components/GoBackButton'
 import Loader from '../components/Loader'
+
 
 
 const RegisterScreen = () => {
@@ -46,66 +48,69 @@ const RegisterScreen = () => {
     }
 
     return (
-        <FormContainer>
-            <h1>Sign Up</h1>
-            <Form onSubmit={submitHandler}>
-                <Form.Group controlId="name" className="my-3">
-                    <Form.Label>Full Name</Form.Label>
-                    <Form.Control
-                        type="name"
-                        value={name}
-                        placeholder="Name"
-                        onChange={(event) => setName(event.target.value)}
-                    >
-                    </Form.Control>
-                </Form.Group>
+        <>
+            <GoBackButton />
+            <FormContainer>
+                <h1>Sign Up</h1>
+                <Form onSubmit={submitHandler}>
+                    <Form.Group controlId="name" className="my-3">
+                        <Form.Label>Full Name</Form.Label>
+                        <Form.Control
+                            type="name"
+                            value={name}
+                            placeholder="Name"
+                            onChange={(event) => setName(event.target.value)}
+                        >
+                        </Form.Control>
+                    </Form.Group>
 
-                <Form.Group controlId="email" className="my-3">
-                    <Form.Label>Email Address</Form.Label>
-                    <Form.Control
-                        type="email"
-                        value={email}
-                        placeholder="Email"
-                        onChange={(event) => setEmail(event.target.value)}
-                    >
-                    </Form.Control>
-                </Form.Group>
+                    <Form.Group controlId="email" className="my-3">
+                        <Form.Label>Email Address</Form.Label>
+                        <Form.Control
+                            type="email"
+                            value={email}
+                            placeholder="Email"
+                            onChange={(event) => setEmail(event.target.value)}
+                        >
+                        </Form.Control>
+                    </Form.Group>
 
-                <Form.Group controlId="password" className="my-3">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        value={password}
-                        placeholder="Password"
-                        onChange={(event) => setPassword(event.target.value)}
-                    >
-                    </Form.Control>
-                </Form.Group>
+                    <Form.Group controlId="password" className="my-3">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control
+                            type="password"
+                            value={password}
+                            placeholder="Password"
+                            onChange={(event) => setPassword(event.target.value)}
+                        >
+                        </Form.Control>
+                    </Form.Group>
 
-                <Form.Group controlId="confirmPassword" className="my-3">
-                    <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        value={confirmPassword}
-                        placeholder="Confirm Password"
-                        onChange={(event) => setConfirmPassword(event.target.value)}
-                    >
-                    </Form.Control>
-                </Form.Group>
+                    <Form.Group controlId="confirmPassword" className="my-3">
+                        <Form.Label>Confirm Password</Form.Label>
+                        <Form.Control
+                            type="password"
+                            value={confirmPassword}
+                            placeholder="Confirm Password"
+                            onChange={(event) => setConfirmPassword(event.target.value)}
+                        >
+                        </Form.Control>
+                    </Form.Group>
 
-                <Button type="submit" variant="primary" className="mt-2 w-25" disabled={isLoading}>
-                    {isLoading ? <Loader /> : 'Register'}
-                </Button>
-            </Form>
-            <Row className="py-3">
-                <Col>
-                    Have an account already? {' '}
-                    <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
-                        Sign in
-                    </Link>
-                </Col>
-            </Row>
-        </FormContainer>
+                    <Button type="submit" variant="primary" className="mt-2 w-25" disabled={isLoading}>
+                        {isLoading ? <Loader /> : 'Register'}
+                    </Button>
+                </Form>
+                <Row className="py-3">
+                    <Col>
+                        Have an account already? {' '}
+                        <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
+                            Sign in
+                        </Link>
+                    </Col>
+                </Row>
+            </FormContainer>
+        </>
     )
 }
 

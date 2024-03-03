@@ -23,3 +23,13 @@ export const updateCart = (state) => {
     localStorage.setItem('cart', JSON.stringify(state))
     return state
 }
+
+export const addedToCartToastOptions = {
+    position: "top-right",
+    autoClose: 1000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "colored",
+}

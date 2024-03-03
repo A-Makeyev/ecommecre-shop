@@ -2,12 +2,14 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Row, Col, Card, Form } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import Rating from '../components/Rating'
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
 import { addToCart } from '../slices/cartSlice'
 import { FaCartPlus } from 'react-icons/fa'
+import { addedToCartToastOptions } from '../utils/cartUtils'
+import { toast } from 'react-toastify'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import Rating from '../components/Rating'
 
 
 const ProductDetails = ({ product }) => {
@@ -18,6 +20,10 @@ const ProductDetails = ({ product }) => {
     const addToCartHandler = () => {
         setQty(Number(qty))
         dispatch(addToCart({ ...productDetails, qty }))
+        toast.success(
+            `${qty > 1 ? `${qty} ${product.name}s were` : `${qty} ${product.name} was`} added to your cart`,
+            addedToCartToastOptions
+        )
     }
 
     return (
@@ -41,7 +47,7 @@ const ProductDetails = ({ product }) => {
                         </Link>
                         <Card.Text as="h4">
                             <Row>
-                                <Col 
+                                <Col
                                     xs={3} sm={3} md={6} lg={6} xl={7}
                                     className={product.countInStock < 1 ? "out-of-stock mt-1 xs-price-width-120" : "mt-1 xs-price-width-120"}
                                 >
