@@ -4,7 +4,6 @@ import { FaTrash, FaArrowLeft } from 'react-icons/fa'
 import { Row, Col, ListGroup, Form, Button, Card, Image } from 'react-bootstrap'
 import { addToCart, removeFromCart } from '../slices/cartSlice'
 import Message from '../components/Message'
-import Loader from '../components/Loader'
 
 
 const CartScreen = () => {
@@ -16,7 +15,7 @@ const CartScreen = () => {
     const totalItems = cartItems.reduce((accumulator, item) => accumulator + item.qty, 0)
     const totalPrice = cartItems.reduce((accumulator, item) => accumulator + item.qty * item.price, 0).toFixed(2)
 
-    const updateCartHandler = async (product, qty) => {
+    const addToCartHandler = async (product, qty) => {
         dispatch(addToCart({ ...product, qty }))
     }
 
@@ -61,7 +60,7 @@ const CartScreen = () => {
                                             as="select"
                                             role="button"
                                             value={item.qty}
-                                            onChange={(event) => updateCartHandler(item, Number(event.target.value))}
+                                            onChange={(event) => addToCartHandler(item, Number(event.target.value))}
                                         >
                                             {[...Array(item.countInStock).keys()].map((i) => (
                                                 <option key={i + 1} value={i + 1}>

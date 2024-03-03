@@ -5,6 +5,7 @@ import connectMongoDB from './config/db.js'
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
+import colors from 'colors'
 
 
 dotenv.config()
@@ -28,4 +29,4 @@ app.use('/api/users', userRoutes)
 app.use(errorHandler)
 app.use(notFound)
 
-app.listen(port, () => console.log(`>>> Server is running on port ${port}`))
+app.listen(port, () => console.log(` >>> Server is running on port ${port} `.blue.bold.inverse))

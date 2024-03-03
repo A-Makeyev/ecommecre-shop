@@ -15,7 +15,7 @@ import {
 const router = express.Router()
 
 // /api/users
-router.post('/login', authenticateUser)
+router.post('/auth', authenticateUser)
 router.post('/logout', logoutUser)
 
 router.route('/')

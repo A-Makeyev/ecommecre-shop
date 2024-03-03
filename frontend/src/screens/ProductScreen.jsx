@@ -23,16 +23,16 @@ const ProductScreen = () => {
     //     fetchProduct()
     // }, [productId])
 
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [ qty, setQty ] = useState(1)
     const { id: productId } = useParams()
     const { data: product, isLoading, error } = useGetProductDetailsQuery(productId)
 
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-
     const addToCartHandler = () => {
         dispatch(addToCart({ ...product, qty }))
     }
+    
     const buyNowHandler = () => {
         dispatch(addToCart({ ...product, qty }))
         navigate('/cart')
