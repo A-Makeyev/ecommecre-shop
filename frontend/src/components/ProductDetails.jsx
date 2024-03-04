@@ -21,8 +21,10 @@ const ProductDetails = ({ product }) => {
         setQty(Number(qty))
         dispatch(addToCart({ ...productDetails, qty }))
         toast.success(
-            `${qty > 1 ? `${qty} ${product.name}s are` : `${qty} ${product.name} is`} waiting for you in the cart ${getRandomEmoji()}`,
-            addedToCartToastOptions
+            `${qty > 1 
+            ? `${qty} ${product.name.split(' ', 3).join(' ')}s are`
+            : `${qty} ${product.name.split(' ', 3).join(' ')} is`} waiting for you in the cart ${getRandomEmoji()}`,
+                addedToCartToastOptions
         )
     }
 

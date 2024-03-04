@@ -28,6 +28,10 @@ export const updateCart = (state) => {
     return state
 }
 
+export const numberWithCommas = (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+
 export const quantityAlert = (qty) => {
     return (qty === 1 || qty < 1 || ((qty < 10) && (qty > 1))) 
         ? "quantity-alert-text xs-price-width-120 mt-1" 
