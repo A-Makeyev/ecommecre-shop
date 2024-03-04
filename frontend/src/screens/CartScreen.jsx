@@ -69,9 +69,10 @@ const CartScreen = () => {
                                             <Col xs={2} sm={3} lg={2}>
                                                 <Form.Control
                                                     as="select"
-                                                    role="button"
                                                     value={item.qty}
                                                     className="p-1 text-center"
+                                                    disabled={item.countInStock === 1}
+                                                    role={item.countInStock > 1 && "button"}
                                                     onChange={(event) => addToCartHandler(item, Number(event.target.value))}
                                                 >
                                                     {[...Array(item.countInStock).keys()].map((i) => (

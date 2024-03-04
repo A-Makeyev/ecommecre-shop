@@ -26,7 +26,7 @@ const ProductScreen = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [ qty, setQty ] = useState(1)
+    const [qty, setQty] = useState(1)
     const { id: productId } = useParams()
     const { data: product, isLoading, error } = useGetProductDetailsQuery(productId)
 
@@ -90,11 +90,14 @@ const ProductScreen = () => {
                                             <Col>Status:</Col>
                                             <Col>
                                                 <strong>
+
                                                     {
-                                                        product.countInStock === 1 ? <span className="text-danger">Last One!</span>
-                                                        : product.countInStock > 0 ? <span className="text-success">In Stock</span>
-                                                        : <span className="text-danger">Out of Stock</span>
+                                                        ((product.countInStock < 10) && (product.countInStock > 1)) ? <span className="text-danger">Only {product.countInStock} Left</span>
+                                                            : product.countInStock === 1 ? <span className="text-danger">Last One</span>
+                                                            : product.countInStock > 0 ? <span className="text-success">In Stock</span>
+                                                            : <span className="text-danger">Out of Stock</span>
                                                     }
+
                                                 </strong>
                                             </Col>
                                         </Row>
@@ -108,9 +111,9 @@ const ProductScreen = () => {
                                                     <Form.Control
                                                         as="select"
                                                         value={qty}
-                                                        role="button"
                                                         className="w-50 text-center"
                                                         disabled={product.countInStock === 1}
+                                                        role={product.countInStock > 1 && "button"}
                                                         onChange={(event) => setQty(Number(event.target.value))}
                                                     >
                                                         {[...Array(product.countInStock).keys()].map((item) => (

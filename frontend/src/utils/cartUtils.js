@@ -28,6 +28,20 @@ export const updateCart = (state) => {
     return state
 }
 
+export const quantityAlert = (qty) => {
+    return (qty === 1 || qty < 1 || ((qty < 10) && (qty > 1))) 
+        ? "quantity-alert-text xs-price-width-120 mt-1" 
+        : "mt-1 xs-price-width-120"
+}
+
+export const alertText = (qty) => {
+    return ((qty < 10) && (qty > 1)) 
+        ? `Only ${qty} Left`
+        : qty === 1 ? "Last One"
+        : qty < 1 ? "Out of Stock"
+        : ""
+}
+
 export const getRandomEmoji = () => {
     const emojis = ['🥳', '✨', '🤩', '🔥']
     return emojis[~~(Math.random() * emojis.length)]

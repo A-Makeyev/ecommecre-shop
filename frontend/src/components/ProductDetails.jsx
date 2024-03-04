@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
 import { addToCart } from '../slices/cartSlice'
 import { FaCartPlus } from 'react-icons/fa'
-import { addedToCartToastOptions, getRandomEmoji } from '../utils/cartUtils'
+import { addedToCartToastOptions, alertText, quantityAlert, getRandomEmoji } from '../utils/cartUtils'
 import { toast } from 'react-toastify'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -25,9 +25,6 @@ const ProductDetails = ({ product }) => {
             addedToCartToastOptions
         )
     }
-
-    const alertText = product.countInStock === 1 ? "Last One!" : product.countInStock < 1 ? "Out of Stock" : ""
-    const quantityAlert = (product.countInStock === 1 || product.countInStock < 1) ? "quantity-alert-text mt-1 xs-price-width-120" : "mt-1 xs-price-width-120"
 
     return (
         <Card className="my-3 p-3 rounded">
@@ -52,8 +49,8 @@ const ProductDetails = ({ product }) => {
                             <Row>
                                 <Col
                                     xs={3} sm={3} md={6} lg={6} xl={7}
-                                    className={quantityAlert}
-                                    value={alertText}
+                                    className={quantityAlert(product.countInStock)}
+                                    value={alertText(product.countInStock)}
                                 >
                                     ${product.price}
                                 </Col>
@@ -67,9 +64,9 @@ const ProductDetails = ({ product }) => {
                                             <Form.Control
                                                 as="select"
                                                 value={qty}
-                                                role="button"
                                                 className="qty-select"
                                                 disabled={product.countInStock === 1}
+                                                role={product.countInStock > 1 && "button"}
                                                 onChange={(event) => setQty(Number(event.target.value))}
                                             >
                                                 {[...Array(product.countInStock).keys()].map((item) => (
