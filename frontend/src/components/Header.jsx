@@ -23,7 +23,7 @@ const Header = () => {
             await logoutApiCall().unwrap()
             dispatch(logout())
             navigate('/')
-            toast('Loggout out')
+            toast(`See you soon ${userInfo.name}`)
         } catch (error) {
             toast.error(error?.data?.message || error.error)
         }

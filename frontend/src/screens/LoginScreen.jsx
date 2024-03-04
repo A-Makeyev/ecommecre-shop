@@ -29,12 +29,14 @@ const LoginScreen = () => {
 
     const submitHandler = async (event) => {
         event.preventDefault()
+        const time = new Date().getHours()
+        const greeting = 'Good '+ (time < 12 ? 'Morning' : time < 18 ? 'Afternoon' : 'Evening')
 
         try {
             const response = await login({ email, password }).unwrap()
             dispatch(setCredentials({ ...response }))
             navigate(redirect)
-            toast(`Welcome back ${response.name}!`)
+            toast(`${greeting} ${response.name}!`)
         } catch (error) {
             toast.error(error?.data?.message || error.error)
         }

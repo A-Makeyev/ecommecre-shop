@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
 import { addToCart } from '../slices/cartSlice'
 import { FaCartPlus } from 'react-icons/fa'
-import { addedToCartToastOptions } from '../utils/cartUtils'
+import { addedToCartToastOptions, getRandomEmoji } from '../utils/cartUtils'
 import { toast } from 'react-toastify'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -21,7 +21,7 @@ const ProductDetails = ({ product }) => {
         setQty(Number(qty))
         dispatch(addToCart({ ...productDetails, qty }))
         toast.success(
-            `${qty > 1 ? `${qty} ${product.name}s were` : `${qty} ${product.name} was`} added to your cart`,
+            `${qty > 1 ? `${qty} ${product.name}s are` : `${qty} ${product.name} is`} waiting for you in the cart ${getRandomEmoji()}`,
             addedToCartToastOptions
         )
     }
@@ -42,7 +42,7 @@ const ProductDetails = ({ product }) => {
                     <Card.Body>
                         <Link to={`/product/${product._id}`}>
                             <Card.Title as="div" className="product-title">
-                                <h3>{product.name}</h3>
+                                <h4>{product.name}</h4>
                             </Card.Title>
                         </Link>
                         <Card.Text as="h4">

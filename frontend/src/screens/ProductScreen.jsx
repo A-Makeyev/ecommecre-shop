@@ -4,7 +4,7 @@ import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
 import { addToCart } from '../slices/cartSlice'
-import { addedToCartToastOptions } from '../utils/cartUtils'
+import { addedToCartToastOptions, getRandomEmoji } from '../utils/cartUtils'
 import { toast } from 'react-toastify'
 import GoBackButton from '../components/GoBackButton'
 import Message from '../components/Message'
@@ -33,7 +33,7 @@ const ProductScreen = () => {
     const addToCartHandler = () => {
         dispatch(addToCart({ ...product, qty }))
         toast.success(
-            `${qty > 1 ? `${qty} ${product.name}s were` : `${qty} ${product.name} was`} added to your cart`,
+            `${qty > 1 ? `${qty} ${product.name}s are` : `${qty} ${product.name} is`} waiting for you in the cart ${getRandomEmoji()}`,
             addedToCartToastOptions
         )
     }
@@ -56,11 +56,11 @@ const ProductScreen = () => {
             ) : (
                 <>
                     <Row>
-                        <Col md={5}>
+                        <Col md={12} lg={4} className="mt-4">
                             <Image src={product.image} alt={product.name} fluid />
                         </Col>
-                        <Col md={4}>
-                            <ListGroup >
+                        <Col md={6} lg={5}>
+                            <ListGroup className="text-center">
                                 <ListGroup.Item variant="flush" className="border-0">
                                     <h3>{product.name}</h3>
                                 </ListGroup.Item>
@@ -74,8 +74,8 @@ const ProductScreen = () => {
                                 </ListGroup.Item>
                             </ListGroup>
                         </Col>
-                        <Col md={3}>
-                            <Card>
+                        <Col md={5} lg={3}>
+                            <Card className="mt-3">
                                 <ListGroup variant="flush">
                                     <ListGroup.Item>
                                         <Row>
@@ -108,6 +108,7 @@ const ProductScreen = () => {
                                                         as="select"
                                                         value={qty}
                                                         role="button"
+                                                        className="w-50 text-center"
                                                         onChange={(event) => setQty(Number(event.target.value))}
                                                     >
                                                         {[...Array(product.countInStock).keys()].map((item) => (
@@ -123,20 +124,18 @@ const ProductScreen = () => {
 
                                     <ListGroup.Item>
                                         <Row>
-                                            <Col className="pe-0">
+                                            <Col className="text-center">
                                                 <Button 
                                                     type="button" 
-                                                    className="w-100 btn-block" 
+                                                    className="w-100 m-1" 
                                                     disabled={product.countInStock === 0}
                                                     onClick={addToCartHandler}
                                                 >
                                                     Add To Cart
                                                 </Button>
-                                            </Col>
-                                            <Col>
                                                 <Button 
                                                     type="button" 
-                                                    className="w-100 btn-block" 
+                                                    className="w-100 m-1" 
                                                     disabled={product.countInStock === 0}
                                                     onClick={buyNowHandler}
                                                 >

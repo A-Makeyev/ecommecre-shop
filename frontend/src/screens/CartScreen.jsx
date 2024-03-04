@@ -51,26 +51,27 @@ const CartScreen = () => {
                                 </div>
                             </Message>
                         ) : (
-                            <ListGroup variant="flush" className="mt-5">
+                            <ListGroup variant="flush" className="mt-3 me-3">
                                 {cartItems.map((item) => (
-                                    <ListGroup.Item key={item._id} className="mt-3">
-                                        <Row>
-                                            <Col md={2} className="mb-3">
+                                    <ListGroup.Item key={item._id}>
+                                        <Row className="d-flex justify-content-start mt-3 mb-2">
+                                            <Col md={3} lg={2} className="mb-3">
                                                 <Image src={item.image} alt={item.name} fluid rounded />
                                             </Col>
-                                            <Col md={5} className="mt-2">
+                                            <Col xs={13} sm={10} md={7} lg={5}>
                                                 <Link to={`/product/${item._id}`}>
                                                     <h5>{item.name}</h5>
                                                 </Link>
                                             </Col>
-                                            <Col md={2} className="mt-2">
+                                            <Col xs={3} sm={3} md={3} lg={2} className="mt-1 text-center">
                                                 <h5>${item.price}</h5>
                                             </Col>
-                                            <Col md={2}>
+                                            <Col xs={2} sm={3} lg={2}>
                                                 <Form.Control
                                                     as="select"
                                                     role="button"
                                                     value={item.qty}
+                                                    className="p-1 text-center"
                                                     onChange={(event) => addToCartHandler(item, Number(event.target.value))}
                                                 >
                                                     {[...Array(item.countInStock).keys()].map((i) => (
@@ -80,10 +81,11 @@ const CartScreen = () => {
                                                     ))}
                                                 </Form.Control>
                                             </Col>
-                                            <Col md={1}>
+                                            <Col xs={1} sm={3} md={1}>
                                                 <Button
                                                     type="button"
                                                     variant="light"
+                                                    className="p-1 text-center"
                                                     onClick={() => removeFromCartHandler(item._id)}
                                                 >
                                                     <FaTrash />
@@ -96,16 +98,16 @@ const CartScreen = () => {
                         )}
 
                     </Col>
-                    <Col md={4}>
+                    <Col md={4} className="mt-4">
                         <Card>
                             <ListGroup variant="flush">
                                 <ListGroup.Item>
-                                    <h2>
+                                    <h3>
                                         Subtotal Items ({totalItems})
-                                    </h2>
-                                    <h2>
+                                    </h3>
+                                    <h3>
                                         ${totalPrice}
-                                    </h2>
+                                    </h3>
                                 </ListGroup.Item>
                                 <ListGroup.Item>
                                     <Button

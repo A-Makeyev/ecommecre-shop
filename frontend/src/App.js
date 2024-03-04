@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
-import { ToastContainer} from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -18,7 +18,7 @@ const App = () => {
       <Footer />
       <ToastContainer
         position="top-center"
-        autoClose={3000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop
         closeOnClick

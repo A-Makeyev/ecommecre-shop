@@ -25,14 +25,9 @@ main {
 }
 
 .product-title {
-  height: 2.5em;
-  /* Set a fixed height */
+  height: 4em;
   overflow: hidden;
-  /* Hide overflow content */
   text-overflow: ellipsis;
-  /* Add ellipsis for long text */
-  white-space: nowrap;
-  /* Prevent wrapping */
 }
 
 table td,
@@ -103,11 +98,11 @@ table th {
   padding: 0 0 1px;
   text-align: center;
   scrollbar-width: none;
-  -ms-overflow-style: none;  
+  -ms-overflow-style: none;
 }
 
-.qty-select::-webkit-scrollbar { 
-  display: none; 
+.qty-select::-webkit-scrollbar {
+  display: none;
 }
 
 .out-of-stock:after {
@@ -137,9 +132,8 @@ table th {
     margin-top: 6px;
     margin-left: 3px;
   }
-  
+
   .xs-price-width-120 {
     width: 120px !important;
   }
 }
-

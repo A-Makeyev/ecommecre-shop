@@ -1,6 +1,10 @@
+import { Slide } from 'react-toastify'
+
+
 export const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2)
 }
+
 export const updateCart = (state) => {
     const freeShippingPrice = 100, tax = 0.15
 
@@ -24,6 +28,12 @@ export const updateCart = (state) => {
     return state
 }
 
+export const getRandomEmoji = () => {
+    const emojis = ['🥳', '✨', '🤩', '🔥']
+    return emojis[~~(Math.random() * emojis.length)]
+}
+
+// https://fkhadra.github.io/react-toastify/introduction
 export const addedToCartToastOptions = {
     position: "top-right",
     autoClose: 1000,
@@ -32,4 +42,5 @@ export const addedToCartToastOptions = {
     pauseOnHover: true,
     draggable: true,
     theme: "colored",
+    transition: Slide,
 }
