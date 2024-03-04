@@ -13,10 +13,10 @@ import Rating from '../components/Rating'
 
 
 const ProductDetails = ({ product }) => {
+    const dispatch = useDispatch()
     const [qty, setQty] = useState(1)
     const { data: productDetails, isLoading, error } = useGetProductDetailsQuery(product._id)
 
-    const dispatch = useDispatch()
     const addToCartHandler = () => {
         setQty(Number(qty))
         dispatch(addToCart({ ...productDetails, qty }))
@@ -25,6 +25,9 @@ const ProductDetails = ({ product }) => {
             addedToCartToastOptions
         )
     }
+
+    const alertText = product.countInStock === 1 ? "Last One!" : product.countInStock < 1 ? "Out of Stock" : ""
+    const quantityAlert = (product.countInStock === 1 || product.countInStock < 1) ? "quantity-alert-text mt-1 xs-price-width-120" : "mt-1 xs-price-width-120"
 
     return (
         <Card className="my-3 p-3 rounded">
@@ -49,7 +52,8 @@ const ProductDetails = ({ product }) => {
                             <Row>
                                 <Col
                                     xs={3} sm={3} md={6} lg={6} xl={7}
-                                    className={product.countInStock < 1 ? "out-of-stock mt-1 xs-price-width-120" : "mt-1 xs-price-width-120"}
+                                    className={quantityAlert}
+                                    value={alertText}
                                 >
                                     ${product.price}
                                 </Col>
@@ -65,6 +69,7 @@ const ProductDetails = ({ product }) => {
                                                 value={qty}
                                                 role="button"
                                                 className="qty-select"
+                                                disabled={product.countInStock === 1}
                                                 onChange={(event) => setQty(Number(event.target.value))}
                                             >
                                                 {[...Array(product.countInStock).keys()].map((item) => (

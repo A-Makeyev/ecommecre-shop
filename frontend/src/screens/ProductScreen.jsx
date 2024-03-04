@@ -90,8 +90,9 @@ const ProductScreen = () => {
                                             <Col>Status:</Col>
                                             <Col>
                                                 <strong>
-                                                    {product.countInStock > 0
-                                                        ? <span className="text-success">In Stock</span>
+                                                    {
+                                                        product.countInStock === 1 ? <span className="text-danger">Last One!</span>
+                                                        : product.countInStock > 0 ? <span className="text-success">In Stock</span>
                                                         : <span className="text-danger">Out of Stock</span>
                                                     }
                                                 </strong>
@@ -109,6 +110,7 @@ const ProductScreen = () => {
                                                         value={qty}
                                                         role="button"
                                                         className="w-50 text-center"
+                                                        disabled={product.countInStock === 1}
                                                         onChange={(event) => setQty(Number(event.target.value))}
                                                     >
                                                         {[...Array(product.countInStock).keys()].map((item) => (

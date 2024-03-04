@@ -105,8 +105,8 @@ table th {
   display: none;
 }
 
-.out-of-stock:after {
-  content: 'Out of Stock';
+.quantity-alert-text:after {
+  content: attr(value);
   display: block;
   position: absolute;
   font-size: 12px;

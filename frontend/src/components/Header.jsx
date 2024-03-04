@@ -16,14 +16,15 @@ const Header = () => {
     const { cartItems } = useSelector((state) => state.cart)
     const { userInfo } = useSelector((state) => state.auth)
     const quantity = cartItems.reduce((accumulator, currentItem) => accumulator + currentItem.qty, 0)
-    const displayCartCount = quantity ? "cart-item-count" : "cart-item-count-invisible"
+    const displayQuantity = (quantity && quantity > 999) ? `${String(quantity)[0]}K` : quantity ? quantity : ""
+    const displayCartCountClass = quantity ? "cart-item-count" : "cart-item-count-invisible"
 
     const logoutHandler = async () => {
         try {
             await logoutApiCall().unwrap()
             dispatch(logout())
             navigate('/')
-            toast(`See you soon ${userInfo.name}`)
+            toast(`See you soon ~ ${quantity} items in the cart are waiting for you to come back 🙂`)
         } catch (error) {
             toast.error(error?.data?.message || error.error)
         }
@@ -46,7 +47,7 @@ const Header = () => {
                             <LinkContainer to="/cart">
                                 <Nav.Link className="fs-5">
                                     <FaShoppingCart className="me-2 mb-1" />
-                                    <span className={displayCartCount} value={quantity ? quantity : ""}>
+                                    <span className={displayCartCountClass} value={displayQuantity}>
                                         Cart
                                     </span>
                                 </Nav.Link>
