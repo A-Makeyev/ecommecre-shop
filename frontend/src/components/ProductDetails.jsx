@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom'
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
 import { addToCart } from '../slices/cartSlice'
 import { FaCartPlus } from 'react-icons/fa'
-import { addedToCartToastOptions, alertText, quantityAlert, getRandomEmoji, numberWithCommas } from '../utils/cartUtils'
-import { toast } from 'react-toastify'
+import { alertText, quantityAlert, addedToCartMessage, addCommas } from '../utils/cartUtils'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Rating from '../components/Rating'
@@ -17,15 +16,11 @@ const ProductDetails = ({ product }) => {
     const [qty, setQty] = useState(1)
     const { data: productDetails, isLoading, error } = useGetProductDetailsQuery(product._id)
 
+
     const addToCartHandler = () => {
         setQty(Number(qty))
         dispatch(addToCart({ ...productDetails, qty }))
-        toast.success(
-            `${qty > 1 
-            ? `${qty} ${product.name.split(' ', 3).join(' ')}s are`
-            : `${qty} ${product.name.split(' ', 3).join(' ')} is`} waiting for you in the cart ${getRandomEmoji()}`,
-                addedToCartToastOptions
-        )
+        addedToCartMessage(qty, product.name)
     }
 
     return (
@@ -54,7 +49,7 @@ const ProductDetails = ({ product }) => {
                                     className={quantityAlert(product.countInStock)}
                                     value={alertText(product.countInStock)}
                                 >
-                                    ${numberWithCommas(product.price)}
+                                    ${addCommas(product.price)}
                                 </Col>
 
                                 {product.countInStock > 0 && (

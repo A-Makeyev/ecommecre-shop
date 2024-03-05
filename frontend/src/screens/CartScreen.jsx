@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FaTrash } from 'react-icons/fa'
 import { Container, Row, Col, ListGroup, Form, Button, Card, Image } from 'react-bootstrap'
 import { addToCart, removeFromCart } from '../slices/cartSlice'
-import { numberWithCommas } from '../utils/cartUtils'
+import { addCommas } from '../utils/cartUtils'
 import GoBackButton from '../components/GoBackButton'
 import Message from '../components/Message'
 
@@ -15,7 +15,7 @@ const CartScreen = () => {
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart
     const totalItems = cartItems.reduce((accumulator, item) => accumulator + item.qty, 0)
-    const totalPrice = numberWithCommas(cartItems.reduce((accumulator, item) => accumulator + item.qty * item.price, 0).toFixed(2))
+    const totalPrice = addCommas(cartItems.reduce((accumulator, item) => accumulator + item.qty * item.price, 0).toFixed(2))
 
     const addToCartHandler = async (product, qty) => {
         dispatch(addToCart({ ...product, qty }))
@@ -65,7 +65,7 @@ const CartScreen = () => {
                                                 </Link>
                                             </Col>
                                             <Col xs={3} sm={3} md={3} lg={2} className="mt-1 text-center">
-                                                <h5>${numberWithCommas(item.price)}</h5>
+                                                <h5>${addCommas(item.price)}</h5>
                                             </Col>
                                             <Col xs={2} sm={3} lg={2}>
                                                 <Form.Control

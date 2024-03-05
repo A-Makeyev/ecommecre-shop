@@ -18,13 +18,16 @@ const Header = () => {
     const quantity = cartItems.reduce((accumulator, currentItem) => accumulator + currentItem.qty, 0)
     const displayQuantity = (quantity && quantity > 999) ? `${String(quantity)[0]}K` : quantity ? quantity : ""
     const displayCartCountClass = quantity ? "cart-item-count" : "cart-item-count-invisible"
+    const logOutMessage = quantity === 1 ? `See you soon ~ ${cartItems[0].name.split(' ', 3).join(' ')} is waiting for you 😊`
+                        : quantity > 1 ? `See you soon ~ ${quantity} items are waiting for you in the shopping cart 🙂`
+                        : 'See you soon'
 
     const logoutHandler = async () => {
         try {
             await logoutApiCall().unwrap()
             dispatch(logout())
             navigate('/')
-            toast(`See you soon ~ ${quantity} items are waiting for you in the shopping cart 🙂`)
+            toast(logOutMessage)
         } catch (error) {
             toast.error(error?.data?.message || error.error)
         }

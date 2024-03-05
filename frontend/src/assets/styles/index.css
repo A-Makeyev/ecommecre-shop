@@ -64,9 +64,9 @@ table th {
   display: inline-block;
   position: absolute;
   position: relative;
-  padding: 1px 0;
-  height: 20px;
-  width: 20px;
+  padding-right: 1px;
+  height: 19px;
+  width: 19px;
   right: 56px;
   top: -15px;
   font-size: 12px;
@@ -75,18 +75,14 @@ table th {
   border-radius: 50%;
   background: #FF0000;
   color: white;
-  opacity: 0.9;
 }
 
 .cart-item-count-invisible:after {
   content: attr(value);
   display: inline-block;
-  position: absolute;
-  text-align: center;
-  position: relative;
-  padding: 1px 0;
-  height: 20px;
-  width: 20px;
+  padding-right: 1px;
+  height: 19px;
+  width: 19px;
   right: 56px;
   top: -15px;
 }

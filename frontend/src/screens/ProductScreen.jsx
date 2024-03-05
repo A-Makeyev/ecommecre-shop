@@ -4,8 +4,7 @@ import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
 import { addToCart } from '../slices/cartSlice'
-import { addedToCartToastOptions, getRandomEmoji, numberWithCommas } from '../utils/cartUtils'
-import { toast } from 'react-toastify'
+import { addedToCartMessage, addCommas } from '../utils/cartUtils'
 import GoBackButton from '../components/GoBackButton'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -32,14 +31,9 @@ const ProductScreen = () => {
 
     const addToCartHandler = () => {
         dispatch(addToCart({ ...product, qty }))
-        toast.success(
-            `${qty > 1 
-            ? `${qty} ${product.name.split(' ', 3).join(' ')}s are`
-            : `${qty} ${product.name.split(' ', 3).join(' ')} is`} waiting for you in the cart ${getRandomEmoji()}`,
-                addedToCartToastOptions
-        )
+        addedToCartMessage(qty, product.name)
     }
-    
+
     const buyNowHandler = () => {
         dispatch(addToCart({ ...product, qty }))
         navigate('/cart')
@@ -83,7 +77,7 @@ const ProductScreen = () => {
                                         <Row>
                                             <Col>Price:</Col>
                                             <Col>
-                                                <strong>${numberWithCommas(product.price)}</strong>
+                                                <strong>${addCommas(product.price)}</strong>
                                             </Col>
                                         </Row>
                                     </ListGroup.Item>
@@ -96,8 +90,8 @@ const ProductScreen = () => {
                                                     {
                                                         ((product.countInStock < 10) && (product.countInStock > 1)) ? <span className="text-danger">Only {product.countInStock} Left</span>
                                                             : product.countInStock === 1 ? <span className="text-danger">Last One</span>
-                                                            : product.countInStock > 0 ? <span className="text-success">In Stock</span>
-                                                            : <span className="text-danger">Out of Stock</span>
+                                                                : product.countInStock > 0 ? <span className="text-success">In Stock</span>
+                                                                    : <span className="text-danger">Out of Stock</span>
                                                     }
 
                                                 </strong>
@@ -132,17 +126,17 @@ const ProductScreen = () => {
                                     <ListGroup.Item>
                                         <Row>
                                             <Col className="text-center">
-                                                <Button 
-                                                    type="button" 
-                                                    className="w-100 m-1" 
+                                                <Button
+                                                    type="button"
+                                                    className="w-100 m-1"
                                                     disabled={product.countInStock === 0}
                                                     onClick={addToCartHandler}
                                                 >
                                                     Add To Cart
                                                 </Button>
-                                                <Button 
-                                                    type="button" 
-                                                    className="w-100 m-1" 
+                                                <Button
+                                                    type="button"
+                                                    className="w-100 m-1"
                                                     disabled={product.countInStock === 0}
                                                     onClick={buyNowHandler}
                                                 >
