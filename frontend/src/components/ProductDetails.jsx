@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
 import { addToCart } from '../slices/cartSlice'
 import { FaCartPlus } from 'react-icons/fa'
-import { addedToCartToastOptions, alertText, quantityAlert, getRandomEmoji } from '../utils/cartUtils'
+import { addedToCartToastOptions, alertText, quantityAlert, getRandomEmoji, numberWithCommas } from '../utils/cartUtils'
 import { toast } from 'react-toastify'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -54,7 +54,7 @@ const ProductDetails = ({ product }) => {
                                     className={quantityAlert(product.countInStock)}
                                     value={alertText(product.countInStock)}
                                 >
-                                    ${product.price}
+                                    ${numberWithCommas(product.price)}
                                 </Col>
 
                                 {product.countInStock > 0 && (

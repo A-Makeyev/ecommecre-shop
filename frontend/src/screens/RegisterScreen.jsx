@@ -10,7 +10,6 @@ import GoBackButton from '../components/GoBackButton'
 import Loader from '../components/Loader'
 
 
-
 const RegisterScreen = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -32,7 +31,6 @@ const RegisterScreen = () => {
 
     const submitHandler = async (event) => {
         event.preventDefault()
-
         if (password !== confirmPassword) {
             toast.error('Passwords don\'t match!')
         } else {
@@ -58,7 +56,6 @@ const RegisterScreen = () => {
                         <Form.Control
                             type="name"
                             value={name}
-                            placeholder="Name"
                             onChange={(event) => setName(event.target.value)}
                         >
                         </Form.Control>
@@ -69,7 +66,6 @@ const RegisterScreen = () => {
                         <Form.Control
                             type="email"
                             value={email}
-                            placeholder="Email"
                             onChange={(event) => setEmail(event.target.value)}
                         >
                         </Form.Control>
@@ -80,7 +76,6 @@ const RegisterScreen = () => {
                         <Form.Control
                             type="password"
                             value={password}
-                            placeholder="Password"
                             onChange={(event) => setPassword(event.target.value)}
                         >
                         </Form.Control>
@@ -91,7 +86,6 @@ const RegisterScreen = () => {
                         <Form.Control
                             type="password"
                             value={confirmPassword}
-                            placeholder="Confirm Password"
                             onChange={(event) => setConfirmPassword(event.target.value)}
                         >
                         </Form.Control>

@@ -24,7 +24,7 @@ const Header = () => {
             await logoutApiCall().unwrap()
             dispatch(logout())
             navigate('/')
-            toast(`See you soon ~ ${quantity} items in the cart are waiting for you to come back 🙂`)
+            toast(`See you soon ~ ${quantity} items are waiting for you in the shopping cart 🙂`)
         } catch (error) {
             toast.error(error?.data?.message || error.error)
         }

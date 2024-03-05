@@ -65,7 +65,7 @@ const CartScreen = () => {
                                                 </Link>
                                             </Col>
                                             <Col xs={3} sm={3} md={3} lg={2} className="mt-1 text-center">
-                                                <h5>${item.price}</h5>
+                                                <h5>${numberWithCommas(item.price)}</h5>
                                             </Col>
                                             <Col xs={2} sm={3} lg={2}>
                                                 <Form.Control

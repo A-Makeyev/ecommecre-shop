@@ -4,7 +4,7 @@ import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
 import { addToCart } from '../slices/cartSlice'
-import { addedToCartToastOptions, getRandomEmoji } from '../utils/cartUtils'
+import { addedToCartToastOptions, getRandomEmoji, numberWithCommas } from '../utils/cartUtils'
 import { toast } from 'react-toastify'
 import GoBackButton from '../components/GoBackButton'
 import Message from '../components/Message'
@@ -83,7 +83,7 @@ const ProductScreen = () => {
                                         <Row>
                                             <Col>Price:</Col>
                                             <Col>
-                                                <strong>${product.price}</strong>
+                                                <strong>${numberWithCommas(product.price)}</strong>
                                             </Col>
                                         </Row>
                                     </ListGroup.Item>

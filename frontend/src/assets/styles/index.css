@@ -64,16 +64,17 @@ table th {
   display: inline-block;
   position: absolute;
   position: relative;
-  height: 19px;
-  width: 19px;
+  padding: 1px 0;
+  height: 20px;
+  width: 20px;
   right: 56px;
   top: -15px;
   font-size: 12px;
   font-weight: 600;
   text-align: center;
-  background: #FF0000;
-  color: #DDD;
   border-radius: 50%;
+  background: #FF0000;
+  color: white;
   opacity: 0.9;
 }
 
@@ -83,8 +84,9 @@ table th {
   position: absolute;
   text-align: center;
   position: relative;
-  height: 19px;
-  width: 19px;
+  padding: 1px 0;
+  height: 20px;
+  width: 20px;
   right: 56px;
   top: -15px;
 }

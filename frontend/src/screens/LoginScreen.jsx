@@ -30,7 +30,7 @@ const LoginScreen = () => {
     const submitHandler = async (event) => {
         event.preventDefault()
         const time = new Date().getHours()
-        const greeting = 'Good '+ (time < 12 ? 'Morning' : time < 18 ? 'Afternoon' : 'Evening')
+        const greeting = 'Good ' + (time < 12 ? 'Morning' : time < 18 ? 'Afternoon' : 'Evening')
 
         try {
             const response = await login({ email, password }).unwrap()
@@ -53,7 +53,6 @@ const LoginScreen = () => {
                         <Form.Control
                             type="email"
                             value={email}
-                            placeholder="Email"
                             onChange={(event) => setEmail(event.target.value)}
                         >
                         </Form.Control>
@@ -64,7 +63,6 @@ const LoginScreen = () => {
                         <Form.Control
                             type="password"
                             value={password}
-                            placeholder="Password"
                             onChange={(event) => setPassword(event.target.value)}
                         >
                         </Form.Control>
