@@ -24,7 +24,7 @@ const ProductDetails = ({ product }) => {
     }
 
     return (
-        <Card className="my-1 p-2 rounded">
+        <Card className="my-1 p-2 h-100 rounded">
             {isLoading ? (
                 <Loader />
             ) : error ? (
@@ -45,17 +45,17 @@ const ProductDetails = ({ product }) => {
                         <Card.Text as="h4">
                             <Row>
                                 <Col
-                                    xs={3} sm={3} md={6} lg={6} xl={7}
+                                    xs={3} sm={3} md={4} lg={5} xl={6}
                                     className={quantityAlert(product.countInStock)}
                                     value={alertText(product.countInStock)}
                                 >
                                     ${addCommas(product.price)}
                                 </Col>
 
-                                {product.countInStock > 0 && (
+                                {product.countInStock > 0 ? (
                                     <>
                                         <Col xs={1} sm={1} md={1} lg={1} xl={1}>
-                                            <FaCartPlus role="button" className="mt-1" onClick={addToCartHandler} />
+                                            <FaCartPlus role="button" className="fs-5" onClick={addToCartHandler} />
                                         </Col>
                                         <Col xs={1} sm={1} md={1} lg={1} xl={2}>
                                             <Form.Control
@@ -74,16 +74,18 @@ const ProductDetails = ({ product }) => {
                                             </Form.Control>
                                         </Col>
                                     </>
+                                ) : (
+                                    <Col className="qty-select-invisible"></Col>
                                 )}
                             </Row>
                         </Card.Text>
-                        <Card.Text as="h5">
+                        <Card.Text as="h5" className="mt-4">
                             <Rating value={product.rating} text={`${product.numReviews} reviews`} />
                         </Card.Text>
                     </Card.Body>
                 </>
             )}
-        </Card>
+        </Card >
     )
 }
 

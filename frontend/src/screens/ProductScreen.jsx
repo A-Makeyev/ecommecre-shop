@@ -56,7 +56,7 @@ const ProductScreen = () => {
                             <Image src={product.image} alt={product.name} fluid />
                         </Col>
                         <Col md={6} lg={5}>
-                            <ListGroup className="text-center">
+                            <ListGroup>
                                 <ListGroup.Item variant="flush" className="border-0">
                                     <h3>{product.name}</h3>
                                 </ListGroup.Item>
@@ -88,7 +88,8 @@ const ProductScreen = () => {
                                                 <strong>
 
                                                     {
-                                                        ((product.countInStock < 10) && (product.countInStock > 1)) ? <span className="text-danger">Only {product.countInStock} Left</span>
+                                                        ((product.countInStock < 10) && (product.countInStock > 1))
+                                                            ? <span className="text-danger">Only {product.countInStock} Left</span>
                                                             : product.countInStock === 1 ? <span className="text-danger">Last One</span>
                                                                 : product.countInStock > 0 ? <span className="text-success">In Stock</span>
                                                                     : <span className="text-danger">Out of Stock</span>

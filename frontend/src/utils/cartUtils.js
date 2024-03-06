@@ -34,8 +34,8 @@ export const updateCart = (state) => {
 
 export const quantityAlert = (qty) => {
     return (qty === 1 || qty < 1 || ((qty < 10) && (qty > 1)))
-        ? "quantity-alert-text xs-price-width-120 mt-1"
-        : "mt-1 xs-price-width-120"
+        ? "quantity-alert-text xs-price-width-100 mt-1 pe-0 fs-5"
+        : "xs-price-width-100 mt-1 pe-0 fs-5"
 }
 
 export const alertText = (qty) => {
