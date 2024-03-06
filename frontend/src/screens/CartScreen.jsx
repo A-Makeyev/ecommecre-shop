@@ -55,19 +55,19 @@ const CartScreen = () => {
                             <ListGroup variant="flush" className="mt-3 me-3">
                                 {cartItems.map((item) => (
                                     <ListGroup.Item key={item._id}>
-                                        <Row className="d-flex justify-content-start mt-3 mb-2">
+                                        <Row className="mt-3 mb-2 justify-content-center">
                                             <Col md={3} lg={2} className="mb-3">
                                                 <Image src={item.image} alt={item.name} fluid rounded />
                                             </Col>
-                                            <Col xs={13} sm={10} md={7} lg={5}>
+                                            <Col xs={13} sm={11} md={7} lg={5} className="mb-3 pl-5">
                                                 <Link to={`/product/${item._id}`}>
                                                     <h5>{item.name}</h5>
                                                 </Link>
                                             </Col>
-                                            <Col xs={3} sm={3} md={3} lg={2} className="mt-1 text-center">
+                                            <Col xs={4} sm={3} md={3} lg={2} className="mt-1 p-0 text-center">
                                                 <h5>${addCommas(item.price)}</h5>
                                             </Col>
-                                            <Col xs={2} sm={3} lg={2}>
+                                            <Col xs={4} sm={3} lg={2}>
                                                 <Form.Control
                                                     as="select"
                                                     value={item.qty}
@@ -87,7 +87,7 @@ const CartScreen = () => {
                                                 <Button
                                                     type="button"
                                                     variant="light"
-                                                    className="p-1 text-center"
+                                                    className="p-1"
                                                     onClick={() => removeFromCartHandler(item._id)}
                                                 >
                                                     <FaTrash />
@@ -104,17 +104,17 @@ const CartScreen = () => {
                         <Card>
                             <ListGroup variant="flush">
                                 <ListGroup.Item>
-                                    <h3>
+                                    <h5>
                                         Subtotal Items ({totalItems})
-                                    </h3>
-                                    <h3>
+                                    </h5>
+                                    <h4>
                                         ${totalPrice}
-                                    </h3>
+                                    </h4>
                                 </ListGroup.Item>
                                 <ListGroup.Item>
                                     <Button
                                         type="button"
-                                        className="btn-block"
+                                        className="p-2"
                                         disabled={cartItems.length === 0}
                                         onClick={checkoutHandler}
                                     >

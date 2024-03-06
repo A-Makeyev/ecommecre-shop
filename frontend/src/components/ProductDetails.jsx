@@ -24,7 +24,7 @@ const ProductDetails = ({ product }) => {
     }
 
     return (
-        <Card className="my-3 p-3 rounded">
+        <Card className="my-1 p-2 rounded">
             {isLoading ? (
                 <Loader />
             ) : error ? (
@@ -39,7 +39,7 @@ const ProductDetails = ({ product }) => {
                     <Card.Body>
                         <Link to={`/product/${product._id}`}>
                             <Card.Title as="div" className="product-title">
-                                <h4>{product.name}</h4>
+                                <h5>{product.name}</h5>
                             </Card.Title>
                         </Link>
                         <Card.Text as="h4">

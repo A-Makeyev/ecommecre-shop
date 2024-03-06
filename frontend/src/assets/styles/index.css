@@ -25,7 +25,7 @@ main {
 }
 
 .product-title {
-  height: 4em;
+  height: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -64,13 +64,13 @@ table th {
   display: inline-block;
   position: absolute;
   position: relative;
-  padding-right: 1px;
+  padding: 1px 0;
   height: 19px;
   width: 19px;
   right: 56px;
   top: -15px;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 500;
   text-align: center;
   border-radius: 50%;
   background: #FF0000;
