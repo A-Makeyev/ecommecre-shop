@@ -47,7 +47,7 @@ const RegisterScreen = () => {
 
     return (
         <>
-            <GoBackButton />
+            <GoBackButton url="/login" />
             <FormContainer>
                 <h1>Sign Up</h1>
                 <Form onSubmit={submitHandler}>

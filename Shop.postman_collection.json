@@ -29,9 +29,22 @@
 				},
 				{
 					"name": "Get Single Product",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "65e8cc7e4620a38bd5f20941",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
 							"raw": "{{baseURL}}/products/:id",
 							"host": [
@@ -44,7 +57,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "65e3774984b998d82bdb39ff"
+									"value": "65e8cc7e4620a38bd5f20941"
 								}
 							]
 						},
@@ -172,13 +185,13 @@
 							]
 						},
 						"url": {
-							"raw": "{{baseURL}}/users/login",
+							"raw": "{{baseURL}}/users/auth",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"users",
-								"login"
+								"auth"
 							]
 						}
 					},
@@ -205,13 +218,13 @@
 							]
 						},
 						"url": {
-							"raw": "{{baseURL}}/users/login",
+							"raw": "{{baseURL}}/users/auth",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"users",
-								"login"
+								"auth"
 							]
 						}
 					},
@@ -323,6 +336,165 @@
 							"path": [
 								"users",
 								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Get Order By Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseURL}}/orders/:id",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"orders",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Order To Paid",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseURL}}/orders/:id/pay",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"orders",
+										":id",
+										"pay"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Order To Delivered",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/orders/:id/deliver",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"orders",
+										":id",
+										"deliver"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Orders",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/orders",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"orders"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create New Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/orders",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Logged In User's Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/orders/mine",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"orders",
+								"mine"
 							]
 						}
 					},

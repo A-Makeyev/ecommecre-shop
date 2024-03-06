@@ -42,14 +42,15 @@ export const alertText = (qty) => {
     return ((qty < 10) && (qty > 1))
         ? `Only ${qty} Left`
         : qty === 1 ? "Last One"
-            : qty < 1 ? "Out of Stock"
-                : ""
+        : qty < 1 ? "Out of Stock"
+        : ""
 }
 
 export const addedToCartMessage = (qty, item) => {
+    item = item.split(' ', 3).join(' ')
     const emojis = ['🥳', '✨', '🤩', '🔥']
     const emoji = emojis[~~(Math.random() * emojis.length)]
-    const product = qty === 1 ? `${item.split(' ', 3).join(' ')} is` : `(${qty}) ${item} are`
+    const product = qty === 1 ? `${item} is` : `(${qty}) ${item} are`
     toast.success(`${product} waiting for you in the cart ${emoji}`,
         // https://fkhadra.github.io/react-toastify/introduction
         {

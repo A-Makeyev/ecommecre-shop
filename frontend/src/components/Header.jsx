@@ -26,7 +26,7 @@ const Header = () => {
         try {
             await logoutApiCall().unwrap()
             dispatch(logout())
-            navigate('/')
+            window.location.href.includes('/profile') && navigate('/')
             toast(logOutMessage)
         } catch (error) {
             toast.error(error?.data?.message || error.error)

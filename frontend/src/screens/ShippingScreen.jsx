@@ -5,6 +5,7 @@ import { Form, Button } from 'react-bootstrap'
 import { saveShippingAddress } from '../slices/cartSlice'
 import FormContainer from '../components/FormContainer'
 import GoBackButton from '../components/GoBackButton'
+import CheckoutSteps from '../components/CheckoutSteps'
 
 
 const ShippingScreen = () => {
@@ -25,11 +26,12 @@ const ShippingScreen = () => {
 
     return (
         <>
-            <GoBackButton />
+            <GoBackButton url="/" />
             <FormContainer>
+                <CheckoutSteps one two />
                 <h1>Shipping</h1>
                 <Form onSubmit={submitHandler}>
-                    <Form.Group controlId="country" className="my-2">
+                    <Form.Group controlId="country" className="my-3">
                         <Form.Label>Country</Form.Label>
                         <Form.Control
                             type="text"
@@ -39,7 +41,7 @@ const ShippingScreen = () => {
                         </Form.Control>
                     </Form.Group>
 
-                    <Form.Group controlId="city" className="my-2">
+                    <Form.Group controlId="city" className="my-3">
                         <Form.Label>City</Form.Label>
                         <Form.Control
                             type="text"
@@ -49,7 +51,7 @@ const ShippingScreen = () => {
                         </Form.Control>
                     </Form.Group>
 
-                    <Form.Group controlId="address" className="my-2">
+                    <Form.Group controlId="address" className="my-3">
                         <Form.Label>Address</Form.Label>
                         <Form.Control
                             type="text"
@@ -59,7 +61,7 @@ const ShippingScreen = () => {
                         </Form.Control>
                     </Form.Group>
 
-                    <Form.Group controlId="postalCode" className="my-2">
+                    <Form.Group controlId="postalCode" className="my-3">
                         <Form.Label>Postal Code</Form.Label>
                         <Form.Control
                             type="text"

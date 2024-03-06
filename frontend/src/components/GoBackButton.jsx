@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom'
 import { FaArrowLeft } from 'react-icons/fa'
 
 
-const GoBackButton = () => {
+const GoBackButton = ({ url }) => {
     return (
         <>
-            <Link to="/" className='btn btn-light my-3'>
+            <Link to={url} className='btn btn-light my-3'>
                 <FaArrowLeft className='mb-1' />
                 {' '}
                 <span>Go Back</span>

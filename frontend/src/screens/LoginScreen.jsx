@@ -44,11 +44,11 @@ const LoginScreen = () => {
 
     return (
         <>
-            <GoBackButton />
+            <GoBackButton url="/" />
             <FormContainer>
                 <h1>Sign In</h1>
                 <Form onSubmit={submitHandler}>
-                    <Form.Group controlId="email" className="my-3">
+                    <Form.Group controlId="email" className="my-3 ">
                         <Form.Label>Email Address</Form.Label>
                         <Form.Control
                             type="email"
@@ -58,7 +58,7 @@ const LoginScreen = () => {
                         </Form.Control>
                     </Form.Group>
 
-                    <Form.Group controlId="password" className="my-3">
+                    <Form.Group controlId="password" className="my-3 ">
                         <Form.Label>Password</Form.Label>
                         <Form.Control
                             type="password"

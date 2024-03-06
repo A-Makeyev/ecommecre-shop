@@ -36,7 +36,7 @@ const CartScreen = () => {
                     <Col md={8}>
                         <Row>
                             <Col md={4}>
-                                <GoBackButton />
+                                <GoBackButton url="/" />
                             </Col>
                             <Col className="mt-3">
                                 <h1>
