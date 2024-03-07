@@ -33,7 +33,7 @@ const registerUser = asyncHandler(async (request, response) => {
 
     if (userExists) {
         response.status(400)
-        throw new Error(`user with email '${email}' already exists`)
+        throw new Error(`User with email '${email}' already exists`)
     }
 
     const user = await User.create({

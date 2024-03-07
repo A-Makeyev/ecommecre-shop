@@ -31,7 +31,6 @@ const PaymentScreen = () => {
         <>
             <GoBackButton url="/shipping" />
             <FormContainer>
-
                 <CheckoutSteps one two three />
                 <h1>Payment Method</h1>
                 <Form onSubmit={submitHandler}>

@@ -21,24 +21,26 @@ const HomeScreen = () => {
 
     return (
         <>
-            {isLoading ? (
-                <Loader />
-            ) : error ? (
-                <Message varient="danger">
-                    {error?.data?.message || error.error}
-                </Message>
-            ) : (
-                <>
-                    <h1>Latest Products</h1>
-                    <Row>
+            <h1>Latest Products</h1>
+            <Row>
+                
+                {isLoading ? (
+                    <Loader />
+                ) : error ? (
+                    <Message varient="danger">
+                        {error?.data?.message || error.error}
+                    </Message>
+                ) : (
+                    <>
                         {products.map((product) => (
                             <Col key={product._id} sm={12} md={6} lg={4} xl={3} className="p-2">
                                 <ProductDetails product={product} />
                             </Col>
                         ))}
-                    </Row>
-                </>
-            )}
+                    </>
+                )}
+
+            </Row>
         </>
     )
 }

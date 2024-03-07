@@ -48,13 +48,14 @@ export const alertText = (qty) => {
 
 export const addedToCartMessage = (qty, item) => {
     item = item.split(' ', 3).join(' ')
-    const emojis = ['🥳', '✨', '🤩', '🔥']
-    const emoji = emojis[~~(Math.random() * emojis.length)]
+    const randomValue = (array) => { return array[~~(Math.random() * array.length)] }
+    const positions = ['top-left', 'top-right', 'top-center', 'bottom-left', 'bottom-right', 'bottom-center']
+    const emojis = ['🥳', '✨', '🤩', '🔥', '👀', '👌🏼']
     const product = qty === 1 ? `${item} is` : `(${qty}) ${item} are`
-    toast.success(`${product} waiting for you in the cart ${emoji}`,
+    toast.success(`${product} waiting for you in the cart ${randomValue(emojis)}`,
         // https://fkhadra.github.io/react-toastify/introduction
         {
-            position: "top-right",
+            position: randomValue(positions),
             autoClose: 1000,
             hideProgressBar: true,
             closeOnClick: true,

@@ -91,13 +91,13 @@ const RegisterScreen = () => {
                         </Form.Control>
                     </Form.Group>
 
-                    <Button type="submit" variant="primary" className="mt-2 w-25" disabled={isLoading}>
-                        {isLoading ? <Loader /> : 'Register'}
+                    <Button type="submit" variant="primary" className="mt-2" disabled={isLoading}>
+                        {isLoading ? <Loader register /> : 'Register'}
                     </Button>
                 </Form>
                 <Row className="py-3">
                     <Col>
-                        Have an account already? {' '}
+                        Have an account? {' '}
                         <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
                             Sign in
                         </Link>

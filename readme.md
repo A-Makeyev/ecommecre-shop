@@ -42,17 +42,28 @@ PAYPAL_CLIENT_ID = your paypal client id
 PAGINATION_LIMIT = 8
 ```
 
+### Install & Run
+
+```
+cd frontend && npm i && cd.. && npm i && npm run dev
+```
+
+#### or simply open init-app.bat
+
 ### Install Dependencies (frontend & backend)
-### & Run frontend (:3000) & backend (:5000)
 
 ```
 cd frontend
 npm i
 cd..
 npm i
-npm run dev
 ```
 
+### Run frontend (:3000) & backend (:5000)
+
+```
+npm run dev
+```
 ### Run backend only
 
 ```

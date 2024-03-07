@@ -30,13 +30,13 @@ const LoginScreen = () => {
     const submitHandler = async (event) => {
         event.preventDefault()
         const time = new Date().getHours()
-        const greeting = 'Good ' + (time < 12 ? 'Morning' : time < 18 ? 'Afternoon' : 'Evening')
+        const greeting = 'Good ' + (time < 12 ? 'morning' : time < 18 ? 'afternoon' : 'evening')
 
         try {
             const response = await login({ email, password }).unwrap()
             dispatch(setCredentials({ ...response }))
             navigate(redirect)
-            toast(`${greeting} ${response.name.split(' ')[1]}!`)
+            toast(`${greeting} ${response.name.split(' ')[1]}`)
         } catch (error) {
             toast.error(error?.data?.message || error.error)
         }
@@ -68,8 +68,8 @@ const LoginScreen = () => {
                         </Form.Control>
                     </Form.Group>
 
-                    <Button type="submit" variant="primary" className="mt-2 w-25" disabled={isLoading}>
-                        {isLoading ? <Loader /> : 'Sign In'}
+                    <Button type="submit" variant="primary" className="mt-2" disabled={isLoading}>
+                        {isLoading ? <Loader signIn /> : 'Sign In'}
                     </Button>
                 </Form>
                 <Row className="py-3">
