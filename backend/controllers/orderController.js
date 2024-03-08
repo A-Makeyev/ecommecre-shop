@@ -26,12 +26,12 @@ const addOrderItems = asyncHandler(async (request, response) => {
         }))
 
         const order = new Order({
-            user: request.user.id,
+            user: request.user._id,
             orderItems: items,
             shippingAddress,
             paymentMethod,
-            shippingPrice,
             itemsPrice,
+            shippingPrice,
             taxPrice,
             totalPrice
         })

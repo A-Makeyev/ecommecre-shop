@@ -7,10 +7,10 @@ const Loader = ({ signIn, register, order }) => {
             role="status"
             animation="border"
             style={{
+                display: "block",
                 width: signIn || register || order ? "25px" : "40px",
                 height: signIn || register || order ? "25px" : "40px",
-                display: signIn || register ? "block" : "inline-block",
-                margin: signIn ? "0 12px -1px 12px" : register ? "0 16px -1px 16px" : order ? "1px 18px -1px 18px" : "auto"
+                margin: signIn ? "0 12px -1px 12px" : register ? "0 16px -1px 16px" : order ? "0px 28.5px -5px 28.5px" : "auto"
             }}
         >
 

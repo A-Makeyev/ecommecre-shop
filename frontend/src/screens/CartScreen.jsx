@@ -31,25 +31,20 @@ const CartScreen = () => {
 
     return (
         <>
+            <Row>
+                <Col sm={3} md={3} lg={2}>
+                    <GoBackButton url="/" />
+                </Col>
+                <Col sm={13} md={6} lg={6} xl={6} className="text-center mt-3">
+                    <h1>{cartItems.length === 0 ? 'Your cart is empty' : 'Shopping Cart'}</h1>
+                </Col>
+            </Row>
             <Container>
                 <Row>
-                    <Col md={8}>
-                        <Row>
-                            <Col md={4}>
-                                <GoBackButton url="/" />
-                            </Col>
-                            <Col className="mt-3">
-                                <h1>
-                                    {cartItems.length === 0 ? 'Your cart is empty' : 'Shopping Cart'}
-                                </h1>
-                            </Col>
-                        </Row>
-
+                    <Col md={8} lg={9}>
                         {cartItems.length === 0 ? (
-                            <Message varient="none">
-                                <div className="text-center mt-5">
-                                    <h3>(◡ _ ◡)</h3>
-                                </div>
+                            <Message varient="none" className="text-center mt-5">
+                                <h3>(◡ _ ◡)</h3>
                             </Message>
                         ) : (
                             <ListGroup variant="flush" className="mt-3 me-3">
@@ -59,7 +54,7 @@ const CartScreen = () => {
                                             <Col md={3} lg={2} className="mb-3">
                                                 <Image src={item.image} alt={item.name} fluid rounded />
                                             </Col>
-                                            <Col xs={13} sm={11} md={7} lg={5} className="mb-3 pl-5">
+                                            <Col xs={13} sm={11} md={7} lg={5} className="ms-text-center mb-3 pl-5">
                                                 <Link to={`/product/${item._id}`}>
                                                     <h5>{item.name}</h5>
                                                 </Link>
@@ -100,21 +95,17 @@ const CartScreen = () => {
                         )}
 
                     </Col>
-                    <Col md={4} className="mt-4">
+                    <Col md={4} lg={3} className="mt-4">
                         <Card>
                             <ListGroup variant="flush">
                                 <ListGroup.Item>
-                                    <h5>
-                                        Subtotal Items ({totalItems})
-                                    </h5>
-                                    <h4>
-                                        ${totalPrice}
-                                    </h4>
+                                    <h5>Subtotal Items ({totalItems})</h5>
+                                    <h4>${totalPrice}</h4>
                                 </ListGroup.Item>
                                 <ListGroup.Item>
                                     <Button
                                         type="button"
-                                        className="p-2"
+                                        className="p-2 w-100"
                                         disabled={cartItems.length === 0}
                                         onClick={checkoutHandler}
                                     >

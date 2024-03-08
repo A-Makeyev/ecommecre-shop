@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Col, Form, Button } from 'react-bootstrap'
+import { Row, Col, Form, Button } from 'react-bootstrap'
 import FormContainer from '../components/FormContainer'
 import CheckoutSteps from '../components/CheckoutSteps'
 import GoBackButton from '../components/GoBackButton'
@@ -29,27 +29,33 @@ const PaymentScreen = () => {
 
     return (
         <>
-            <GoBackButton url="/shipping" />
+            <Row>
+                <Col md={3} lg={2} xl={2}>
+                    <GoBackButton url="/shipping" />
+                </Col>
+                <Col sm={13} md={7} lg={8} xl={8} className="mt-3">
+                    <CheckoutSteps one two />
+                </Col>
+            </Row>
             <FormContainer>
-                <CheckoutSteps one two three />
-                <h1>Payment Method</h1>
+                <h1 className="text-center">Payment Details</h1>
                 <Form onSubmit={submitHandler}>
                     <Form.Group>
-                        <Form.Label as="legend">Select Method</Form.Label>
+                        <Form.Label as="legend" className="mt-4 mb-4">Select Method</Form.Label>
                         <Col>
                             <Form.Check
                                 type="radio"
                                 id="PayPal"
                                 name="PaymentMethod"
-                                label="PayPal or Credit Card"
-                                className="my-3"
+                                label="PayPal"
+                                className="my-3 fs-5"
                                 value="PayPal"
                                 checked
                                 onChange={(event) => setPaymentMethod(event.target.value)}
                             ></Form.Check>
                         </Col>
                     </Form.Group>
-                    <Button type="submit" variant="primary">
+                    <Button type="submit" variant="primary" className="mt-5">
                         Continue
                     </Button>
                 </Form>

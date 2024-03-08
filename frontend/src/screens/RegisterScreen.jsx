@@ -49,7 +49,7 @@ const RegisterScreen = () => {
         <>
             <GoBackButton url="/login" />
             <FormContainer>
-                <h1>Sign Up</h1>
+                <h1 className="text-center">Sign Up</h1>
                 <Form onSubmit={submitHandler}>
                     <Form.Group controlId="name" className="my-3">
                         <Form.Label>Full Name</Form.Label>

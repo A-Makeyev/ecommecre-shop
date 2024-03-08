@@ -55,7 +55,9 @@ const ProductDetails = ({ product }) => {
                                 {product.countInStock > 0 ? (
                                     <>
                                         <Col xs={1} sm={1} md={1} lg={1} xl={1} className="ms-cart-margin-1">
-                                            <FaCartPlus role="button" className="fs-5" onClick={addToCartHandler} />
+                                            <span id={`add-${product.name.split(' ', 3).join('-')}`}>
+                                                <FaCartPlus role="button" className="fs-5" onClick={addToCartHandler} />
+                                            </span>
                                         </Col>
                                         <Col xs={1} sm={1} md={1} lg={1} xl={2} className="ms-cart-margin-1">
                                             <Form.Control

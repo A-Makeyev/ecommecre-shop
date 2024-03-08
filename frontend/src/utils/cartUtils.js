@@ -39,11 +39,11 @@ export const quantityAlert = (qty) => {
 }
 
 export const alertText = (qty) => {
-    return ((qty < 10) && (qty > 1))
+    return ((qty < 11) && (qty > 1))
         ? `Only ${qty} Left`
         : qty === 1 ? "Last One"
-        : qty < 1 ? "Out of Stock"
-        : ""
+            : qty < 1 ? "Out of Stock"
+                : ""
 }
 
 export const addedToCartMessage = (qty, item) => {
@@ -51,8 +51,8 @@ export const addedToCartMessage = (qty, item) => {
     const randomValue = (array) => { return array[~~(Math.random() * array.length)] }
     const positions = ['top-left', 'top-right', 'top-center', 'bottom-left', 'bottom-right', 'bottom-center']
     const emojis = ['🥳', '✨', '🤩', '🔥', '👀', '👌🏼']
-    const product = qty === 1 ? `${item} is` : `(${qty}) ${item} are`
-    toast.success(`${product} waiting for you in the cart ${randomValue(emojis)}`,
+    const product = qty === 1 ? `${item} was` : `(${qty}) ${item} were`
+    toast.success(`${product} added to your shopping cart ${randomValue(emojis)}`,
         // https://fkhadra.github.io/react-toastify/introduction
         {
             position: randomValue(positions),

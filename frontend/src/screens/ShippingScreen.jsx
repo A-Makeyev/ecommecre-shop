@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Form, Button } from 'react-bootstrap'
+import { Row, Col, Form, Button } from 'react-bootstrap'
 import { saveShippingAddress } from '../slices/cartSlice'
 import FormContainer from '../components/FormContainer'
 import GoBackButton from '../components/GoBackButton'
@@ -26,10 +26,16 @@ const ShippingScreen = () => {
 
     return (
         <>
-            <GoBackButton url="/" />
+            <Row>
+                <Col md={3} lg={2} xl={2}>
+                    <GoBackButton url="/cart" />
+                </Col>
+                <Col sm={13} md={7} lg={8} xl={8} className="mt-3">
+                    <CheckoutSteps one />
+                </Col>
+            </Row>
             <FormContainer>
-                <CheckoutSteps one two />
-                <h1>Shipping</h1>
+                <h1 className="text-center">Shipping Address</h1>
                 <Form onSubmit={submitHandler}>
                     <Form.Group controlId="country" className="my-3">
                         <Form.Label>Country</Form.Label>
@@ -71,7 +77,7 @@ const ShippingScreen = () => {
                         </Form.Control>
                     </Form.Group>
 
-                    <Button type="submit" variant="primary" className="mt-2">
+                    <Button type="submit" variant="primary" className="mt-1">
                         Continue
                     </Button>
                 </Form>
