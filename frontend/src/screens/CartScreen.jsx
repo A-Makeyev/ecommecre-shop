@@ -43,9 +43,14 @@ const CartScreen = () => {
                 <Row>
                     <Col md={8} lg={9}>
                         {cartItems.length === 0 ? (
-                            <Message variant="none" className="text-center mt-5">
-                                <h1>(◡ _ ◡)</h1>
-                            </Message>
+                            <Row>
+                                <Col md={1} lg={4}></Col>
+                                <Col md={11} lg={5} xl={5}>
+                                    <Message variant="none" className="text-center mt-5">
+                                        <h1>(◡ _ ◡)</h1>
+                                    </Message>
+                                </Col>
+                            </Row>
                         ) : (
                             <ListGroup variant="flush" className="mt-3 me-3">
                                 {cartItems.map((item) => (
@@ -99,7 +104,7 @@ const CartScreen = () => {
                         <Card>
                             <ListGroup variant="flush">
                                 <ListGroup.Item>
-                                    <h4>Subtotal ({totalItems} Items)</h4>
+                                    <h4>Subtotal ({totalItems === 1 ? `${totalItems} Item` : `${totalItems} Items`})</h4>
                                     <h4>${totalPrice}</h4>
                                 </ListGroup.Item>
                                 <ListGroup.Item>
