@@ -31,7 +31,7 @@ const OrderScreen = () => {
             ) : (
                 <>
                     <Row className="justify-content-center mt-4">
-                        <Col md={5}>
+                        <Col md={9} lg={5}>
                             <ListGroup variant="flush">
                                 <ListGroup.Item>
                                     <h2>Shipping</h2>
@@ -82,7 +82,7 @@ const OrderScreen = () => {
                                 </ListGroup.Item>
                             </ListGroup>
                         </Col>
-                        <Col md={4}>
+                        <Col md={9} lg={4}>
                             <Card className="mt-3 mb-3">
                                 <ListGroup variant="flush" className="fs-5">
                                     <ListGroup.Item>
@@ -122,22 +122,22 @@ const OrderScreen = () => {
                                 </ListGroup>
                             </Card>
                         </Col>
-                        <Col md={9}>
+                        <Col md={13} lg={9}>
                             <ListGroup.Item>
                                 {order.orderItems.map((item, index) => (
                                     <ListGroup.Item key={index} className="border rounded p-3 mb-2">
                                         <Row className="ms-text-center">
-                                            <Col md={1}>
+                                            <Col md={2} lg={1}>
                                                 <Link to={`/product/${item._id}`}>
                                                     <Image src={item.image} alt={item.name} fluid rounded />
                                                 </Link>
                                             </Col>
-                                            <Col md={6}>
+                                            <Col md={7} lg={6}>
                                                 <Link to={`/product/${item._id}`}>
                                                     <strong>{item.name}</strong>
                                                 </Link>
                                             </Col>
-                                            <Col md={5} className="text-center">
+                                            <Col md={1} lg={5} className="text-center">
                                                 ${addCommas((item.qty * item.price).toFixed(2))}
                                                 <br />
                                                 ({addCommas(item.qty)}x{addCommas(item.price)})
