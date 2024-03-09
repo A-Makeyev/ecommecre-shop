@@ -43,8 +43,8 @@ const CartScreen = () => {
                 <Row>
                     <Col md={8} lg={9}>
                         {cartItems.length === 0 ? (
-                            <Message varient="none" className="text-center mt-5">
-                                <h3>(◡ _ ◡)</h3>
+                            <Message variant="none" className="text-center mt-5">
+                                <h1>(◡ _ ◡)</h1>
                             </Message>
                         ) : (
                             <ListGroup variant="flush" className="mt-3 me-3">
@@ -99,7 +99,7 @@ const CartScreen = () => {
                         <Card>
                             <ListGroup variant="flush">
                                 <ListGroup.Item>
-                                    <h5>Subtotal Items ({totalItems})</h5>
+                                    <h4>Subtotal ({totalItems} Items)</h4>
                                     <h4>${totalPrice}</h4>
                                 </ListGroup.Item>
                                 <ListGroup.Item>

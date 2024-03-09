@@ -45,6 +45,8 @@ const PlaceOrderScreen = () => {
         }
     }
 
+    const totalItems = cart.cartItems.reduce((accumulator, item) => accumulator + item.qty, 0)
+
     return (
         <>
             <Row>
@@ -60,29 +62,25 @@ const PlaceOrderScreen = () => {
                     <ListGroup variant="flush">
                         <ListGroup.Item>
                             <Row>
-                                <h2>Shipping Address</h2>
-                                <p>
-                                    <strong>
-                                        {' '} {cart.shippingAddress.address}, {cart.shippingAddress.city},
-                                        {' '} {cart.shippingAddress.country}, {cart.shippingAddress.postalCode}
-                                    </strong>
+                                <h3>Shipping Address</h3>
+                                <p className="fs-5">
+                                    {' '} {cart.shippingAddress.address}, {cart.shippingAddress.city},
+                                    {' '} {cart.shippingAddress.country}, {cart.shippingAddress.postalCode}
                                 </p>
                             </Row>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <Row>
-                                <h2>Payment Method</h2>
-                                <p>
-                                    <strong>
-                                        {' '} {cart.paymentMethod}
-                                    </strong>
+                                <h3>Payment Method</h3>
+                                <p className="fs-5">
+                                    {' '} {cart.paymentMethod}
                                 </p>
                             </Row>
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <h2>Total Items</h2>
+                            <h3>Total Items</h3>
                             {cart.cartItems.length === 0 ? (
-                                <Message varient="none" className="p-0">
+                                <Message variant="none" className="p-0">
                                     <h5>You have no saved items yet</h5>
                                 </Message>
                             ) : (
@@ -119,10 +117,11 @@ const PlaceOrderScreen = () => {
                         <ListGroup variant="flush">
                             <ListGroup.Item>
                                 <h2>Order Summary</h2>
+                                <h4>Checkout ({totalItems > 1 ? `${totalItems} Items` : '1 item'})</h4>
                             </ListGroup.Item>
                             <ListGroup.Item className="fs-5">
                                 <Row>
-                                    <Col>Items:</Col>
+                                    <Col>Price:</Col>
                                     <Col>${addCommas(cart.itemsPrice)}</Col>
                                 </Row>
                                 <Row>
@@ -143,6 +142,7 @@ const PlaceOrderScreen = () => {
                                     <Col>
                                         <Button
                                             type="button"
+                                            className="w-100"
                                             onClick={placeOrderHandler}
                                             disabled={cart.cartItems.length === 0}
                                         >
@@ -153,7 +153,7 @@ const PlaceOrderScreen = () => {
                                     {error && (
 
                                         <div className="mt-3">
-                                            <Message varient="danger" className="p-2">
+                                            <Message variant="danger" className="p-2">
                                                 {error?.data?.message || error.error}
                                             </Message>
                                         </div>

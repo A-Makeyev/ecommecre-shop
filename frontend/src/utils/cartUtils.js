@@ -52,7 +52,7 @@ export const addedToCartMessage = (qty, item) => {
     const positions = ['top-left', 'top-right', 'top-center', 'bottom-left', 'bottom-right', 'bottom-center']
     const emojis = ['🥳', '✨', '🤩', '🔥', '👀', '👌🏼']
     const product = qty === 1 ? `${item} was` : `(${qty}) ${item} were`
-    toast.success(`${product} added to your shopping cart ${randomValue(emojis)}`,
+    toast.success(`${product} added to your cart ${randomValue(emojis)}`,
         // https://fkhadra.github.io/react-toastify/introduction
         {
             position: randomValue(positions),

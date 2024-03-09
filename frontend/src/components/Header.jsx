@@ -18,8 +18,10 @@ const Header = () => {
     const quantity = cartItems.reduce((accumulator, currentItem) => accumulator + currentItem.qty, 0)
     const displayQuantity = (quantity && quantity > 999) ? `${String(quantity)[0]}K` : quantity ? quantity : ""
     const displayCartCountClass = quantity ? "cart-item-count" : "cart-item-count-invisible"
-    const logOutMessage = quantity === 1 ? `Hey don't forget about your ${cartItems[0].name.split(' ', 3).join(' ')}!`
-                        : quantity > 1 ? `${cartItems[0].name.split(' ', 3).join(' ')} and ${quantity - 1} more items are waiting!`
+    const shortenedProductName = quantity > 0 && cartItems[0].name.split(' ', 3).join(' ')
+    const logOutMessage = quantity === 1 ? `Hey don't forget about your ${shortenedProductName}!`
+                        : quantity === 2 ? `${shortenedProductName} and one more item are waiting!`
+                        : quantity > 1 ? `${shortenedProductName} and ${quantity - 1} more items are waiting!`
                         : 'See you soon'
 
     const logoutHandler = async () => {
