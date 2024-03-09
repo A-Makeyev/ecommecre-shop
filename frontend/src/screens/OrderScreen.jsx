@@ -125,7 +125,7 @@ const OrderScreen = () => {
                         <Col md={9}>
                             <ListGroup.Item>
                                 {order.orderItems.map((item, index) => (
-                                    <ListGroup.Item key={index} className="border rounded p-3">
+                                    <ListGroup.Item key={index} className="border rounded p-3 mb-2">
                                         <Row className="ms-text-center">
                                             <Col md={1}>
                                                 <Link to={`/product/${item._id}`}>

@@ -41,11 +41,11 @@ const CartScreen = () => {
             </Row>
             <Container>
                 <Row>
-                    <Col md={8} lg={9}>
+                    <Col md={13} lg={8}>
                         {cartItems.length === 0 ? (
                             <Row>
-                                <Col md={1} lg={4}></Col>
-                                <Col md={11} lg={5} xl={5}>
+                                <Col md={1} lg={5} xl={4}></Col>
+                                <Col md={11} lg={5} xl={7}>
                                     <Message variant="none" className="text-center mt-5">
                                         <h1>(◡ _ ◡)</h1>
                                     </Message>
@@ -56,10 +56,10 @@ const CartScreen = () => {
                                 {cartItems.map((item) => (
                                     <ListGroup.Item key={item._id}>
                                         <Row className="mt-3 mb-2 justify-content-center">
-                                            <Col md={3} lg={2} className="mb-3">
+                                            <Col md={2} lg={2} className="mb-3">
                                                 <Image src={item.image} alt={item.name} fluid rounded />
                                             </Col>
-                                            <Col xs={13} sm={11} md={7} lg={5} className="ms-text-center mb-3 pl-5">
+                                            <Col xs={13} sm={11} md={4} lg={5} className="ms-text-center mb-3 pl-5">
                                                 <Link to={`/product/${item._id}`}>
                                                     <h5>{item.name}</h5>
                                                 </Link>
@@ -67,7 +67,7 @@ const CartScreen = () => {
                                             <Col xs={4} sm={3} md={3} lg={2} className="mt-1 p-0 text-center">
                                                 <h5>${addCommas(item.price)}</h5>
                                             </Col>
-                                            <Col xs={4} sm={3} lg={2}>
+                                            <Col xs={4} sm={3} md={2} lg={2}>
                                                 <Form.Control
                                                     as="select"
                                                     value={item.qty}
@@ -100,7 +100,7 @@ const CartScreen = () => {
                         )}
 
                     </Col>
-                    <Col md={4} lg={3} className="mt-4">
+                    <Col md={13} lg={4} className="mt-4">
                         <Card>
                             <ListGroup variant="flush">
                                 <ListGroup.Item>

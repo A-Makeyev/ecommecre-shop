@@ -86,7 +86,7 @@ const PlaceOrderScreen = () => {
                             ) : (
                                 <ListGroup>
                                     {cart.cartItems.map((item, index) => (
-                                        <ListGroup.Item key={index} className="border rounded">
+                                        <ListGroup.Item key={index} className="border rounded mb-2">
                                             <Row className="ms-text-center">
                                                 <Col md={4} lg={2}>
                                                     <Link to={`/product/${item._id}`}>
