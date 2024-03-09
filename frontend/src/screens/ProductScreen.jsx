@@ -52,25 +52,25 @@ const ProductScreen = () => {
             ) : (
                 <>
                     <Row>
-                        <Col md={12} lg={4} className="mt-4">
+                        <Col md={11} lg={13} xl={4} className="mt-4 mb-3 text-center">
                             <Image src={product.image} alt={product.name} fluid />
                         </Col>
-                        <Col md={6} lg={5}>
+                        <Col md={6} lg={7} xl={5}>
                             <ListGroup>
                                 <ListGroup.Item variant="flush" className="border-0">
                                     <h3>{product.name}</h3>
                                 </ListGroup.Item>
-                                <hr align="center" className="border-bottom border-1 border-dark" />
+                                <hr align="center" className="border-bottom border-1" />
                                 <ListGroup.Item variant="flush" className="border-0">
                                     <p>{product.description}</p>
                                 </ListGroup.Item>
-                                <hr align="center" className="border-bottom border-1 border-dark" />
+                                <hr align="center" className="border-bottom border-1" />
                                 <ListGroup.Item variant="flush" className="border-0">
                                     <Rating value={product.rating} text={`${product.numReviews} reviews`} />
                                 </ListGroup.Item>
                             </ListGroup>
                         </Col>
-                        <Col md={5} lg={3}>
+                        <Col md={5} lg={13} xl={3}>
                             <Card className="mt-3">
                                 <ListGroup variant="flush">
                                     <ListGroup.Item>
