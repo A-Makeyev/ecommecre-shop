@@ -117,7 +117,7 @@ const PlaceOrderScreen = () => {
                         <ListGroup variant="flush">
                             <ListGroup.Item>
                                 <h2>Order Summary</h2>
-                                <h4>Checkout ({totalItems === 1 ? `${totalItems} Item` : `${totalItems} Items`})</h4>
+                                <h4>Checkout ({totalItems === 1 ? '1 item' : `${totalItems} items`})</h4>
                             </ListGroup.Item>
                             <ListGroup.Item className="fs-5">
                                 <Row>

@@ -87,7 +87,7 @@ const OrderScreen = () => {
                                 <ListGroup variant="flush" className="fs-5">
                                     <ListGroup.Item>
                                         <h2>Order Summary</h2>
-                                        <h4>Total Items ({order.orderItems.length})</h4>
+                                        <h4>Total ({order.orderItems.length === 1 ? '1 item' : `${order.orderItems.length} items`})</h4>
                                     </ListGroup.Item>
                                     <ListGroup.Item>
                                         <Row>

@@ -104,7 +104,7 @@ const CartScreen = () => {
                         <Card>
                             <ListGroup variant="flush">
                                 <ListGroup.Item>
-                                    <h4>Subtotal ({totalItems === 1 ? `${totalItems} Item` : `${totalItems} Items`})</h4>
+                                    <h4>Subtotal ({totalItems === 1 ? '1 item' : `${totalItems} items`})</h4>
                                     <h4>${totalPrice}</h4>
                                 </ListGroup.Item>
                                 <ListGroup.Item>

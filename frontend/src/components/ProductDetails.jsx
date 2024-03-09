@@ -1,11 +1,11 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Row, Col, Card, Form } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { alertText, quantityAlert, addedToCartMessage, addCommas } from '../utils/cartUtils'
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
 import { addToCart } from '../slices/cartSlice'
 import { FaCartPlus } from 'react-icons/fa'
-import { alertText, quantityAlert, addedToCartMessage, addCommas } from '../utils/cartUtils'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Rating from '../components/Rating'
@@ -34,7 +34,7 @@ const ProductDetails = ({ product }) => {
             ) : (
                 <>
                     <Link to={`/product/${product._id}`} >
-                        <Card.Img src={product.image} variant="top" />
+                        <Card.Img src={product.image} variant="top" className="product-details-img" />
                     </Link>
                     <Card.Body>
                         <Link to={`/product/${product._id}`}>

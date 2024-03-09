@@ -13,8 +13,8 @@ const Header = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [logoutApiCall] = useLogoutMutation()
-    const { cartItems } = useSelector((state) => state.cart)
-    const { userInfo } = useSelector((state) => state.auth)
+    const { userInfo } = useSelector(state => state.auth)
+    const { cartItems } = useSelector(state => state.cart)
     const quantity = cartItems.reduce((accumulator, currentItem) => accumulator + currentItem.qty, 0)
     const displayQuantity = (quantity && quantity > 999) ? `${String(quantity)[0]}K` : quantity ? quantity : ""
     const displayCartCountClass = quantity ? "cart-item-count" : "cart-item-count-invisible"
@@ -59,7 +59,7 @@ const Header = () => {
                             </LinkContainer>
 
                             {userInfo ? (
-                                <NavDropdown title={userInfo.name} id="username" className="fs-5">
+                                <NavDropdown title={userInfo.name.split(' ')[0]} id="username" className="fs-5">
                                     <LinkContainer to="/profile">
                                         <NavDropdown.Item>Profile</NavDropdown.Item>
                                     </LinkContainer>
