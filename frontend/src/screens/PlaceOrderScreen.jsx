@@ -53,12 +53,12 @@ const PlaceOrderScreen = () => {
                 <Col md={3} lg={2}>
                     <GoBackButton url="/payment" />
                 </Col>
-                <Col sm={13} md={8} lg={8} xl={7} className="mt-3">
+                <Col sm={13} md={11} lg={8} xl={7} className="mt-3">
                     <CheckoutSteps one two three />
                 </Col>
             </Row>
             <Row>
-                <Col md={8}>
+                <Col md={10} lg={8}>
                     <ListGroup variant="flush">
                         <ListGroup.Item>
                             <Row>
@@ -86,19 +86,19 @@ const PlaceOrderScreen = () => {
                             ) : (
                                 <ListGroup>
                                     {cart.cartItems.map((item, index) => (
-                                        <ListGroup.Item key={index} className="border-0 p-0">
-                                            <Row className="ms-text-center border-bottom pb-3 pt-3">
+                                        <ListGroup.Item key={index} className="border rounded">
+                                            <Row className="ms-text-center">
                                                 <Col md={4} lg={2}>
                                                     <Link to={`/product/${item._id}`}>
                                                         <Image src={item.image} alt={item.name} fluid rounded />
                                                     </Link>
                                                 </Col>
-                                                <Col md={5} lg={8} className="mt-1">
+                                                <Col md={5} lg={7} className="mt-1">
                                                     <Link to={`/product/${item._id}`}>
                                                         <strong>{item.name}</strong>
                                                     </Link>
                                                 </Col>
-                                                <Col md={2} className="mt-1">
+                                                <Col md={2} className="text-center mt-1">
                                                     ${addCommas((item.qty * item.price).toFixed(2))}
                                                     <br />
                                                     ({addCommas(item.qty)}x{addCommas(item.price)})
@@ -112,7 +112,7 @@ const PlaceOrderScreen = () => {
                     </ListGroup>
                 </Col >
 
-                <Col md={8} lg={4}>
+                <Col md={10} lg={4}>
                     <Card className="mt-3">
                         <ListGroup variant="flush">
                             <ListGroup.Item>
