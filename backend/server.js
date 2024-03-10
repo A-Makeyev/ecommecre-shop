@@ -28,7 +28,11 @@ app.get('/', (request, response) => {
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/products', productRoutes)
+// https://developer.paypal.com
+app.use('/api/config/paypal', (request, response) => response.send({ clientId: process.env.PAYPAL_CLIENT_ID }))
 app.use(errorHandler)
 app.use(notFound)
+
+
 
 app.listen(port, () => console.log(` >>> Server is running on port ${port} `.blue.bold.inverse))

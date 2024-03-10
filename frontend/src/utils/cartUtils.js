@@ -32,6 +32,22 @@ export const updateCart = (state) => {
     return state
 }
 
+export const getCurrentDateAndTime = (us) => {
+    let date = new Date()
+    let dd = String(date.getDate()).padStart(2, '0')
+    let mm = String(date.getMonth() + 1).padStart(2, '0')
+    let yyyy = date.getFullYear()
+    let hours = date.getHours()
+    let minutes = date.getMinutes()
+    let seconds = date.getSeconds()
+
+    hours = hours < 10 ? '0' + hours : hours
+    minutes = minutes < 10 ? '0' + minutes : minutes
+    seconds = seconds < 10 ? '0' + seconds : seconds
+
+    return (us ? `${mm}-${dd}-${yyyy}` : `${dd}-${mm}-${yyyy}`) + `${hours}:${minutes}:${seconds}`
+}
+
 export const quantityAlert = (qty) => {
     return (qty === 1 || qty < 1 || ((qty < 10) && (qty > 1)))
         ? "quantity-alert-text xs-price-width-100 mt-1 pe-0 fs-5"

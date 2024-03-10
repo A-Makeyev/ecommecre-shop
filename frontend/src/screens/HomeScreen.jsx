@@ -22,7 +22,7 @@ const HomeScreen = () => {
     return (
         <>
             <h1 className="text-center mb-5">Latest Products</h1>
-            <Row>
+            <Row className="justify-content-center">
 
                 {isLoading ? (
                     <Loader />

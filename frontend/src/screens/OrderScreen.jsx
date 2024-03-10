@@ -1,6 +1,9 @@
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
-import { Row, Col, Button, Form, Card, ListGroup, Image } from 'react-bootstrap'
-import { useGetOrderDetailsQuery } from '../slices/ordersApiSlice'
+import { Row, Col, Button, Card, ListGroup, Image } from 'react-bootstrap'
+import { useGetOrderDetailsQuery, usePayOrderMutation, useGetPayPalClientIdQuery } from '../slices/ordersApiSlice'
+import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
 import { addCommas } from '../utils/cartUtils'
 import { toast } from 'react-toastify'
 import GoBackButton from '../components/GoBackButton'
@@ -9,13 +12,73 @@ import Loader from '../components/Loader'
 
 const OrderScreen = () => {
     const { id: orderId } = useParams()
+    const { userInfo } = useSelector(state => state.auth)
     const { data: order, refetch, isLoading, error } = useGetOrderDetailsQuery(orderId)
+    const { data: paypal, isLoading: loadingPayPal, error: payPalError } = useGetPayPalClientIdQuery()
+    const [payOrder, { isLoading: loadingPayment }] = usePayOrderMutation()
+    const [{ isPending }, paypalDispatch] = usePayPalScriptReducer()
+
+    useEffect(() => {
+        if (!loadingPayPal && !payPalError && paypal.clientId) {
+            const loadPayPalScript = async () => {
+                paypalDispatch({
+                    type: 'resetOptions',
+                    value: {
+                        'client-id': paypal.clientId,
+                        currency: 'USD'
+                    }
+                })
+                paypalDispatch({ type: 'setLoadingStatus', value: 'pending' })
+            }
+            if (order && !order.isPaid) {
+                if (!window.paypal) {
+                    loadPayPalScript()
+                }
+            }
+        }
+    }, [order, paypal, paypalDispatch, loadingPayPal, payPalError])
+
+    function onApprove(data, actions) {
+        return actions.order.capture().then(async function (details) {
+            try {
+                await payOrder({ orderId, details })
+                refetch()
+                toast.success('Payment Successfull')
+            } catch (error) {
+                toast.error(error?.data?.message || error.message)
+            }
+        })
+    }
+
+    async function onApproveTest() {
+        await payOrder({ orderId, details: { payer: {} } })
+        refetch()
+        toast.success('Payment Successfull')
+    }
+
+    function createOrder(data, actions) {
+        return actions.order.create({
+            purchase_units: [
+                {
+                    amount: {
+                        value: order.totalPrice
+                    }
+                }
+            ]
+        }).then(function (orderId) {
+            return orderId
+        })
+    }
+
+    function onError(error) {
+        toast.error(error.message)
+    }
 
     return (
         <>
             <Row>
                 <Col md={3} lg={2}>
-                    <GoBackButton url="/placeorder" />
+                    <GoBackButton url="/" />
                 </Col>
                 <Col md={12} lg={8} className="text-center mt-3">
                     <h3>Order ID: {orderId}</h3>
@@ -69,8 +132,8 @@ const OrderScreen = () => {
                                     </p>
 
                                     {order.isPaid ? (
-                                        <Message variant="success">
-                                            <strong>Paid At:</strong>
+                                        <Message variant="success" className="text-center">
+                                            <strong>Paid At: </strong>
                                             {order.paidAt}
                                         </Message>
                                     ) : (
@@ -107,18 +170,28 @@ const OrderScreen = () => {
                                             <Col>${addCommas(order.totalPrice)}</Col>
                                         </Row>
                                     </ListGroup.Item>
-                                    <ListGroup.Item className="p-4">
-                                        <Row>
-                                            <Button role="button">
-                                                Pay Now
-                                            </Button>
-                                        </Row>
-                                        <Row className="mt-1">
-                                            <Button role="button">
-                                                Mark As Delievered
-                                            </Button>
-                                        </Row>
-                                    </ListGroup.Item>
+
+                                    {!order.isPaid && (
+                                        <ListGroup.Item className="p-4">
+                                            {isPending ? <Loader /> : (
+                                                <div>
+                                                    <Button onClick={onApproveTest} className="mb-2 w-100">
+                                                        {loadingPayment || loadingPayment ? <Loader order /> : 'Test Pay'}
+                                                    </Button>
+                                                    <div>
+                                                        <PayPalButtons
+                                                            createOrder={createOrder}
+                                                            onApprove={onApprove}
+                                                            onError={onError}
+                                                        >
+                                                        </PayPalButtons>
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                        </ListGroup.Item>
+                                    )}
+
                                 </ListGroup>
                             </Card>
                         </Col>
@@ -128,9 +201,7 @@ const OrderScreen = () => {
                                     <ListGroup.Item key={index} className="border rounded p-3 mb-2">
                                         <Row className="ms-text-center">
                                             <Col md={2} lg={1}>
-                                                <Link to={`/product/${item._id}`}>
-                                                    <Image src={item.image} alt={item.name} fluid rounded />
-                                                </Link>
+                                                <Image src={item.image} alt={item.name} fluid rounded />
                                             </Col>
                                             <Col md={7} lg={6}>
                                                 <Link to={`/product/${item._id}`}>

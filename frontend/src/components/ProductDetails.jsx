@@ -82,7 +82,7 @@ const ProductDetails = ({ product }) => {
                             </Row>
                         </Card.Text>
                         <Card.Text as="h5" className="mt-4">
-                            <Rating value={product.rating} text={`${product.numReviews} reviews`} />
+                            <Rating value={product.rating} text={product.numReviews === 1 ? '1 review' : `${product.numReviews} reviews`} />
                         </Card.Text>
                     </Card.Body>
                 </>

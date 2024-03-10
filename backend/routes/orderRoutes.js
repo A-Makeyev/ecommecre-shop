@@ -23,7 +23,7 @@ router.get('/mine', protect, getMyOrders)
 router.get('/:id', protect, getOrderById)
 
 // router.route('/:id/pay').put(protect, admin, updateOrderToPaid)
-router.put('/:id/pay', protect, admin, updateOrderToPaid)
+router.put('/:id/pay', protect, updateOrderToPaid)
 
 // router.route('/:id/deliver').put(protect, admin, updateOrderToDelivered)
 router.put('/:id/deliver', protect, admin, updateOrderToDelivered)

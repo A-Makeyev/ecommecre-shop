@@ -66,7 +66,7 @@ const ProductScreen = () => {
                                 </ListGroup.Item>
                                 <hr align="center" className="border-bottom border-1" />
                                 <ListGroup.Item variant="flush" className="border-0">
-                                    <Rating value={product.rating} text={`${product.numReviews} reviews`} />
+                                    <Rating value={product.rating} text={product.numReviews === 1 ? '1 review' : `${product.numReviews} reviews`} />
                                 </ListGroup.Item>
                             </ListGroup>
                         </Col>

@@ -36,7 +36,7 @@ const LoginScreen = () => {
             const response = await login({ email, password }).unwrap()
             dispatch(setCredentials({ ...response }))
             navigate(redirect)
-            toast(`${greeting} ${response.name.split(' ')[1]}`)
+            toast(`${greeting} ${response.name.split(' ')[0]}`)
         } catch (error) {
             toast.error(error?.data?.message || error.error)
         }

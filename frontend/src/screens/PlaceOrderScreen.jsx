@@ -89,9 +89,7 @@ const PlaceOrderScreen = () => {
                                         <ListGroup.Item key={index} className="border rounded mb-2">
                                             <Row className="ms-text-center">
                                                 <Col md={4} lg={2}>
-                                                    <Link to={`/product/${item._id}`}>
-                                                        <Image src={item.image} alt={item.name} fluid rounded />
-                                                    </Link>
+                                                    <Image src={item.image} alt={item.name} fluid rounded />
                                                 </Col>
                                                 <Col md={5} lg={7} className="mt-1">
                                                     <Link to={`/product/${item._id}`}>
