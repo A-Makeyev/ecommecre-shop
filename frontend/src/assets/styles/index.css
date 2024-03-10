@@ -67,6 +67,11 @@ select::-webkit-scrollbar {
 .product-details-img {
   width: 100%;
   height: 220px;
+  transition: 0.25s;
+}
+
+.product-details-img:hover {
+  transform: scale(1.025);
 }
 
 .cart-item-count:after {

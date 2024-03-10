@@ -3,15 +3,18 @@ import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { Row, Col, Button, Card, ListGroup, Image } from 'react-bootstrap'
 import { useGetOrderDetailsQuery, usePayOrderMutation, useGetPayPalClientIdQuery } from '../slices/ordersApiSlice'
-import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
 import { addCommas, formatDateAndTime } from '../utils/cartUtils'
+import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
+import { usePDF } from 'react-to-pdf'
 import { toast } from 'react-toastify'
 import GoBackButton from '../components/GoBackButton'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 
+
 const OrderScreen = () => {
     const { id: orderId } = useParams()
+    const { userInfo } = useSelector(state => state.auth)
     const { data: order, refetch, isLoading, error } = useGetOrderDetailsQuery(orderId)
     const { data: paypal, isLoading: loadingPayPal, error: payPalError } = useGetPayPalClientIdQuery()
     const [payOrder, { isLoading: loadingPayment }] = usePayOrderMutation()
@@ -73,14 +76,14 @@ const OrderScreen = () => {
         toast.error(error.message)
     }
 
+    const fileName = `${userInfo.name}'s Order Invoice ${formatDateAndTime(order.createdAt)}`
+    const { toPDF, targetRef } = usePDF({ filename: fileName })
+
     return (
         <>
             <Row>
                 <Col md={3} lg={2}>
                     <GoBackButton url="/profile" />
-                </Col>
-                <Col md={12} lg={8} className="text-center mt-3">
-                    <h3>Order ID: {orderId}</h3>
                 </Col>
             </Row>
 
@@ -91,7 +94,12 @@ const OrderScreen = () => {
                     {error?.data?.message || error.error}
                 </Message>
             ) : (
-                <>
+                <div ref={targetRef}>
+                    <Row>
+                        <Col className="text-center">
+                            <h3>Order ID: {orderId}</h3>
+                        </Col>
+                    </Row>
                     <Row className="justify-content-center mt-4">
                         <Col md={9} lg={5}>
                             <ListGroup variant="flush">
@@ -196,14 +204,19 @@ const OrderScreen = () => {
 
                                         </ListGroup.Item>
                                     ) : (
-                                        <ListGroup.Item className="p-3 mt-1">
-                                            <Button className="mb-2 w-100">
-                                                Download Invoice
-                                            </Button>
-                                            <Button className="w-100 mb-1">
-                                                Send Invoice to Your Email
-                                            </Button>
-                                        </ListGroup.Item>
+                                        <>
+                                            <ListGroup.Item className="p-3 mt-1">
+                                                <Row>
+                                                    <Col>Order Date:</Col>
+                                                    <Col>{formatDateAndTime(order.createdAt)}</Col>
+                                                </Row>
+                                            </ListGroup.Item>
+                                            <ListGroup.Item className="p-3 mt-1">
+                                                <Button onClick={() => toPDF()} className="mb-2 w-100">
+                                                    Invoice
+                                                </Button>
+                                            </ListGroup.Item>
+                                        </>
                                     )}
 
                                 </ListGroup>
@@ -233,7 +246,7 @@ const OrderScreen = () => {
                             </ListGroup.Item>
                         </Col>
                     </Row>
-                </>
+                </div>
             )}
         </>
     )

@@ -9,7 +9,7 @@ const users = [
         isAdmin: true,
     },
     {
-        name: 'Tolik Makeyev',
+        name: 'Anatoly Makeyev',
         email: 'anatoly.makeyev@cloudbeat.io',
         password: bcrypt.hashSync('iLoveSpaceX69', 10),
         isAdmin: false,

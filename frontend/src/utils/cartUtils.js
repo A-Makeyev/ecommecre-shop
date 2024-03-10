@@ -1,4 +1,5 @@
 import { toast, Slide } from 'react-toastify'
+import { Resolution, Margin } from 'react-to-pdf'
 
 
 export const addDecimals = (num) => {
@@ -47,7 +48,7 @@ export const formatDateAndTime = (date, includeTime) => {
     return dateAndTimeString.substring(0, 10)
 }
 
-export const getCurrentDateAndTime = (us) => {
+export const getCurrentDateAndTime = (us, includeTime) => {
     let date = new Date()
     let dd = String(date.getDate()).padStart(2, '0')
     let mm = String(date.getMonth() + 1).padStart(2, '0')
@@ -58,7 +59,12 @@ export const getCurrentDateAndTime = (us) => {
         minute: 'numeric',
         second: 'numeric'
     })
-    return (us ? `${mm}/${dd}/${yyyy}` : `${dd}/${mm}/${yyyy}`) + ` ~ ${time}`
+
+    let dateAndTimeString = (us ? `${mm}/${dd}/${yyyy}` : `${dd}/${mm}/${yyyy}`) + ` ~ ${time}`
+    if (includeTime) {
+        return dateAndTimeString
+    }
+    return dateAndTimeString.substring(0, 10)
 }
 
 export const quantityAlert = (qty) => {
