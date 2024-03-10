@@ -1,4 +1,3 @@
-
 import asyncHandler from '../middleware/asyncHandler.js'
 import Order from '../models/orderModel.js'
 
@@ -75,7 +74,7 @@ const updateOrderToPaid = asyncHandler(async (request, response) => {
 
     if (order) {
         order.isPaid = true
-        order.paidAt = getCurrentDateAndTime()
+        order.paidAt = Date.now()
         order.paymentResult = {
             id: request.body.id,
             status: request.body.status,

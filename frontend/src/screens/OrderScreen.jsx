@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom'
 import { Row, Col, Button, Card, ListGroup, Image } from 'react-bootstrap'
 import { useGetOrderDetailsQuery, usePayOrderMutation, useGetPayPalClientIdQuery } from '../slices/ordersApiSlice'
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
-import { addCommas } from '../utils/cartUtils'
+import { addCommas, getCurrentDateAndTime } from '../utils/cartUtils'
 import { toast } from 'react-toastify'
 import GoBackButton from '../components/GoBackButton'
 import Message from '../components/Message'
@@ -38,22 +38,22 @@ const OrderScreen = () => {
         }
     }, [order, paypal, paypalDispatch, loadingPayPal, payPalError])
 
+    async function onApproveTest() {
+        await payOrder({ orderId, details: { payer: {} } })
+        refetch()
+        toast.success('Payment Successful')
+    }
+
     function onApprove(data, actions) {
         return actions.order.capture().then(async function (details) {
             try {
                 await payOrder({ orderId, details })
                 refetch()
-                toast.success('Payment Successfull')
+                toast.success('Payment Successful')
             } catch (error) {
                 toast.error(error?.data?.message || error.message)
             }
         })
-    }
-
-    async function onApproveTest() {
-        await payOrder({ orderId, details: { payer: {} } })
-        refetch()
-        toast.success('Payment Successfull')
     }
 
     function createOrder(data, actions) {
@@ -119,7 +119,7 @@ const OrderScreen = () => {
                                         </Message>
                                     ) : (
                                         <Message variant="info" className="text-center">
-                                            <strong>Awaiting Delivery</strong>
+                                            <strong>Awaiting Dispatch</strong>
                                         </Message>
                                     )}
 
@@ -133,8 +133,10 @@ const OrderScreen = () => {
 
                                     {order.isPaid ? (
                                         <Message variant="success" className="text-center">
-                                            <strong>Paid At: </strong>
-                                            {order.paidAt}
+                                            <strong>
+                                                Paid At: {' '}
+                                                {getCurrentDateAndTime(order.paidAt)}
+                                            </strong>
                                         </Message>
                                     ) : (
                                         <Message variant="info" className="text-center">
@@ -171,24 +173,35 @@ const OrderScreen = () => {
                                         </Row>
                                     </ListGroup.Item>
 
-                                    {!order.isPaid && (
-                                        <ListGroup.Item className="p-4">
+                                    {!order.isPaid ? (
+                                        <ListGroup.Item className="p-3">
                                             {isPending ? <Loader /> : (
                                                 <div>
-                                                    <Button onClick={onApproveTest} className="mb-2 w-100">
-                                                        {loadingPayment || loadingPayment ? <Loader order /> : 'Test Pay'}
-                                                    </Button>
-                                                    <div>
-                                                        <PayPalButtons
-                                                            createOrder={createOrder}
-                                                            onApprove={onApprove}
-                                                            onError={onError}
-                                                        >
-                                                        </PayPalButtons>
-                                                    </div>
+
+                                                    {process.env.NODE_ENV === 'development' &&
+                                                        <Button onClick={onApproveTest} className="mb-2 w-100">
+                                                            {loadingPayment || loadingPayment ? <Loader order /> : 'PayTest'}
+                                                        </Button>
+                                                    }
+
+                                                    <PayPalButtons
+                                                        createOrder={createOrder}
+                                                        onApprove={onApprove}
+                                                        onError={onError}
+                                                    >
+                                                    </PayPalButtons>
                                                 </div>
                                             )}
 
+                                        </ListGroup.Item>
+                                    ) : (
+                                        <ListGroup.Item className="p-3">
+                                            <Button className="mb-2 w-100">
+                                                Download Invoice
+                                            </Button>
+                                            <Button className="w-100">
+                                                Send Invoice to Your Email
+                                            </Button>
                                         </ListGroup.Item>
                                     )}
 

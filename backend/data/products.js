@@ -55,7 +55,7 @@ const products = [
         numReviews: 666,
     },
     {
-        name: 'PlayStation®5 Digital Edition - White',
+        name: 'PlayStation®5 Digital Edition',
         image: '/images/playstation.jpg',
         description: 'Includes DualSense Wireless Controller, 1TB SSD, 2 Horizontal Stand Feet, HDMI Cable, AC power cord, USB cable, printed materials, ASTRO’s PLAYROOM (Pre-installed game)',
         brand: 'Sony',

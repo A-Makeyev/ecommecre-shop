@@ -37,15 +37,13 @@ export const getCurrentDateAndTime = (us) => {
     let dd = String(date.getDate()).padStart(2, '0')
     let mm = String(date.getMonth() + 1).padStart(2, '0')
     let yyyy = date.getFullYear()
-    let hours = date.getHours()
-    let minutes = date.getMinutes()
-    let seconds = date.getSeconds()
-
-    hours = hours < 10 ? '0' + hours : hours
-    minutes = minutes < 10 ? '0' + minutes : minutes
-    seconds = seconds < 10 ? '0' + seconds : seconds
-
-    return (us ? `${mm}-${dd}-${yyyy}` : `${dd}-${mm}-${yyyy}`) + `${hours}:${minutes}:${seconds}`
+    let time = date.toLocaleString('en-US', { 
+        hour12: true,
+        hour: 'numeric', 
+        minute: 'numeric', 
+        second: 'numeric'
+    })
+    return (us ? `${mm}/${dd}/${yyyy}` : `${dd}/${mm}/${yyyy}`) + ` ~ ${time}`
 }
 
 export const quantityAlert = (qty) => {
