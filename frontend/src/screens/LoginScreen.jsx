@@ -42,6 +42,8 @@ const LoginScreen = () => {
         }
     }
 
+
+
     return (
         <>
             <GoBackButton url="/" />
@@ -58,7 +60,7 @@ const LoginScreen = () => {
                         </Form.Control>
                     </Form.Group>
 
-                    <Form.Group controlId="password" className="my-3 ">
+                    <Form.Group controlId="password" className="my-3">
                         <Form.Label>Password</Form.Label>
                         <Form.Control
                             type="password"
@@ -68,7 +70,7 @@ const LoginScreen = () => {
                         </Form.Control>
                     </Form.Group>
 
-                    <Button type="submit" variant="primary" className="mt-2" disabled={isLoading}>
+                    <Button type="submit" variant="primary" id="sign-in" className="mt-2" disabled={isLoading}>
                         {isLoading ? <Loader signIn /> : 'Sign In'}
                     </Button>
                 </Form>

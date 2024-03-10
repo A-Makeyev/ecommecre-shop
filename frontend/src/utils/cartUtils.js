@@ -32,15 +32,30 @@ export const updateCart = (state) => {
     return state
 }
 
+export const formatDateAndTime = (date, includeTime) => {
+    date = new Date(date)
+    let time = date.toLocaleString('en-US', {
+        hour12: true,
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+    })
+    let dateAndTimeString = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ~ ${time}`
+    if (includeTime) {
+        return dateAndTimeString
+    }
+    return dateAndTimeString.substring(0, 10)
+}
+
 export const getCurrentDateAndTime = (us) => {
     let date = new Date()
     let dd = String(date.getDate()).padStart(2, '0')
     let mm = String(date.getMonth() + 1).padStart(2, '0')
     let yyyy = date.getFullYear()
-    let time = date.toLocaleString('en-US', { 
+    let time = date.toLocaleString('en-US', {
         hour12: true,
-        hour: 'numeric', 
-        minute: 'numeric', 
+        hour: 'numeric',
+        minute: 'numeric',
         second: 'numeric'
     })
     return (us ? `${mm}/${dd}/${yyyy}` : `${dd}/${mm}/${yyyy}`) + ` ~ ${time}`
@@ -70,7 +85,7 @@ export const addedToCartMessage = (qty, item) => {
         // https://fkhadra.github.io/react-toastify/introduction
         {
             position: randomValue(positions),
-            autoClose: 1000,
+            autoClose: 1500,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,

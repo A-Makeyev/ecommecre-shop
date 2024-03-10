@@ -488,7 +488,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/orders/mine",
+							"raw": "{{baseURL}}/orders/myorders",
 							"host": [
 								"{{baseURL}}"
 							],

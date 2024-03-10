@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom'
 import { Row, Col, Button, Card, ListGroup, Image } from 'react-bootstrap'
 import { useGetOrderDetailsQuery, usePayOrderMutation, useGetPayPalClientIdQuery } from '../slices/ordersApiSlice'
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
-import { addCommas, getCurrentDateAndTime } from '../utils/cartUtils'
+import { addCommas, formatDateAndTime } from '../utils/cartUtils'
 import { toast } from 'react-toastify'
 import GoBackButton from '../components/GoBackButton'
 import Message from '../components/Message'
@@ -12,7 +12,6 @@ import Loader from '../components/Loader'
 
 const OrderScreen = () => {
     const { id: orderId } = useParams()
-    const { userInfo } = useSelector(state => state.auth)
     const { data: order, refetch, isLoading, error } = useGetOrderDetailsQuery(orderId)
     const { data: paypal, isLoading: loadingPayPal, error: payPalError } = useGetPayPalClientIdQuery()
     const [payOrder, { isLoading: loadingPayment }] = usePayOrderMutation()
@@ -78,7 +77,7 @@ const OrderScreen = () => {
         <>
             <Row>
                 <Col md={3} lg={2}>
-                    <GoBackButton url="/" />
+                    <GoBackButton url="/profile" />
                 </Col>
                 <Col md={12} lg={8} className="text-center mt-3">
                     <h3>Order ID: {orderId}</h3>
@@ -114,8 +113,10 @@ const OrderScreen = () => {
 
                                     {order.isDelivered ? (
                                         <Message variant="success">
-                                            <strong>Delievered on:</strong>
-                                            {order.deliveredAt}
+                                            <strong>
+                                                Delievered At: {' '}
+                                                {formatDateAndTime(order.deliveredAt, true)}
+                                            </strong>
                                         </Message>
                                     ) : (
                                         <Message variant="info" className="text-center">
@@ -135,7 +136,7 @@ const OrderScreen = () => {
                                         <Message variant="success" className="text-center">
                                             <strong>
                                                 Paid At: {' '}
-                                                {getCurrentDateAndTime(order.paidAt)}
+                                                {formatDateAndTime(order.paidAt, true)}
                                             </strong>
                                         </Message>
                                     ) : (
@@ -174,7 +175,7 @@ const OrderScreen = () => {
                                     </ListGroup.Item>
 
                                     {!order.isPaid ? (
-                                        <ListGroup.Item className="p-3">
+                                        <ListGroup.Item className="p-3 mt-1">
                                             {isPending ? <Loader /> : (
                                                 <div>
 
@@ -195,11 +196,11 @@ const OrderScreen = () => {
 
                                         </ListGroup.Item>
                                     ) : (
-                                        <ListGroup.Item className="p-3">
+                                        <ListGroup.Item className="p-3 mt-1">
                                             <Button className="mb-2 w-100">
                                                 Download Invoice
                                             </Button>
-                                            <Button className="w-100">
+                                            <Button className="w-100 mb-1">
                                                 Send Invoice to Your Email
                                             </Button>
                                         </ListGroup.Item>
