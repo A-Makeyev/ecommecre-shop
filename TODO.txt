@@ -1,2 +1,3 @@
 - Fix shipping price (default 10)
 - Fix shipping address (from cart to user)
+- Fix form validation (profile, shipping, signin, register)
