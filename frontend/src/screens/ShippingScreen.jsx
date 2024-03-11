@@ -28,7 +28,7 @@ const ShippingScreen = () => {
         <>
             <Row>
                 <Col md={3} lg={2} xl={2}>
-                    <GoBackButton url="/cart" />
+                    <GoBackButton text="Cart" url="/cart" />
                 </Col>
                 <Col sm={13} md={7} lg={8} xl={8} className="mt-3">
                     <CheckoutSteps one />

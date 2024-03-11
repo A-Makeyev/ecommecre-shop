@@ -41,7 +41,7 @@ const CartScreen = () => {
         <>
             <Row>
                 <Col sm={3} md={3} lg={2}>
-                    <GoBackButton url="/" />
+                    <GoBackButton text="Home" url="/" />
                 </Col>
                 <Col sm={13} md={6} lg={6} xl={6} className="text-center mt-3">
                     <h1>{cartItems.length === 0 ? 'Your cart is empty' : 'Shopping Cart'}</h1>

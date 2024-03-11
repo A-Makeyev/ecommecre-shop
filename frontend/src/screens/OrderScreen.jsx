@@ -75,7 +75,7 @@ const OrderScreen = () => {
     function onError(error) {
         toast.error(error.message)
     }
-    
+
     const fileName = `${userInfo.name}'s Order Invoice ${getCurrentDateAndTime()}`
     const { toPDF, targetRef } = usePDF({ filename: fileName })
 
@@ -83,7 +83,7 @@ const OrderScreen = () => {
         <>
             <Row>
                 <Col md={3} lg={2}>
-                    <GoBackButton url="/profile" />
+                    <GoBackButton text="Profile" url="/profile" />
                 </Col>
             </Row>
 
@@ -212,7 +212,7 @@ const OrderScreen = () => {
                                                 </Row>
                                             </ListGroup.Item>
                                             <ListGroup.Item className="p-3 mt-1">
-                                                <Button onClick={() => {toPDF()}} className="mb-2 w-100">
+                                                <Button onClick={() => { toPDF() }} className="mb-2 w-100">
                                                     Invoice
                                                 </Button>
                                             </ListGroup.Item>

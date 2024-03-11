@@ -44,7 +44,7 @@ const LoginScreen = () => {
 
     return (
         <>
-            <GoBackButton url="/" />
+            <GoBackButton text="Home" url="/" />
             <FormContainer>
                 <h1 className="text-center">Sign In</h1>
                 <Form onSubmit={submitHandler}>

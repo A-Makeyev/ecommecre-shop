@@ -51,7 +51,7 @@ const PlaceOrderScreen = () => {
         <>
             <Row>
                 <Col md={3} lg={2}>
-                    <GoBackButton url="/payment" />
+                    <GoBackButton text="Payment" url="/payment" />
                 </Col>
                 <Col sm={13} md={11} lg={8} xl={7} className="mt-3">
                     <CheckoutSteps one two three />

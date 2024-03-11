@@ -52,7 +52,7 @@ const ProductScreen = () => {
 
     return (
         <>
-            <GoBackButton url="/" />
+            <GoBackButton text="Home" url="/" />
 
             {isLoading ? (
                 <Loader />
