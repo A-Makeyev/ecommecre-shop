@@ -1,3 +1,10 @@
 - Fix shipping price (default 10)
 - Fix shipping address (from cart to user)
 - Fix form validation (profile, shipping, signin, register)
+- Add change address & payment from place order screen
+- Add update payment and shipping inside profile
+- Add reset password
+- Add email verification
+- Add save to favorite items list
+- Add sign up and login with google
+- Add profile pic

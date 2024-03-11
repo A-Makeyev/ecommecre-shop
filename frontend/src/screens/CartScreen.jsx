@@ -68,7 +68,7 @@ const CartScreen = () => {
                                                 <Image src={item.image} alt={item.name} fluid rounded />
                                             </Col>
                                             <Col xs={13} sm={11} md={4} lg={5} className="ms-text-center mb-3 pl-5">
-                                                <Link to={`/product/${item._id}`}>
+                                                <Link to={`/product/${item._id}`} target="_blank">
                                                     <h5>{item.name}</h5>
                                                 </Link>
                                             </Col>

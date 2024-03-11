@@ -33,7 +33,7 @@ const ProductDetails = ({ product }) => {
                 </Message>
             ) : (
                 <>
-                    <Link to={`/product/${product._id}`} >
+                    <Link to={`/product/${product._id}`}>
                         <Card.Img src={product.image} variant="top" className="product-details-img" />
                     </Link>
                     <Card.Body>

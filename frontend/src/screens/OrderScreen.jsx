@@ -231,7 +231,7 @@ const OrderScreen = () => {
                                                 <Image src={item.image} alt={item.name} fluid rounded />
                                             </Col>
                                             <Col md={7} lg={6}>
-                                                <Link to={`/product/${item._id}`}>
+                                                <Link to={`/product/${item._id}`} target="_blank">
                                                     <strong>{item.name}</strong>
                                                 </Link>
                                             </Col>

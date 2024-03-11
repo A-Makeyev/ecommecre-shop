@@ -40,8 +40,6 @@ const addOrderItems = asyncHandler(async (request, response) => {
         const createdOrder = await order.save()
         response.status(201).json(createdOrder)
     }
-
-    response.send('add orders')
 })
 
 // @desc Get logged in user's orders

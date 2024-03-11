@@ -20,9 +20,9 @@ const Header = () => {
     const displayCartCountClass = quantity ? "cart-item-count" : "cart-item-count-invisible"
     const shortenedProductName = quantity > 0 && cartItems[0].name.split(' ', 3).join(' ')
     const logOutMessage = quantity === 1 ? `Hey don't forget about your ${shortenedProductName}!`
-                        : quantity === 2 ? `${shortenedProductName} and one more item are waiting!`
-                        : quantity > 1 ? `${shortenedProductName} and ${quantity - 1} more items are waiting!`
-                        : 'See you soon'
+        : quantity === 2 ? `${shortenedProductName} and one more item are waiting!`
+            : quantity > 1 ? `${shortenedProductName} and ${quantity - 1} more items are waiting!`
+                : 'See you soon'
 
     const logoutHandler = async () => {
         try {
@@ -61,9 +61,32 @@ const Header = () => {
                             {userInfo ? (
                                 <NavDropdown title={userInfo.name.split(' ')[0]} id="username" className="fs-5">
                                     <LinkContainer to="/profile">
-                                        <NavDropdown.Item>Profile</NavDropdown.Item>
+                                        <NavDropdown.Item id="profile" className="text-center">
+                                            Profile
+                                        </NavDropdown.Item>
                                     </LinkContainer>
-                                    <NavDropdown.Item onClick={logoutHandler}>
+
+                                    {userInfo.isAdmin && (
+                                        <>
+                                            <LinkContainer to="/admin/productlist">
+                                                <NavDropdown.Item className="text-center">
+                                                    Products
+                                                </NavDropdown.Item>
+                                            </LinkContainer>
+                                            <LinkContainer to="/admin/orderlist">
+                                                <NavDropdown.Item className="text-center">
+                                                    Orders
+                                                </NavDropdown.Item>
+                                            </LinkContainer>
+                                            <LinkContainer to="/admin/userlist">
+                                                <NavDropdown.Item className="text-center">
+                                                    Users
+                                                </NavDropdown.Item>
+                                            </LinkContainer>
+                                        </>
+                                    )}
+
+                                    <NavDropdown.Item onClick={logoutHandler} className="text-center">
                                         Logout
                                     </NavDropdown.Item>
                                 </NavDropdown>
