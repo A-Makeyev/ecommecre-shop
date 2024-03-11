@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { Row, Col, Button, Card, ListGroup, Image } from 'react-bootstrap'
 import { useGetOrderDetailsQuery, usePayOrderMutation, useGetPayPalClientIdQuery } from '../slices/ordersApiSlice'
-import { addCommas, formatDateAndTime } from '../utils/cartUtils'
+import { addCommas, formatDateAndTime, getCurrentDateAndTime } from '../utils/cartUtils'
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
 import { usePDF } from 'react-to-pdf'
 import { toast } from 'react-toastify'
@@ -75,8 +75,8 @@ const OrderScreen = () => {
     function onError(error) {
         toast.error(error.message)
     }
-
-    const fileName = `${userInfo.name}'s Order Invoice ${formatDateAndTime(order.createdAt)}`
+    
+    const fileName = `${userInfo.name}'s Order Invoice ${getCurrentDateAndTime()}`
     const { toPDF, targetRef } = usePDF({ filename: fileName })
 
     return (
@@ -212,7 +212,7 @@ const OrderScreen = () => {
                                                 </Row>
                                             </ListGroup.Item>
                                             <ListGroup.Item className="p-3 mt-1">
-                                                <Button onClick={() => toPDF()} className="mb-2 w-100">
+                                                <Button onClick={() => {toPDF()}} className="mb-2 w-100">
                                                     Invoice
                                                 </Button>
                                             </ListGroup.Item>
