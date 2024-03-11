@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
@@ -27,6 +27,7 @@ const ProductScreen = () => {
     const navigate = useNavigate()
     const [qty, setQty] = useState(1)
     const { id: productId } = useParams()
+    const cart = useSelector(state => state.cart)
     const { data: product, isLoading, error } = useGetProductDetailsQuery(productId)
 
     const addToCartHandler = () => {
@@ -36,7 +37,17 @@ const ProductScreen = () => {
 
     const buyNowHandler = () => {
         dispatch(addToCart({ ...product, qty }))
-        navigate('/login?redirect=/shipping')
+
+        const emptyShippingAddress = Object.keys(cart.shippingAddress).length === 0
+        const emptyPaymentMethod = Object.keys(cart.paymentMethod).length === 0
+
+        if (!emptyShippingAddress && emptyPaymentMethod) {
+            navigate('/login?redirect=/payment')
+        } else if (!emptyShippingAddress && !emptyPaymentMethod) {
+            navigate('/login?redirect=/placeorder')
+        } else {
+            navigate('/login?redirect=/shipping')
+        }
     }
 
     return (

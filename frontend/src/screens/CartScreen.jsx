@@ -25,7 +25,16 @@ const CartScreen = () => {
     }
 
     const checkoutHandler = () => {
-        navigate('/login?redirect=/shipping')
+        const emptyShippingAddress = Object.keys(cart.shippingAddress).length === 0
+        const emptyPaymentMethod = Object.keys(cart.paymentMethod).length === 0
+
+        if (!emptyShippingAddress && emptyPaymentMethod) {
+            navigate('/login?redirect=/payment')
+        } else if (!emptyShippingAddress && !emptyPaymentMethod) {
+            navigate('/login?redirect=/placeorder')
+        } else {
+            navigate('/login?redirect=/shipping')
+        }
     }
 
     return (

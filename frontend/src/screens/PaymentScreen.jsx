@@ -44,13 +44,14 @@ const PaymentScreen = () => {
                         <Form.Label as="legend" className="mt-4 mb-4">Select Method</Form.Label>
                         <Col>
                             <Form.Check
-                                type="radio"
-                                id="PayPal"
-                                name="PaymentMethod"
-                                label="PayPal"
-                                className="my-3 fs-5"
-                                value="PayPal"
                                 checked
+                                id="PayPal"
+                                label="PayPal"
+                                value="PayPal"
+                                role="button"
+                                type="radio"
+                                name="PaymentMethod"
+                                className="my-3 fs-5"
                                 onChange={(event) => setPaymentMethod(event.target.value)}
                             ></Form.Check>
                         </Col>

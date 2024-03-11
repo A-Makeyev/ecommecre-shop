@@ -1,0 +1,2 @@
+- Fix shipping price (default 10)
+- Fix shipping address (from cart to user)
