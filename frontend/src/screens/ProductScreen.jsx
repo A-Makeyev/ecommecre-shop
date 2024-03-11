@@ -36,7 +36,7 @@ const ProductScreen = () => {
 
     const buyNowHandler = () => {
         dispatch(addToCart({ ...product, qty }))
-        navigate('/cart')
+        navigate('/login?redirect=/shipping')
     }
 
     return (

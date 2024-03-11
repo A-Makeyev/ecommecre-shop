@@ -1,5 +1,4 @@
 import { toast, Slide } from 'react-toastify'
-import { Resolution, Margin } from 'react-to-pdf'
 
 
 export const addDecimals = (num) => {

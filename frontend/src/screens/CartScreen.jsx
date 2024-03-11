@@ -11,7 +11,6 @@ import Message from '../components/Message'
 const CartScreen = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart
     const totalItems = cartItems.reduce((accumulator, item) => accumulator + item.qty, 0)

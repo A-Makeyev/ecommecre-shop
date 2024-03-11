@@ -13,11 +13,11 @@ import Loader from '../components/Loader'
 const LoginScreen = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const { search } = useLocation()
+    const { userInfo } = useSelector(state => state.auth)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [login, { isLoading }] = useLoginMutation()
-    const { userInfo } = useSelector(state => state.auth)
-    const { search } = useLocation()
     const searchParams = new URLSearchParams(search)
     const redirect = searchParams.get('redirect') || '/'
 
@@ -41,8 +41,6 @@ const LoginScreen = () => {
             toast.error(error?.data?.message || error.error)
         }
     }
-
-
 
     return (
         <>
