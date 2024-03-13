@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { Row, Col, Button, Card, ListGroup, Image } from 'react-bootstrap'
-import { useGetOrderDetailsQuery, usePayOrderMutation, useGetPayPalClientIdQuery } from '../slices/ordersApiSlice'
+import { useGetOrderDetailsQuery, usePayOrderMutation, useGetPayPalClientIdQuery, useDeliverOrderMutation } from '../slices/ordersApiSlice'
 import { addCommas, formatDateAndTime, getCurrentDateAndTime } from '../utils/cartUtils'
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
 import { usePDF } from 'react-to-pdf'
@@ -17,8 +17,21 @@ const OrderScreen = () => {
     const { userInfo } = useSelector(state => state.auth)
     const { data: order, refetch, isLoading, error } = useGetOrderDetailsQuery(orderId)
     const { data: paypal, isLoading: loadingPayPal, error: payPalError } = useGetPayPalClientIdQuery()
+    const [deliverOrder, { isLoading: loadingDelivery }] = useDeliverOrderMutation()
     const [payOrder, { isLoading: loadingPayment }] = usePayOrderMutation()
     const [{ isPending }, paypalDispatch] = usePayPalScriptReducer()
+    const fileName = `${userInfo.name}'s Order Invoice ${getCurrentDateAndTime()}`
+    const { toPDF, targetRef } = usePDF({ filename: fileName })
+
+    const deliverOrderHandler = async () => {
+        try {
+            await deliverOrder(orderId)
+            refetch()
+            toast.success('Order Marked As Delivered')
+        } catch (error) {
+            toast.error(error?.data?.message || error.message)
+        }
+    }
 
     useEffect(() => {
         if (!loadingPayPal && !payPalError && paypal.clientId) {
@@ -43,7 +56,7 @@ const OrderScreen = () => {
     async function onApproveTest() {
         await payOrder({ orderId, details: { payer: {} } })
         refetch()
-        toast.success('Payment Successful')
+        toast.success('Order Was Paid Successfully')
     }
 
     function onApprove(data, actions) {
@@ -51,7 +64,7 @@ const OrderScreen = () => {
             try {
                 await payOrder({ orderId, details })
                 refetch()
-                toast.success('Payment Successful')
+                toast.success('Order Was Paid Successfully')
             } catch (error) {
                 toast.error(error?.data?.message || error.message)
             }
@@ -75,9 +88,6 @@ const OrderScreen = () => {
     function onError(error) {
         toast.error(error.message)
     }
-
-    const fileName = `${userInfo.name}'s Order Invoice ${getCurrentDateAndTime()}`
-    const { toPDF, targetRef } = usePDF({ filename: fileName })
 
     return (
         <>
@@ -120,7 +130,7 @@ const OrderScreen = () => {
                                     </p>
 
                                     {order.isDelivered ? (
-                                        <Message variant="success">
+                                        <Message variant="success" className="text-center">
                                             <strong>
                                                 Delievered At: {' '}
                                                 {formatDateAndTime(order.deliveredAt, true)}
@@ -212,6 +222,13 @@ const OrderScreen = () => {
                                                 </Row>
                                             </ListGroup.Item>
                                             <ListGroup.Item className="p-3 mt-1">
+
+                                                {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                                                    <Button onClick={deliverOrderHandler} className="mb-2 w-100">
+                                                        {loadingDelivery ? <Loader update /> : 'Mark As Delivered'}
+                                                    </Button> 
+                                                )}
+
                                                 <Button onClick={() => { toPDF() }} className="mb-2 w-100">
                                                     Invoice
                                                 </Button>
@@ -231,7 +248,7 @@ const OrderScreen = () => {
                                                 <Image src={item.image} alt={item.name} fluid rounded />
                                             </Col>
                                             <Col md={7} lg={6}>
-                                                <Link to={`/product/${item._id}`} target="_blank">
+                                                <Link to={`/product/${item.product}`} target="_blank">
                                                     <strong>{item.name}</strong>
                                                 </Link>
                                             </Col>

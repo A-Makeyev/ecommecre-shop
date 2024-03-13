@@ -15,17 +15,17 @@ const PaymentScreen = () => {
     const { shippingAddress } = cart
     const [paymentMethod, setPaymentMethod] = useState('PayPal')
 
-    useEffect(() => {
-        if (!shippingAddress) {
-            navigate('/shipping')
-        }
-    }, [shippingAddress, navigate])
-
     const submitHandler = (event) => {
         event.preventDefault()
         dispatch(savePaymentMethod(paymentMethod))
         navigate('/placeorder')
     }
+
+    useEffect(() => {
+        if (!shippingAddress) {
+            navigate('/shipping')
+        }
+    }, [shippingAddress, navigate])
 
     return (
         <>

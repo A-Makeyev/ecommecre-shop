@@ -16,15 +16,8 @@ const PlaceOrderScreen = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const cart = useSelector(state => state.cart)
+    const totalItems = cart.cartItems.reduce((accumulator, item) => accumulator + item.qty, 0)
     const [createOrder, { isLoading, error }] = useCreateOrderMutation()
-
-    useEffect(() => {
-        if (!cart.shippingAddress.address) {
-            navigate('/shipping')
-        } else if (!cart.paymentMethod) {
-            navigate('/payment')
-        }
-    }, [cart.shippingAddress.address, cart.paymentMethod, navigate])
 
     const placeOrderHandler = async () => {
         try {
@@ -44,8 +37,14 @@ const PlaceOrderScreen = () => {
             toast.error(error)
         }
     }
-
-    const totalItems = cart.cartItems.reduce((accumulator, item) => accumulator + item.qty, 0)
+    
+    useEffect(() => {
+        if (!cart.shippingAddress.address) {
+            navigate('/shipping')
+        } else if (!cart.paymentMethod) {
+            navigate('/payment')
+        }
+    }, [cart.shippingAddress.address, cart.paymentMethod, navigate])
 
     return (
         <>

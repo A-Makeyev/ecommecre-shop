@@ -24,13 +24,6 @@ const ProfileScreen = () => {
     const { userInfo } = useSelector(state => state.auth)
     const emptyOrdersList = JSON.stringify(orders) === '[]'
 
-    useEffect(() => {
-        if (userInfo) {
-            setName(userInfo.name)
-            setEmail(userInfo.email)
-        }
-    }, [userInfo])
-
     const submitHandler = async (event) => {
         event.preventDefault()
         if (password !== confirmPassword) {
@@ -46,12 +39,19 @@ const ProfileScreen = () => {
         }
     }
 
+    useEffect(() => {
+        if (userInfo) {
+            setName(userInfo.name)
+            setEmail(userInfo.email)
+        }
+    }, [userInfo])
+
     return (
         <>
             <GoBackButton text="Home" url="/" />
             <Row className="justify-content-center">
                 <Col md={9} lg={emptyOrdersList ? 5 : 4}>
-                    <Card className="my-3 p-3">
+                    <Card className="my-4 p-3">
                         <h3>Personal Details</h3>
                         <Form onSubmit={submitHandler}>
                             <Form.Group controlId="name" className="my-2">
@@ -119,7 +119,7 @@ const ProfileScreen = () => {
                                 {error?.data?.message || error.error}
                             </Message>
                         ) : (
-                            <Table striped responsive className="table-sm">
+                            <Table striped responsive className="table-sm mt-2">
                                 <thead>
                                     <tr>
                                         <th>TRANSACTION</th>
@@ -138,21 +138,13 @@ const ProfileScreen = () => {
                                             <td>${addCommas(order.totalPrice)}</td>
                                             <td>
                                                 {order.isPaid ? (
-                                                    // <>
-                                                    //     <span>{formatDateAndTime(order.paidAt)} </span>
-                                                    //     <FaCheck className="text-success mb-1" />
-                                                    // </>
                                                     <FaCheck className="text-success fs-5" />
                                                 ) : (
                                                     <FaTimes className="text-danger fs-5" />
                                                 )}
                                             </td>
                                             <td>
-                                                {order.isDelievered ? (
-                                                    // <>
-                                                    //     <span>{formatDateAndTime(order.isDelievered)} </span>
-                                                    //     <FaCheck className="text-success mb-1" />
-                                                    // </>
+                                                {order.isDelivered ? (
                                                     <FaCheck className="text-success fs-5" />
                                                 ) : (
                                                     <FaTimes className="text-danger fs-5" />

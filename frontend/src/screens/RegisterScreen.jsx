@@ -23,12 +23,6 @@ const RegisterScreen = () => {
     const searchParams = new URLSearchParams(search)
     const redirect = searchParams.get('redirect') || '/'
 
-    useEffect(() => {
-        if (userInfo) {
-            navigate(redirect)
-        }
-    }, [navigate, redirect, userInfo])
-
     const submitHandler = async (event) => {
         event.preventDefault()
         if (password !== confirmPassword) {
@@ -44,6 +38,12 @@ const RegisterScreen = () => {
             }
         }
     }
+
+    useEffect(() => {
+        if (userInfo) {
+            navigate(redirect)
+        }
+    }, [navigate, redirect, userInfo])
 
     return (
         <>

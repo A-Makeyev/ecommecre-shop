@@ -21,12 +21,6 @@ const LoginScreen = () => {
     const searchParams = new URLSearchParams(search)
     const redirect = searchParams.get('redirect') || '/'
 
-    useEffect(() => {
-        if (userInfo) {
-            navigate(redirect)
-        }
-    }, [navigate, redirect, userInfo])
-
     const submitHandler = async (event) => {
         event.preventDefault()
         const time = new Date().getHours()
@@ -41,6 +35,12 @@ const LoginScreen = () => {
             toast.error(error?.data?.message || error.error)
         }
     }
+
+    useEffect(() => {
+        if (userInfo) {
+            navigate(redirect)
+        }
+    }, [navigate, redirect, userInfo])
 
     return (
         <>
