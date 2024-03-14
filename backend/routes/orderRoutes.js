@@ -13,8 +13,8 @@ const router = express.Router()
 
 // api/orders
 router.route('/')
-    .post(protect, addOrderItems)
-    .get(protect, admin, getOrders)
+      .post(protect, addOrderItems)
+      .get(protect, admin, getOrders)
 
 // router.route('/myorders').get(protect, getMyOrders)
 router.get('/myorders', protect, getMyOrders)

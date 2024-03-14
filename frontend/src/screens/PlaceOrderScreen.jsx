@@ -37,7 +37,7 @@ const PlaceOrderScreen = () => {
             toast.error(error)
         }
     }
-    
+
     useEffect(() => {
         if (!cart.shippingAddress.address) {
             navigate('/shipping')
@@ -150,7 +150,7 @@ const PlaceOrderScreen = () => {
                                     {error && (
 
                                         <div className="mt-3">
-                                            <Message variant="danger" className="p-2">
+                                            <Message variant="danger" className="p-2 text-center">
                                                 {error?.data?.message || error.error}
                                             </Message>
                                         </div>

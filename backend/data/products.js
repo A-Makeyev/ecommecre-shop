@@ -26,7 +26,7 @@ const products = [
         image: '/images/jet.jpg',
         description: 'The F-35 first flew in 2006 and entered service with the U.S. Marine Corps F-35B in July 2015, followed by the U.S. Air Force F-35A in August 2016 and the U.S. Navy F-35C in February 2019. The aircraft was first used in combat in 2018 by the Israeli Air Force. The U.S. plans to buy 2,456 F-35s through 2044, which will represent the bulk of the crewed tactical aviation of the U.S. Air Force, Navy, and Marine Corps for several decades; the aircraft is planned to be a cornerstone of NATO and U.S.-allied air power and to operate until 2070',
         brand: 'Lockheed Martin',
-        category: 'Aircraft',
+        category: 'Aircrafts',
         price: '109000.00',
         countInStock: 1,
         rating: 5,

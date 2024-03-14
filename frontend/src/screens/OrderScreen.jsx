@@ -100,7 +100,7 @@ const OrderScreen = () => {
             {isLoading ? (
                 <Loader />
             ) : error ? (
-                <Message variant="danger">
+                <Message variant="danger" className="text-center">
                     {error?.data?.message || error.error}
                 </Message>
             ) : (
@@ -226,7 +226,7 @@ const OrderScreen = () => {
                                                 {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                                                     <Button onClick={deliverOrderHandler} className="mb-2 w-100">
                                                         {loadingDelivery ? <Loader update /> : 'Mark As Delivered'}
-                                                    </Button> 
+                                                    </Button>
                                                 )}
 
                                                 <Button onClick={() => { toPDF() }} className="mb-2 w-100">

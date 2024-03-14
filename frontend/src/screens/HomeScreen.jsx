@@ -27,7 +27,7 @@ const HomeScreen = () => {
                 {isLoading ? (
                     <Loader />
                 ) : error ? (
-                    <Message variant="danger">
+                    <Message variant="danger" className="text-center">
                         {error?.data?.message || error.error}
                     </Message>
                 ) : (

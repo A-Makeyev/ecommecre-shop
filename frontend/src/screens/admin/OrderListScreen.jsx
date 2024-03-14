@@ -10,6 +10,7 @@ import Loader from '../../components/Loader'
 
 const OrderListScreen = () => {
     const { data: orders, isLoading, error } = useGetOrdersQuery()
+    const emptyOrdersList = JSON.stringify(orders) === '[]'
 
     return (
         <>
@@ -18,14 +19,19 @@ const OrderListScreen = () => {
                     <GoBackButton text="Home" url="/" />
                 </Col>
                 <Col xs={5} sm={7} md={5} lg={8} xl={6} className="my-3 text-center">
-                    <h1>Orders</h1>
+                    <h1>{emptyOrdersList ? '' : 'Orders'}</h1>
                 </Col>
             </Row>
 
             {isLoading ? <Loader /> : error ? (
-                <Message variant="danger">
+                <Message variant="danger" className="text-center">
                     {error?.data?.message || error.error}
                 </Message>
+            ) : emptyOrdersList ? (
+                <Col className="mt-5 fs-1 text-center">
+                    <h3>No Recent Orders</h3>
+                    <h1>¯\_(ツ)_/¯</h1>
+                </Col>
             ) : (
                 <Row>
                     <Table striped bordered responsive className="table-sm">
