@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Row, Col, Button, Table } from 'react-bootstrap'
 import { useGetProductsQuery, useCreateProductMutation } from '../../slices/productsApiSlice'
+import { adjustPrice } from '../../utils/cartUtils'
 import { FaEdit, FaTrash } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import GoBackButton from '../../components/GoBackButton'
@@ -32,11 +33,11 @@ const ProductListScreen = () => {
                 <Col xs={4} sm={3} md={3} lg={3} xl={4}>
                     <GoBackButton text="Home" url="/" />
                 </Col>
-                <Col xs={7} sm={8} md={6} lg={6} xl={4} className="my-3 text-center">
+                <Col xs={5} sm={7} md={6} lg={6} xl={4} className="my-3 text-center">
                     <h1>{emptyProductsList ? '' : 'Products'}</h1>
                 </Col>
-                <Col xs={10} sm={9} md={3} lg={3} xl={4} className="text-end">
-                    <Button role="button" className="mt-3 text-center" onClick={createProductHandler}>
+                <Col sm={13} md={3} lg={3} xl={4} className="text-end">
+                    <Button role="button" className="mt-3 text-center md-width-100" onClick={createProductHandler}>
                         {creatingProduct ? <Loader create /> : (
                             <>
                                 <FaEdit className="mb-1" />
@@ -76,7 +77,7 @@ const ProductListScreen = () => {
                                 <tr key={product._id}>
                                     <td>{product._id}</td>
                                     <td>{product.name}</td>
-                                    <td>{product.price}</td>
+                                    <td>{adjustPrice(product.price, '$')}</td>
                                     <td>{product.category}</td>
                                     <td>{product.brand}</td>
                                     <td>

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { Row, Col, Table } from 'react-bootstrap'
 import { FaTimes, FaCheck, FaExternalLinkAlt } from 'react-icons/fa'
 import { useGetOrdersQuery } from '../../slices/ordersApiSlice'
-import { addCommas, formatDateAndTime } from '../../utils/cartUtils'
+import { adjustPrice, formatDateAndTime } from '../../utils/cartUtils'
 import GoBackButton from '../../components/GoBackButton'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
@@ -34,7 +34,7 @@ const OrderListScreen = () => {
                 </Col>
             ) : (
                 <Row>
-                    <Table striped bordered responsive className="table-sm">
+                    <Table striped responsive className="table-sm">
                         <thead>
                             <tr>
                                 <th>TRANSACTION</th>
@@ -52,7 +52,7 @@ const OrderListScreen = () => {
                                     <td>{order._id}</td>
                                     <td>{order.user && order.user.name}</td>
                                     <td>{formatDateAndTime(order.createdAt)}</td>
-                                    <td>${addCommas(order.totalPrice)}</td>
+                                    <td>{adjustPrice(order.totalPrice)}</td>
                                     <td>
                                         {order.isPaid ? (
                                             <FaCheck className="text-success fs-5" />

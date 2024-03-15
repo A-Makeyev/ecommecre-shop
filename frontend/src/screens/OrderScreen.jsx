@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { Row, Col, Button, Card, ListGroup, Image } from 'react-bootstrap'
 import { useGetOrderDetailsQuery, usePayOrderMutation, useGetPayPalClientIdQuery, useDeliverOrderMutation } from '../slices/ordersApiSlice'
-import { addCommas, formatDateAndTime, getCurrentDateAndTime } from '../utils/cartUtils'
+import { adjustPrice, formatDateAndTime, getCurrentDateAndTime } from '../utils/cartUtils'
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
 import { usePDF } from 'react-to-pdf'
 import { toast } from 'react-toastify'
@@ -176,19 +176,19 @@ const OrderScreen = () => {
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>Price:</Col>
-                                            <Col>${addCommas(order.itemsPrice)}</Col>
+                                            <Col>{adjustPrice(order.itemsPrice)}</Col>
                                         </Row>
                                         <Row>
                                             <Col>Shipping:</Col>
-                                            <Col>${addCommas(order.shippingPrice)}</Col>
+                                            <Col>{adjustPrice(order.shippingPrice)}</Col>
                                         </Row>
                                         <Row>
                                             <Col>Tax:</Col>
-                                            <Col>${addCommas(order.taxPrice)}</Col>
+                                            <Col>{adjustPrice(order.taxPrice)}</Col>
                                         </Row>
                                         <Row>
                                             <Col>Total:</Col>
-                                            <Col>${addCommas(order.totalPrice)}</Col>
+                                            <Col>{adjustPrice(order.totalPrice)}</Col>
                                         </Row>
                                     </ListGroup.Item>
 
@@ -253,9 +253,9 @@ const OrderScreen = () => {
                                                 </Link>
                                             </Col>
                                             <Col md={1} lg={5} className="text-center">
-                                                ${addCommas((item.qty * item.price).toFixed(2))}
+                                                {adjustPrice((item.qty * item.price).toFixed(2))}
                                                 <br />
-                                                ({addCommas(item.qty)}x{addCommas(item.price)})
+                                                ({item.qty}x{item.price})
                                             </Col>
                                         </Row>
                                     </ListGroup.Item>

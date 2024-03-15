@@ -1,12 +1,13 @@
 import { toast, Slide } from 'react-toastify'
+import { CURRENCY_SYMBOL } from '../constants'
 
+
+export const adjustPrice = (num) => {
+    return CURRENCY_SYMBOL + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
 
 export const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2)
-}
-
-export const addCommas = (num) => {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
 
 export const updateCart = (state) => {

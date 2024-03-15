@@ -8,3 +8,5 @@
 - Add save to favorite items list
 - Add sign up and login with google
 - Add profile pic
+- Add create product form 
+- Add max price and max text to forms

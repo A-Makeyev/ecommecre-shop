@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Button, Card, ListGroup, Image } from 'react-bootstrap'
 import { useCreateOrderMutation } from '../slices/ordersApiSlice'
 import { clearCartItems } from '../slices/cartSlice'
-import { addCommas } from '../utils/cartUtils'
+import { adjustPrice } from '../utils/cartUtils'
 import { toast } from 'react-toastify'
 import CheckoutSteps from '../components/CheckoutSteps'
 import GoBackButton from '../components/GoBackButton'
@@ -96,9 +96,9 @@ const PlaceOrderScreen = () => {
                                                     </Link>
                                                 </Col>
                                                 <Col md={2} className="text-center mt-1">
-                                                    ${addCommas((item.qty * item.price).toFixed(2))}
+                                                    {adjustPrice((item.qty * item.price).toFixed(2))}
                                                     <br />
-                                                    ({addCommas(item.qty)}x{addCommas(item.price)})
+                                                    ({item.qty}x{item.price})
                                                 </Col>
                                             </Row>
                                         </ListGroup.Item>
@@ -119,19 +119,19 @@ const PlaceOrderScreen = () => {
                             <ListGroup.Item className="fs-5">
                                 <Row>
                                     <Col>Price:</Col>
-                                    <Col>${addCommas(cart.itemsPrice)}</Col>
+                                    <Col>{adjustPrice(cart.itemsPrice)}</Col>
                                 </Row>
                                 <Row>
                                     <Col>Shipping:</Col>
-                                    <Col>${addCommas(cart.shippingPrice)}</Col>
+                                    <Col>{adjustPrice(cart.shippingPrice)}</Col>
                                 </Row>
                                 <Row>
                                     <Col>Tax:</Col>
-                                    <Col>${addCommas(cart.taxPrice)}</Col>
+                                    <Col>{adjustPrice(cart.taxPrice)}</Col>
                                 </Row>
                                 <Row>
                                     <Col>Total:</Col>
-                                    <Col>${addCommas(cart.totalPrice)}</Col>
+                                    <Col>{adjustPrice(cart.totalPrice)}</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>

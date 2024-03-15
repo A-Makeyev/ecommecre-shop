@@ -6,6 +6,10 @@ a {
   text-decoration: none;
 }
 
+textarea {
+  resize: none;
+}
+
 main {
   min-height: 80vh;
 }
@@ -143,6 +147,12 @@ select::-webkit-scrollbar {
   color: #FF0000;
 }
 
+@media (max-width: 991px) {
+  .md-justify-content-center {
+    justify-content: center;
+  }
+}
+
 @media (max-width: 768px) {
   .qty-select-invisible {
     margin-top: 3px;
@@ -160,6 +170,10 @@ select::-webkit-scrollbar {
 
   .ms-text-center {
     text-align: center;
+  }
+
+  .md-width-100 {
+    width: 100% !important;
   }
 
   .product-details-img {

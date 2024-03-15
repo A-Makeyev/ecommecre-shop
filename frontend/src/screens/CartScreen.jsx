@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FaTrash } from 'react-icons/fa'
 import { Container, Row, Col, ListGroup, Form, Button, Card, Image } from 'react-bootstrap'
 import { addToCart, removeFromCart } from '../slices/cartSlice'
-import { addCommas } from '../utils/cartUtils'
+import { adjustPrice } from '../utils/cartUtils'
 import GoBackButton from '../components/GoBackButton'
 import Message from '../components/Message'
 
@@ -14,7 +14,7 @@ const CartScreen = () => {
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart
     const totalItems = cartItems.reduce((accumulator, item) => accumulator + item.qty, 0)
-    const totalPrice = addCommas(cartItems.reduce((accumulator, item) => accumulator + item.qty * item.price, 0).toFixed(2))
+    const totalPrice = adjustPrice(cartItems.reduce((accumulator, item) => accumulator + item.qty * item.price, 0).toFixed(2))
 
     const addToCartHandler = async (product, qty) => {
         dispatch(addToCart({ ...product, qty }))
@@ -73,7 +73,7 @@ const CartScreen = () => {
                                                 </Link>
                                             </Col>
                                             <Col xs={4} sm={3} md={3} lg={2} className="mt-1 p-0 text-center">
-                                                <h5>${addCommas(item.price)}</h5>
+                                                <h5>{adjustPrice(item.price)}</h5>
                                             </Col>
                                             <Col xs={4} sm={3} md={2} lg={2}>
                                                 <Form.Control
@@ -113,7 +113,7 @@ const CartScreen = () => {
                             <ListGroup variant="flush">
                                 <ListGroup.Item>
                                     <h4>Subtotal ({totalItems === 1 ? '1 item' : `${totalItems} items`})</h4>
-                                    <h4>${totalPrice}</h4>
+                                    <h4>{totalPrice}</h4>
                                 </ListGroup.Item>
                                 <ListGroup.Item>
                                     <Button

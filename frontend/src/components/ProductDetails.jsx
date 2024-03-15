@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Row, Col, Card, Form } from 'react-bootstrap'
-import { alertText, quantityAlert, addedToCartMessage, addCommas } from '../utils/cartUtils'
+import { alertText, quantityAlert, addedToCartMessage, adjustPrice } from '../utils/cartUtils'
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
 import { addToCart } from '../slices/cartSlice'
 import { FaCartPlus } from 'react-icons/fa'
@@ -49,7 +49,7 @@ const ProductDetails = ({ product }) => {
                                     className={quantityAlert(product.countInStock)}
                                     value={alertText(product.countInStock)}
                                 >
-                                    ${addCommas(product.price)}
+                                    {adjustPrice(product.price)}
                                 </Col>
 
                                 {product.countInStock > 0 ? (

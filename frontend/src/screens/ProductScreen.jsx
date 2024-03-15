@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
-import { addedToCartMessage, addCommas } from '../utils/cartUtils'
+import { addedToCartMessage, adjustPrice } from '../utils/cartUtils'
 import { addToCart } from '../slices/cartSlice'
 import GoBackButton from '../components/GoBackButton'
 import Message from '../components/Message'
@@ -88,7 +88,7 @@ const ProductScreen = () => {
                                         <Row>
                                             <Col>Price:</Col>
                                             <Col>
-                                                <strong>${addCommas(product.price)}</strong>
+                                                <strong>{adjustPrice(product.price)}</strong>
                                             </Col>
                                         </Row>
                                     </ListGroup.Item>

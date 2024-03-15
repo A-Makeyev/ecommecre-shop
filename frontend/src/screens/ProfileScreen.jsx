@@ -5,7 +5,7 @@ import { Row, Col, Card, Form, Button, Table } from 'react-bootstrap'
 import { useGetMyOrdersQuery } from '../slices/ordersApiSlice'
 import { useProfileMutation } from '../slices/usersApiSlice'
 import { setCredentials } from '../slices/authSlice'
-import { addCommas, formatDateAndTime } from '../utils/cartUtils'
+import { adjustPrice, formatDateAndTime } from '../utils/cartUtils'
 import { FaTimes, FaCheck, FaExternalLinkAlt } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import GoBackButton from '../components/GoBackButton'
@@ -135,7 +135,7 @@ const ProfileScreen = () => {
                                         <tr key={order._id}>
                                             <td>{order._id}</td>
                                             <td>{formatDateAndTime(order.createdAt)}</td>
-                                            <td>${addCommas(order.totalPrice)}</td>
+                                            <td>{adjustPrice(order.totalPrice)}</td>
                                             <td>
                                                 {order.isPaid ? (
                                                     <FaCheck className="text-success fs-5" />
