@@ -48,7 +48,7 @@ export const formatDateAndTime = (date, includeTime) => {
     return dateAndTimeString.substring(0, 10)
 }
 
-export const getCurrentDateAndTime = (us, includeTime) => {
+export const getCurrentDateAndTime = (includeTime, US) => {
     let date = new Date()
     let dd = String(date.getDate()).padStart(2, '0')
     let mm = String(date.getMonth() + 1).padStart(2, '0')
@@ -60,7 +60,7 @@ export const getCurrentDateAndTime = (us, includeTime) => {
         second: 'numeric'
     })
 
-    let dateAndTimeString = (us ? `${mm}/${dd}/${yyyy}` : `${dd}/${mm}/${yyyy}`) + ` ~ ${time}`
+    let dateAndTimeString = (US ? `${mm}/${dd}/${yyyy}` : `${dd}/${mm}/${yyyy}`) + ` ~ ${time}`
     if (includeTime) {
         return dateAndTimeString
     }

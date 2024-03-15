@@ -147,12 +147,6 @@ select::-webkit-scrollbar {
   color: #FF0000;
 }
 
-@media (max-width: 991px) {
-  .md-justify-content-center {
-    justify-content: center;
-  }
-}
-
 @media (max-width: 768px) {
   .qty-select-invisible {
     margin-top: 3px;
@@ -168,11 +162,15 @@ select::-webkit-scrollbar {
     margin-top: 1px !important;
   }
 
-  .ms-text-center {
+  .sm-text-center {
     text-align: center;
   }
 
-  .md-width-100 {
+  .sm-justify-content-center {
+    justify-content: center;
+  }
+
+  .sm-width-100 {
     width: 100% !important;
   }
 

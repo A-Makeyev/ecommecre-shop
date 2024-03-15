@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Card, Row, Col, Form, Button } from 'react-bootstrap'
-import { useGetProductDetailsQuery, useUpdateProductMutation } from '../../slices/productsApiSlice'
+import { Row, Col, Form, Button } from 'react-bootstrap'
+import { useGetProductDetailsQuery, useUpdateProductMutation, useUploadProductImageMutation } from '../../slices/productsApiSlice'
 import { toast } from 'react-toastify'
 import FormContainer from '../../components/FormContainer'
 import GoBackButton from '../../components/GoBackButton'
@@ -14,6 +14,7 @@ const ProductEditScreen = () => {
     const { id: productId } = useParams()
     const { data: product, isLoading, refetch, error } = useGetProductDetailsQuery(productId)
     const [updateProduct, { isLoading: updatingProduct }] = useUpdateProductMutation()
+    const [uploadProductImage, { isLoading: uploadingImage }] = useUploadProductImageMutation()
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [image, setImage] = useState('')
@@ -53,7 +54,20 @@ const ProductEditScreen = () => {
             toast.error(result.error)
         } else {
             navigate('/admin/productlist')
-            toast.success('Updated Product')
+            toast.success(`Updated ${product.name.split(' ', 3).join(' ')}`)
+        }
+    }
+
+    const uploadFileHandler = async (event) => {
+        const formData = new FormData()
+        formData.append('image', event.target.files[0])
+
+        try {
+            const response = await uploadProductImage(formData).unwrap()
+            setImage(response.image)
+            toast.success(response.message)
+        } catch (error) {
+            toast.error(error?.data?.message || error.error)
         }
     }
 
@@ -63,7 +77,7 @@ const ProductEditScreen = () => {
                 <Col md={3} lg={2} xl={2}>
                     <GoBackButton text="Products" url="/admin/productlist" />
                 </Col>
-                <Col sm={13} md={6} lg={8} xl={8} className="mt-3">
+                <Col sm={13} md={6} lg={8} xl={8} className="my-3">
                     <h1 className="text-center">Update Product</h1>
                 </Col>
             </Row>
@@ -86,6 +100,19 @@ const ProductEditScreen = () => {
                                     </Form.Control>
                                 </Form.Group>
                             </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Form.Group controlId="brand" className="my-3">
+                                    <Form.Label>Brand</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        value={brand}
+                                        onChange={(event) => setBrand(event.target.value)}
+                                    >
+                                    </Form.Control>
+                                </Form.Group>
+                            </Col>
                             <Col>
                                 <Form.Group controlId="category" className="my-3">
                                     <Form.Label>Category</Form.Label>
@@ -98,15 +125,14 @@ const ProductEditScreen = () => {
                                 </Form.Group>
                             </Col>
                         </Row>
-
                         <Row>
                             <Col>
-                                <Form.Group controlId="brand" className="my-3">
-                                    <Form.Label>Brand</Form.Label>
+                                <Form.Group controlId="price" className="my-3">
+                                    <Form.Label>Price</Form.Label>
                                     <Form.Control
-                                        type="text"
-                                        value={brand}
-                                        onChange={(event) => setBrand(event.target.value)}
+                                        type="number"
+                                        value={price}
+                                        onChange={(event) => setPrice(event.target.value)}
                                     >
                                     </Form.Control>
                                 </Form.Group>
@@ -126,18 +152,16 @@ const ProductEditScreen = () => {
 
                         <Row>
                             <Col>
-                                <Form.Group controlId="price" className="my-3">
-                                    <Form.Label>Price</Form.Label>
+                                <Form.Group controlId="image-upload" className="my-3">
+                                    <Form.Label>Image</Form.Label>
                                     <Form.Control
-                                        type="number"
-                                        value={price}
-                                        onChange={(event) => setPrice(event.target.value)}
+                                        type="file"
+                                        label="Choose File"
+                                        onChange={uploadFileHandler}
                                     >
                                     </Form.Control>
                                 </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group controlId="image" className="my-3">
+                                {/* <Form.Group controlId="image" className="my-3">
                                     <Form.Label>Image</Form.Label>
                                     <Form.Control
                                         type="text"
@@ -145,14 +169,14 @@ const ProductEditScreen = () => {
                                         onChange={(event) => setImage(event.target.value)}
                                     >
                                     </Form.Control>
-                                </Form.Group>
+                                </Form.Group> */}
                             </Col>
                         </Row>
 
                         <Form.Group controlId="description" className="my-3">
                             <Form.Label>Description</Form.Label>
                             <Form.Control
-                                as="textarea" 
+                                as="textarea"
                                 rows={10}
                                 maxLength={1000}
                                 value={description}
@@ -161,7 +185,7 @@ const ProductEditScreen = () => {
                             </Form.Control>
                         </Form.Group>
 
-                        <Button type="submit" variant="primary" id="update-product" className="mt-1">
+                        <Button type="submit" variant="primary" id="update-product" className="mt-2 w-100">
                             {updatingProduct ? <Loader update /> : 'Update'}
                         </Button>
                     </Form>

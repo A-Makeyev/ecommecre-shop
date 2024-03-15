@@ -243,7 +243,7 @@ const OrderScreen = () => {
                             <ListGroup.Item>
                                 {order.orderItems.map((item, index) => (
                                     <ListGroup.Item key={index} className="border rounded p-3 mb-2">
-                                        <Row className="ms-text-center">
+                                        <Row className="sm-text-center">
                                             <Col md={2} lg={1}>
                                                 <Image src={item.image} alt={item.name} fluid rounded />
                                             </Col>

@@ -37,7 +37,7 @@ const ProductListScreen = () => {
                     <h1>{emptyProductsList ? '' : 'Products'}</h1>
                 </Col>
                 <Col sm={13} md={3} lg={3} xl={4} className="text-end">
-                    <Button role="button" className="mt-3 text-center md-width-100" onClick={createProductHandler}>
+                    <Button role="button" className="mt-3 text-center sm-width-100" onClick={createProductHandler}>
                         {creatingProduct ? <Loader create /> : (
                             <>
                                 <FaEdit className="mb-1" />
