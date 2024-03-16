@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Row, Col, Button, Table } from 'react-bootstrap'
 import { useGetProductsQuery, useCreateProductMutation } from '../../slices/productsApiSlice'
 import { adjustPrice } from '../../utils/cartUtils'
@@ -10,6 +10,7 @@ import Loader from '../../components/Loader'
 
 
 const ProductListScreen = () => {
+    const navigate = useNavigate()
     const { data: products, isLoading, error, refetch } = useGetProductsQuery()
     const [createProduct, { isLoading: creatingProduct }] = useCreateProductMutation()
     const emptyProductsList = JSON.stringify(products) === '[]'
@@ -20,7 +21,8 @@ const ProductListScreen = () => {
 
     const createProductHandler = async () => {
         try {
-            await createProduct()
+            const newProduct = await createProduct()
+            navigate(`/admin/product/${newProduct.data._id}/edit`)
             refetch()
         } catch (error) {
             toast.error(error?.data?.message || error.error)

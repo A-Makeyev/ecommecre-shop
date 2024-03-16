@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { Row, Col, Form, Button } from 'react-bootstrap'
+import { useParams } from 'react-router-dom'
+import { Row, Col, Form, Button, Image } from 'react-bootstrap'
 import { useGetProductDetailsQuery, useUpdateProductMutation, useUploadProductImageMutation } from '../../slices/productsApiSlice'
 import { toast } from 'react-toastify'
 import FormContainer from '../../components/FormContainer'
@@ -10,11 +10,10 @@ import Loader from '../../components/Loader'
 
 
 const ProductEditScreen = () => {
-    const navigate = useNavigate()
     const { id: productId } = useParams()
     const { data: product, isLoading, refetch, error } = useGetProductDetailsQuery(productId)
     const [updateProduct, { isLoading: updatingProduct }] = useUpdateProductMutation()
-    const [uploadProductImage, { isLoading: uploadingImage }] = useUploadProductImageMutation()
+    const [uploadProductImage] = useUploadProductImageMutation()
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [image, setImage] = useState('')
@@ -32,6 +31,7 @@ const ProductEditScreen = () => {
             setBrand(product.brand)
             setCountInStock(product.countInStock)
             setPrice(product.price)
+            document.getElementById('product-header').textContent = product.name.split(' ', 3).join(' ')
         }
     }, [product])
 
@@ -53,8 +53,8 @@ const ProductEditScreen = () => {
         if (result.error) {
             toast.error(result.error)
         } else {
-            navigate('/admin/productlist')
-            toast.success(`Updated ${product.name.split(' ', 3).join(' ')}`)
+            toast.success('Updated Product', { theme: "colored", hideProgressBar: true })
+            refetch()
         }
     }
 
@@ -65,7 +65,13 @@ const ProductEditScreen = () => {
         try {
             const response = await uploadProductImage(formData).unwrap()
             setImage(response.image)
-            toast.success(response.message)
+            // const text = document.getElementById('image-text')
+            // text.innerHTML = `<label class="fw-bold text-success">Uploaded Image</label>`
+            setTimeout(() => {
+                // text.textContent = 'Upload Image'
+                // text.classList.remove('fw-bold', 'text-success')
+                document.getElementById('update-product').click()
+            }, 500)
         } catch (error) {
             toast.error(error?.data?.message || error.error)
         }
@@ -78,7 +84,9 @@ const ProductEditScreen = () => {
                     <GoBackButton text="Products" url="/admin/productlist" />
                 </Col>
                 <Col sm={13} md={6} lg={8} xl={8} className="my-3">
-                    <h1 className="text-center">Update Product</h1>
+                    <h1 id="product-header" className="text-center">
+                        {!product && 'Update Product'}
+                    </h1>
                 </Col>
             </Row>
             {isLoading ? <Loader /> : error ? (
@@ -90,7 +98,7 @@ const ProductEditScreen = () => {
                     <Form onSubmit={submitHandler}>
                         <Row>
                             <Col>
-                                <Form.Group controlId="name" className="my-3">
+                                <Form.Group controlId="name" className="mt-3">
                                     <Form.Label>Name</Form.Label>
                                     <Form.Control
                                         type="text"
@@ -100,63 +108,12 @@ const ProductEditScreen = () => {
                                     </Form.Control>
                                 </Form.Group>
                             </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Form.Group controlId="brand" className="my-3">
-                                    <Form.Label>Brand</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        value={brand}
-                                        onChange={(event) => setBrand(event.target.value)}
-                                    >
-                                    </Form.Control>
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group controlId="category" className="my-3">
-                                    <Form.Label>Category</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        value={category}
-                                        onChange={(event) => setCategory(event.target.value)}
-                                    >
-                                    </Form.Control>
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Form.Group controlId="price" className="my-3">
-                                    <Form.Label>Price</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        value={price}
-                                        onChange={(event) => setPrice(event.target.value)}
-                                    >
-                                    </Form.Control>
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group controlId="countInStock" className="my-3">
-                                    <Form.Label>Count In Stock</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        value={countInStock}
-                                        onChange={(event) => setCountInStock(event.target.value)}
-                                    >
-                                    </Form.Control>
-                                </Form.Group>
-                            </Col>
-                        </Row>
-
-                        <Row>
                             <Col>
                                 <Form.Group controlId="image-upload" className="my-3">
-                                    <Form.Label>Image</Form.Label>
+                                    <Form.Label id="image-text" className="input-label">Upload Image</Form.Label>
                                     <Form.Control
                                         type="file"
-                                        label="Choose File"
+                                        className="inputfile"
                                         onChange={uploadFileHandler}
                                     >
                                     </Form.Control>
@@ -172,19 +129,59 @@ const ProductEditScreen = () => {
                                 </Form.Group> */}
                             </Col>
                         </Row>
+                        <Row>
+                            <Col>
+                                <Form.Group controlId="brand" className="mb-3">
+                                    <Form.Label>Brand</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        value={brand}
+                                        onChange={(event) => setBrand(event.target.value)}
+                                    >
+                                    </Form.Control>
+                                </Form.Group>
+                                <Form.Group controlId="category" className="my-3">
+                                    <Form.Label>Category</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        value={category}
+                                        onChange={(event) => setCategory(event.target.value)}
+                                    >
+                                    </Form.Control>
+                                </Form.Group>
+                                <Form.Group controlId="price" className="my-3">
+                                    <Form.Label>Price</Form.Label>
+                                    <Form.Control
+                                        type="number"
+                                        value={price}
+                                        onChange={(event) => setPrice(event.target.value)}
+                                    >
+                                    </Form.Control>
+                                </Form.Group>
+                                <Form.Group controlId="countInStock" className="my-3">
+                                    <Form.Label>Count In Stock</Form.Label>
+                                    <Form.Control
+                                        type="number"
+                                        value={countInStock}
+                                        onChange={(event) => setCountInStock(event.target.value)}
+                                    >
+                                    </Form.Control>
+                                </Form.Group>
 
-                        <Form.Group controlId="description" className="my-3">
+                            </Col>
+                            <Image src={product.image} alt={product.name} className="w-50 h-25" />
+                        </Row>
+                        <Form.Group controlId="description" className="mb-2">
                             <Form.Label>Description</Form.Label>
                             <Form.Control
                                 as="textarea"
-                                rows={10}
+                                rows={7}
                                 maxLength={1000}
                                 value={description}
                                 onChange={(event) => setDescription(event.target.value)}
                             >
                             </Form.Control>
                         </Form.Group>
-
                         <Button type="submit" variant="primary" id="update-product" className="mt-2 w-100">
                             {updatingProduct ? <Loader update /> : 'Update'}
                         </Button>
