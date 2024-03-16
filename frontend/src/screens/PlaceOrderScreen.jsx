@@ -110,7 +110,7 @@ const PlaceOrderScreen = () => {
                 </Col >
 
                 <Col md={10} lg={4}>
-                    <Card className="mt-3">
+                    <Card className="mt-3 sticky-top sticky-card">
                         <ListGroup variant="flush">
                             <ListGroup.Item>
                                 <h2>Order Summary</h2>

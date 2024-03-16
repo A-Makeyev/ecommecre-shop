@@ -109,7 +109,7 @@ const CartScreen = () => {
 
                     </Col>
                     <Col md={13} lg={4} className="mt-4">
-                        <Card>
+                        <Card className="sticky-top sticky-card">
                             <ListGroup variant="flush">
                                 <ListGroup.Item>
                                     <h4>Subtotal ({totalItems === 1 ? '1 item' : `${totalItems} items`})</h4>
