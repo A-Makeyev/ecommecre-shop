@@ -20,7 +20,7 @@ const authenticateUser = asyncHandler(async (request, response) => {
         })
     } else {
         response.status(401)
-        throw new Error('Invalid email or password')
+        throw new Error('Invalid Email or Password')
     }
 })
 
@@ -33,7 +33,7 @@ const registerUser = asyncHandler(async (request, response) => {
 
     if (userExists) {
         response.status(400)
-        throw new Error(`User with email '${email}' already exists`)
+        throw new Error(`User With Email '${email}' Already Exists`)
     }
 
     const user = await User.create({
@@ -52,7 +52,7 @@ const registerUser = asyncHandler(async (request, response) => {
         })
     } else {
         response.status(401)
-        throw new Error('Invalid user data')
+        throw new Error('Invalid User Data')
     }
 })
 
@@ -64,7 +64,7 @@ const logoutUser = asyncHandler(async (request, response) => {
         httpOnly: true,
         expires: new Date(0)
     })
-    response.status(200).json({ message: 'Logged out' })
+    response.status(200).json({ message: 'Logged Out' })
 })
 
 // @desc Get user profile
@@ -82,7 +82,7 @@ const getUserProfile = asyncHandler(async (request, response) => {
         })
     } else {
         response.status(404)
-        throw new Error(`User '${request.user.name}' not found`)
+        throw new Error(`User '${request.user.name}' Not Found`)
     }
 })
 
@@ -109,7 +109,7 @@ const updateUserProfile = asyncHandler(async (request, response) => {
         })
     } else {
         response.status(404)
-        throw new Error(`User '${request.user.name}' not found`)
+        throw new Error(`User '${request.user.name}' Not Found`)
     }
 })
 
@@ -118,28 +118,59 @@ const updateUserProfile = asyncHandler(async (request, response) => {
 // @access Admin
 const getUsers = asyncHandler(async (request, response) => {
     const users = await User.find({})
-    response.json(users)
+    response.status(200).json(users)
 })
 
 // @desc Get user by ID
 // @route (GET) /api/users/:id
 // @access Admin
 const getUserById = asyncHandler(async (request, response) => {
-    response.send('getUserById')
+    const user = await User.findById(request.params.id).select('-password')
+
+    if (user) {
+        response.status(200).json(user)
+    } else {
+        response.status(404)
+        throw new Error('User Not Found')
+    }
 })
 
 // @desc Delete users
 // @route (DELETE) /api/users/:id
 // @access Admin
 const deleteUser = asyncHandler(async (request, response) => {
-    response.send('deleteUser')
+    const user = await User.findById(request.params.id)
+
+    if (user) {
+        if (user.isAdmin) {
+            response.status(400)
+            throw new Error('Cannot Delete Admin User')
+        }
+        await User.deleteOne({ _id: user._id })
+        response.status(200).json({ message: `Deleted User '${user.name}' Successfully` })
+    } else {
+        response.status(404)
+        throw new Error('User Not Found')
+    }
 })
 
 // @desc Update user
 // @route (PUT) /api/users/:id
 // @access Admin
 const updateUser = asyncHandler(async (request, response) => {
-    response.send('updateUser')
+    const user = await User.findById(request.params.id)
+
+    if (user) {
+        user.name = request.body.name || user.name
+        user.email = request.body.email || user.email
+        user.isAdmin = Boolean(request.body.isAdmin)
+
+        const updatedUser = await user.save()
+        response.status(200).json(updatedUser)
+    } else {
+        response.status(404)
+        throw new Error('User Not Found')
+    }
 })
 
 export {

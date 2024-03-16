@@ -107,7 +107,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "65e385ae9e28a4e6d29d6fa2"
+											"value": "65f575381092db5ad3209f7b"
 										}
 									]
 								}
@@ -131,7 +131,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "65dcf9d5b1e67b472b4c147a"
+											"value": "65f575381092db5ad3209f7b"
 										}
 									]
 								}
@@ -155,7 +155,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "65dcf9d5b1e67b472b4c147a"
+											"value": "65f575381092db5ad3209f7b"
 										}
 									]
 								}
@@ -379,7 +379,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "65f41655235d75dc3651b147"
 										}
 									]
 								}
@@ -396,8 +396,9 @@
 									"urlencoded": [
 										{
 											"key": "id",
-											"value": "1",
-											"type": "text"
+											"value": "65f42792314f47f4c82e9f1d",
+											"type": "text",
+											"disabled": true
 										}
 									]
 								},
@@ -414,7 +415,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "65f42792314f47f4c82e9f1d"
 										}
 									]
 								}
@@ -439,7 +440,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": ""
+											"value": "65f41655235d75dc3651b147"
 										}
 									]
 								}
@@ -488,7 +489,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/orders/myorders",
+							"raw": "{{baseURL}}/orders/mine",
 							"host": [
 								"{{baseURL}}"
 							],
