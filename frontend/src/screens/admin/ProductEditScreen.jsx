@@ -65,11 +65,11 @@ const ProductEditScreen = () => {
         try {
             const response = await uploadProductImage(formData).unwrap()
             setImage(response.image)
-            // const text = document.getElementById('image-text')
-            // text.innerHTML = `<label class="fw-bold text-success">Uploaded Image</label>`
+            // const label = document.getElementById('image-label')
+            // label.innerHTML = `<label class="fw-bold text-success">Uploaded Image</label>`
             setTimeout(() => {
-                // text.textContent = 'Upload Image'
-                // text.classList.remove('fw-bold', 'text-success')
+                // label.textContent = 'Image'
+                // label.classList.remove('fw-bold', 'text-success')
                 document.getElementById('update-product').click()
             }, 500)
         } catch (error) {
@@ -110,7 +110,7 @@ const ProductEditScreen = () => {
                             </Col>
                             <Col>
                                 <Form.Group controlId="image-upload" className="my-3">
-                                    <Form.Label id="image-text" className="input-label">Upload Image</Form.Label>
+                                    <Form.Label id="image-label" className="input-label">Image</Form.Label>
                                     <Form.Control
                                         type="file"
                                         className="inputfile"

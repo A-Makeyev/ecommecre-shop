@@ -10,3 +10,4 @@
 - Add profile pic
 - Add create product form 
 - Add max price and max text to forms
+- Delete uploaded picture after deleting product

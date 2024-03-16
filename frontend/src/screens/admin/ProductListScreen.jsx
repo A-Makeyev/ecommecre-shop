@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { Row, Col, Button, Table } from 'react-bootstrap'
-import { useGetProductsQuery, useCreateProductMutation } from '../../slices/productsApiSlice'
+import { useGetProductsQuery, useCreateProductMutation, useDeleteProductMutation } from '../../slices/productsApiSlice'
 import { adjustPrice } from '../../utils/cartUtils'
 import { FaEdit, FaTrash } from 'react-icons/fa'
 import { toast } from 'react-toastify'
@@ -13,10 +13,20 @@ const ProductListScreen = () => {
     const navigate = useNavigate()
     const { data: products, isLoading, error, refetch } = useGetProductsQuery()
     const [createProduct, { isLoading: creatingProduct }] = useCreateProductMutation()
+    const [deleteProduct] = useDeleteProductMutation()
     const emptyProductsList = JSON.stringify(products) === '[]'
 
-    const deleteProductHandler = (id) => {
-
+    const deleteProductHandler = async (id, name) => {
+        name = name.split(' ', 3).join(' ')
+        if (window.confirm(`Are you sure you want to delete ${name}?`)) {
+            try {
+                await deleteProduct(id)
+                refetch()
+                toast.success(`Deleted ${name}`, { theme: "colored", hideProgressBar: true })
+            } catch (error) {
+                toast.error(error?.data?.message || error.error)
+            }
+        }
     }
 
     const createProductHandler = async () => {
@@ -91,7 +101,7 @@ const ProductListScreen = () => {
                                         <FaTrash
                                             role="button"
                                             className="fs-5 m-1 delete-product"
-                                            onClick={() => deleteProductHandler(product._id)}
+                                            onClick={() => deleteProductHandler(product._id, product.name)}
                                         />
                                     </td>
                                 </tr>
