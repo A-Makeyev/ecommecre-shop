@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { Row, Col, Form, Button, Image } from 'react-bootstrap'
 import { useGetProductDetailsQuery, useUpdateProductMutation, useUploadProductImageMutation } from '../../slices/productsApiSlice'
 import { toast } from 'react-toastify'
@@ -10,6 +10,7 @@ import Loader from '../../components/Loader'
 
 
 const ProductEditScreen = () => {
+    const navigate = useNavigate()
     const { id: productId } = useParams()
     const { data: product, isLoading, refetch, error } = useGetProductDetailsQuery(productId)
     const [updateProduct, { isLoading: updatingProduct }] = useUpdateProductMutation()
@@ -35,7 +36,7 @@ const ProductEditScreen = () => {
         }
     }, [product])
 
-    const submitHandler = async (event) => {
+    const updateHandler = async (event, stay) => {
         event.preventDefault()
 
         const uppdatedProduct = {
@@ -53,8 +54,15 @@ const ProductEditScreen = () => {
         if (result.error) {
             toast.error(result.error)
         } else {
-            toast.success('Updated Product', { theme: "colored", hideProgressBar: true })
-            refetch()
+            if (stay) {
+                refetch()
+            } else {
+                navigate('/admin/productlist')
+                toast.success(
+                    `Created ${result.data.name.split(' ', 3).join(' ')}`,
+                    { theme: "colored", hideProgressBar: true }
+                )
+            }
         }
     }
 
@@ -95,7 +103,7 @@ const ProductEditScreen = () => {
                 </Message>
             ) : (
                 <FormContainer>
-                    <Form onSubmit={submitHandler}>
+                    <Form>
                         <Row>
                             <Col>
                                 <Form.Group controlId="name" className="mt-3">
@@ -182,9 +190,12 @@ const ProductEditScreen = () => {
                             >
                             </Form.Control>
                         </Form.Group>
-                        <Button type="submit" variant="primary" id="update-product" className="mt-2 w-100">
-                            {updatingProduct ? <Loader update /> : 'Update'}
+
+                        <Button onClick={(event) => updateHandler(event, false)} type="submit" variant="primary" id="save-product" className="mt-2 w-100">
+                            {updatingProduct ? <Loader update /> : 'Save'}
                         </Button>
+
+                        <Button type="submit" id="update-product" onClick={(event) => updateHandler(event, true)}></Button>
                     </Form>
                 </FormContainer>
             )}

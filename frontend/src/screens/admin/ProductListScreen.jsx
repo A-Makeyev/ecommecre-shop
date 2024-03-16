@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { Row, Col, Button, Table } from 'react-bootstrap'
+import { Row, Col, Button, Table} from 'react-bootstrap'
 import { useGetProductsQuery, useCreateProductMutation, useDeleteProductMutation } from '../../slices/productsApiSlice'
 import { adjustPrice } from '../../utils/cartUtils'
 import { FaEdit, FaTrash } from 'react-icons/fa'
@@ -14,11 +14,10 @@ const ProductListScreen = () => {
     const { data: products, isLoading, error, refetch } = useGetProductsQuery()
     const [createProduct, { isLoading: creatingProduct }] = useCreateProductMutation()
     const [deleteProduct] = useDeleteProductMutation()
-    const emptyProductsList = JSON.stringify(products) === '[]'
 
     const deleteProductHandler = async (id, name) => {
         name = name.split(' ', 3).join(' ')
-        if (window.confirm(`Are you sure you want to delete ${name}?`)) {
+        if (window.confirm(`${name} will be permanently deleted`)) {
             try {
                 await deleteProduct(id)
                 refetch()
@@ -46,7 +45,7 @@ const ProductListScreen = () => {
                     <GoBackButton text="Home" url="/" />
                 </Col>
                 <Col xs={5} sm={7} md={6} lg={6} xl={4} className="my-3 text-center">
-                    <h1>{emptyProductsList ? '' : 'Products'}</h1>
+                    <h1>{JSON.stringify(products) === '[]' ? '' : 'Products'}</h1>
                 </Col>
                 <Col sm={13} md={3} lg={3} xl={4} className="text-end">
                     <Button role="button" className="mt-3 text-center sm-width-100" onClick={createProductHandler}>
@@ -64,7 +63,7 @@ const ProductListScreen = () => {
                 <Message variant="danger" className="text-center">
                     {error?.data?.message || error.error}
                 </Message>
-            ) : emptyProductsList ? (
+            ) : JSON.stringify(products) === '[]' ? (
                 <Col className="mt-5 fs-1 text-center">
                     <h3>No Products Available</h3>
                     <h1>¯\_(ツ)_/¯</h1>
