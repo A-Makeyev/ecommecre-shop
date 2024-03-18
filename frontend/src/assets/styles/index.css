@@ -139,11 +139,11 @@ select::-webkit-scrollbar {
   -webkit-box-shadow: none;
 }
 
-.delete-product {
+.delete-icon {
   transition: all 0.5s;
 }
 
-.delete-product:hover {
+.delete-icon:hover {
   color: #FF0000;
 }
 

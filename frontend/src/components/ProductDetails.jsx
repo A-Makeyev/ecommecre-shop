@@ -65,7 +65,7 @@ const ProductDetails = ({ product }) => {
                                                 value={qty}
                                                 className="qty-select"
                                                 disabled={product.countInStock === 1}
-                                                role={product.countInStock > 1 && "button"}
+                                                role={product.countInStock > 1 ? "button" : undefined}
                                                 onChange={(event) => setQty(Number(event.target.value))}
                                             >
                                                 {[...Array(product.countInStock).keys()].map((item) => (

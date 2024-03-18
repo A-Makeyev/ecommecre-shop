@@ -81,7 +81,7 @@ const CartScreen = () => {
                                                     value={item.qty}
                                                     className="p-1 text-center"
                                                     disabled={item.countInStock === 1}
-                                                    role={item.countInStock > 1 && "button"}
+                                                    role={item.countInStock > 1 ? "button" : undefined}
                                                     onChange={(event) => addToCartHandler(item, Number(event.target.value))}
                                                 >
                                                     {[...Array(item.countInStock).keys()].map((i) => (
