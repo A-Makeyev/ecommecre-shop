@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Row, Col, Form, Button } from 'react-bootstrap'
 import { useGetUserDetailsQuery, useUpdateUserMutation } from '../../slices/usersApiSlice'
-import { useLogoutMutation } from '../../slices/usersApiSlice'
-import { logout } from '../../slices/authSlice'
+import { useLogoutMutation, useProfileMutation } from '../../slices/usersApiSlice'
+import { logout, setCredentials } from '../../slices/authSlice'
 import { toast } from 'react-toastify'
 import FormContainer from '../../components/FormContainer'
 import GoBackButton from '../../components/GoBackButton'
@@ -22,6 +22,7 @@ const UserEditScreen = () => {
     const [logoutApiCall] = useLogoutMutation()
     const [updateUser, { isLoading: updatingUser }] = useUpdateUserMutation()
     const { data: user, isLoading, refetch, error } = useGetUserDetailsQuery(userId)
+    const [updateProfile] = useProfileMutation()
 
     useEffect(() => {
         if (user) {
@@ -58,6 +59,9 @@ const UserEditScreen = () => {
         if (result.error) {
             toast.error(result.error)
         } else {
+            const response = await updateProfile(uppdatedUser).unwrap()
+            dispatch(setCredentials(response))
+
             if (userWasAdmin && !result.data.isAdmin) {
                 try {
                     await logoutApiCall().unwrap()
