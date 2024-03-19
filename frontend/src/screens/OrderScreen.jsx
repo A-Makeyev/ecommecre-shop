@@ -245,7 +245,7 @@ const OrderScreen = () => {
                                                 )}
 
                                                 <Button onClick={() => handlerPDF()} className="mb-2 w-100 order-buttons">
-                                                    Invoice
+                                                    Download Invoice
                                                 </Button>
                                             </ListGroup.Item>
                                         </>
