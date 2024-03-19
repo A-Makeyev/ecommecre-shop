@@ -32,14 +32,20 @@ const UserEditScreen = () => {
         }
     }, [user])
 
+    const currentUserWasAdmin = () => {
+        const username = document.getElementById('username').textContent
+        return user.name.includes(username) && user.isAdmin
+    }
 
-    // TODO -> UPDATE BEFORE SAVING
+    const adminWarningHandler = () => {
+        if (currentUserWasAdmin()) {
+            alert('You will be removed from an admin role')
+        }
+    }
 
     const updateHandler = async (event) => {
         event.preventDefault()
 
-        const username = document.getElementById('username').textContent
-        const currentUserWasAdmin = user.name.includes(username) && user.isAdmin
         const uppdatedUser = {
             userId,
             name,
@@ -48,10 +54,11 @@ const UserEditScreen = () => {
         }
 
         const result = await updateUser(uppdatedUser)
+        const userWasAdmin = currentUserWasAdmin()
         if (result.error) {
             toast.error(result.error)
         } else {
-            if (currentUserWasAdmin) {
+            if (userWasAdmin && !result.data.isAdmin) {
                 try {
                     await logoutApiCall().unwrap()
                     dispatch(logout())
@@ -119,7 +126,7 @@ const UserEditScreen = () => {
                                         type="checkbox"
                                         label="Admin"
                                         checked={isAdmin}
-                                        onChange={(event) => setIsAdmin(event.target.value)}
+                                        onChange={() => setIsAdmin(true)}
                                     >
                                     </Form.Check>
                                 </Form.Group>
@@ -131,13 +138,14 @@ const UserEditScreen = () => {
                                         label="Regular User"
                                         checked={!isAdmin}
                                         onChange={() => setIsAdmin(false)}
+                                        onClick={adminWarningHandler}
                                     >
                                     </Form.Check>
                                 </Form.Group>
                             </Col>
                         </Row>
 
-                        <Button onClick={updateHandler} type="submit" variant="primary" id="save-user" className="my-3 w-100">
+                        <Button onClick={(event) => updateHandler(event)} type="submit" variant="primary" id="save-user" className="my-3 w-100">
                             {updatingUser ? <Loader update /> : 'Save'}
                         </Button>
 
