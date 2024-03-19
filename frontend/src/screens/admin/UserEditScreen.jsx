@@ -59,8 +59,10 @@ const UserEditScreen = () => {
         if (result.error) {
             toast.error(result.error)
         } else {
-            const response = await updateProfile(uppdatedUser).unwrap()
-            dispatch(setCredentials(response))
+            if (currentUserWasAdmin()) {
+                const response = await updateProfile(uppdatedUser).unwrap()
+                dispatch(setCredentials(response))
+            }
 
             if (userWasAdmin && !result.data.isAdmin) {
                 try {
