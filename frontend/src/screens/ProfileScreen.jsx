@@ -20,7 +20,7 @@ const ProfileScreen = () => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [updateProfile, { isLoading: loadingUpdateProfile }] = useProfileMutation()
-    const { data: orders, isLoading, error } = useGetMyOrdersQuery()
+    const { data: orders, isLoading, refetch, error } = useGetMyOrdersQuery()
     const { userInfo } = useSelector(state => state.auth)
     const emptyOrdersList = JSON.stringify(orders) === '[]'
 
@@ -33,6 +33,7 @@ const ProfileScreen = () => {
                 const response = await updateProfile({ _id: userInfo._id, name, email, password }).unwrap()
                 dispatch(setCredentials(response))
                 toast.success('Updated Profile')
+                refetch()
             } catch (error) {
                 toast.error(error?.data?.message || error.error)
             }
