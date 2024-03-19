@@ -23,6 +23,20 @@ const OrderScreen = () => {
     const fileName = `${userInfo.name}'s Order Invoice ${getCurrentDateAndTime()}`
     const { toPDF, targetRef } = usePDF({ filename: fileName })
 
+    const handlerPDF = () => {
+        const btns = document.querySelectorAll('.order-buttons')
+        btns.forEach((btn) => { btn.style.display = 'none' })
+
+        const dateRow = document.querySelector('.adjust-date-row')
+        dateRow.classList.add('p-4', 'my-2')
+
+        setTimeout(() => {
+            toPDF()
+            dateRow.classList.remove('p-4', 'my-2')
+            btns.forEach((btn) => { btn.style.display = 'block' })
+        }, 500)
+    }
+
     const deliverOrderHandler = async () => {
         try {
             await deliverOrder(orderId)
@@ -216,12 +230,13 @@ const OrderScreen = () => {
                                     ) : (
                                         <>
                                             <ListGroup.Item className="p-3 mt-1">
-                                                <Row>
+                                                <Row className="adjust-date-row">
                                                     <Col>Order Date:</Col>
                                                     <Col>{formatDateAndTime(order.createdAt)}</Col>
                                                 </Row>
                                             </ListGroup.Item>
-                                            <ListGroup.Item className="p-3 mt-1">
+
+                                            <ListGroup.Item className="p-3 mt-1 border-0 order-buttons">
 
                                                 {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                                                     <Button onClick={deliverOrderHandler} className="mb-2 w-100">
@@ -229,7 +244,7 @@ const OrderScreen = () => {
                                                     </Button>
                                                 )}
 
-                                                <Button onClick={() => { toPDF() }} className="mb-2 w-100">
+                                                <Button onClick={() => handlerPDF()} className="mb-2 w-100 order-buttons">
                                                     Invoice
                                                 </Button>
                                             </ListGroup.Item>
