@@ -24,7 +24,10 @@ const ProductListScreen = () => {
                 toast.success(`Deleted ${name}`, { theme: "colored", hideProgressBar: true })
                 refetch()
             } catch (error) {
-                toast.error(error?.data?.message || error.error)
+                toast.error(
+                    error?.data?.message || error.error, 
+                    { theme: "colored", hideProgressBar: true }
+                )
             }
         }
     }
@@ -35,7 +38,10 @@ const ProductListScreen = () => {
             navigate(`/admin/product/${newProduct.data._id}/edit`)
             refetch()
         } catch (error) {
-            toast.error(error?.data?.message || error.error)
+            toast.error(
+                error?.data?.message || error.error, 
+                { theme: "colored", hideProgressBar: true }
+            )
         }
     }
 

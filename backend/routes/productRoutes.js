@@ -1,11 +1,12 @@
 import express from 'express'
 import { protect, admin } from '../middleware/authMiddleware.js'
-import { 
-      getProducts, 
-      getProductById, 
-      createProduct, 
+import {
+      getProducts,
+      getProductById,
+      createProduct,
       updateProduct,
-      deleteProduct
+      deleteProduct,
+      createProductReview
 } from '../controllers/productController.js'
 
 
@@ -19,5 +20,7 @@ router.route('/:id')
       .get(getProductById)
       .put(protect, admin, updateProduct)
       .delete(protect, admin, deleteProduct)
+
+router.post('/:id/reviews', protect, createProductReview)
 
 export default router

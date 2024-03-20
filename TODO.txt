@@ -10,4 +10,6 @@
 - Add profile pic
 - Add create product form 
 - Add max price and max text to forms
+- Add delete account from profile
+- Add update review?
 - Delete uploaded picture after deleting product

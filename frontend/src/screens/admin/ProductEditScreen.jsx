@@ -52,7 +52,10 @@ const ProductEditScreen = () => {
 
         const result = await updateProduct(uppdatedProduct)
         if (result.error) {
-            toast.error(result.error)
+            toast.error(
+                result.error, 
+                { theme: "colored", hideProgressBar: true }
+            )
         } else {
             if (stay) {
                 refetch()

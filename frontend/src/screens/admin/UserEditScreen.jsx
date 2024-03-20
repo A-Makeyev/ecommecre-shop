@@ -57,7 +57,10 @@ const UserEditScreen = () => {
         const result = await updateUser(uppdatedUser)
         const userWasAdmin = currentUserWasAdmin()
         if (result.error) {
-            toast.error(result.error)
+            toast.error(
+                result.error, 
+                { theme: "colored", hideProgressBar: true }
+            )
         } else {
             if (currentUserWasAdmin()) {
                 const response = await updateProfile(uppdatedUser).unwrap()
@@ -73,7 +76,10 @@ const UserEditScreen = () => {
                         { theme: "colored", hideProgressBar: true }
                     )
                 } catch (error) {
-                    toast.error(error?.data?.message || error.error)
+                    toast.error(
+                        error?.data?.message || error.error, 
+                        { theme: "colored", hideProgressBar: true }
+                    )
                 }
             } else {
                 refetch()

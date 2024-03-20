@@ -32,10 +32,10 @@ const createProduct = asyncHandler(async (request, response) => {
         name: 'Product',
         description: 'Description',
         image: '/images/sample.jpg',
-        category: 'Category', 
+        category: 'Category',
         brand: 'Brand',
         countInStock: 0,
-        numReviews: 0, 
+        numReviews: 0,
         price: 0
     })
 
@@ -51,9 +51,9 @@ const updateProduct = asyncHandler(async (request, response) => {
     const product = await Product.findById(request.params.id)
     if (product) {
         product.name = name,
-        product.description = description
+            product.description = description
         product.image = image
-        product.category = category 
+        product.category = category
         product.brand = brand
         product.countInStock = countInStock
         product.price = price
@@ -72,8 +72,8 @@ const updateProduct = asyncHandler(async (request, response) => {
 const deleteProduct = asyncHandler(async (request, response) => {
     const product = await Product.findById(request.params.id)
     if (product) {
-        await Product.deleteOne({_id: product._id})
-        response.status(200).json({ 
+        await Product.deleteOne({ _id: product._id })
+        response.status(200).json({
             message: `${product.name.split(' ', 3).join(' ')} was deleted`
         })
     } else {
@@ -82,10 +82,45 @@ const deleteProduct = asyncHandler(async (request, response) => {
     }
 })
 
-export { 
-    getProducts, 
-    getProductById, 
-    createProduct, 
+// @desc Create Product Review
+// @route (DELETE) /api/products/:id
+// @access Private
+const createProductReview = asyncHandler(async (request, response) => {
+    const product = await Product.findById(request.params.id)
+    const { rating, comment } = request.body
+
+    if (product) {
+        const alreadyReviewed = product.reviews.find((review) => review.user.toString() === request.user._id.toString())
+        if (alreadyReviewed) {
+            response.status(400)
+            throw new Error('Product Already Reviewed')
+        }
+
+        const review = {
+            user: request.user._id,
+            name: request.user.name,
+            rating: Number(rating),
+            comment
+        }
+
+        product.reviews.push(review)
+        product.numReviews = product.reviews.length
+        product.rating = product.reviews.reduce((accumulator, review) => accumulator + review.rating, 0) / product.reviews.length
+
+        await product.save()
+        response.status(201).json({ message: 'Added Review' })
+
+    } else {
+        response.status(404)
+        throw new Error('Resource Not Found')
+    }
+})
+
+export {
+    getProducts,
+    getProductById,
+    createProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    createProductReview
 }
