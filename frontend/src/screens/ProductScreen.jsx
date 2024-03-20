@@ -30,8 +30,8 @@ const ProductScreen = () => {
     const [rating, setRating] = useState(0)
     const [comment, setComment] = useState('')
     const { id: productId } = useParams()
-    const { data: product, isLoading, error } = useGetProductDetailsQuery(productId)
-    const [createReview, { isLoading: creatingReview, refetch }] = useCreateReviewMutation(productId)
+    const { data: product, isLoading, refetch, error } = useGetProductDetailsQuery(productId)
+    const [createReview, { isLoading: creatingReview }] = useCreateReviewMutation(productId)
     const { userInfo } = useSelector(state => state.auth)
     const cart = useSelector(state => state.cart)
 
@@ -67,7 +67,10 @@ const ProductScreen = () => {
             refetch()
             setRating(0)
             setComment('')
-            toast.success('Added Review')
+            toast.success(
+                'Added Review',
+                { theme: "colored", hideProgressBar: true }
+            )
         } catch (error) {
             toast.error(
                 error?.data?.message || error.error,
@@ -104,13 +107,14 @@ const ProductScreen = () => {
                                     )}
 
                                 </ListGroup.Item>
-                                <ListGroup.Item variant="flush" className="border-0 py-0">
+                                <ListGroup.Item variant="flush" className="border-0">
                                     <p>{product.description}</p>
                                 </ListGroup.Item>
 
                                 <ListGroup.Item className="border-0">
-
-                                    {product.reviews.length > 0 && 
+                                    <hr />
+                                    
+                                    {product.reviews.length > 0 &&
                                         <h5>Reviews ({product.reviews.length})</h5>
                                     }
 
