@@ -67,6 +67,34 @@ export const getCurrentDateAndTime = (includeTime, US) => {
     return dateAndTimeString.substring(0, 10)
 }
 
+export const timeSince = (date) => {
+    date = new Date(date)
+
+    let seconds = Math.floor((new Date() - date) / 1000)
+    let interval = seconds / 31536000
+
+    if (interval > 1) {
+        return Math.floor(interval) + ' years'
+    }
+    interval = seconds / 2592000
+    if (interval > 1) {
+        return Math.floor(interval) + ' months'
+    }
+    interval = seconds / 86400
+    if (interval > 1) {
+        return Math.floor(interval) + ' days'
+    }
+    interval = seconds / 3600
+    if (interval > 1) {
+        return Math.floor(interval) + ' hours'
+    }
+    interval = seconds / 60
+    if (interval > 1) {
+        return Math.floor(interval) + ' minutes'
+    }
+    return Math.floor(seconds) + ' seconds'
+}
+
 export const quantityAlert = (qty) => {
     return (qty === 1 || qty < 1 || ((qty < 10) && (qty > 1)))
         ? "quantity-alert-text xs-price-width-100 mt-1 pe-0 fs-5"
@@ -77,8 +105,8 @@ export const alertText = (qty) => {
     return ((qty < 11) && (qty > 1))
         ? `Only ${qty} Left`
         : qty === 1 ? "Last One"
-            : qty < 1 ? "Out of Stock"
-                : ""
+        : qty < 1 ? "Out of Stock"
+        : ""
 }
 
 export const addedToCartMessage = (qty, item) => {

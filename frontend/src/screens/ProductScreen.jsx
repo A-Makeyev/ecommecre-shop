@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams, useNavigate, useInRouterContext } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import { useGetProductDetailsQuery, useCreateReviewMutation } from '../slices/productsApiSlice'
-import { addedToCartMessage, adjustPrice, formatDateAndTime } from '../utils/cartUtils'
+import { addedToCartMessage, adjustPrice, formatDateAndTime, timeSince } from '../utils/cartUtils'
 import { addToCart } from '../slices/cartSlice'
 import { toast } from 'react-toastify'
 import GoBackButton from '../components/GoBackButton'
@@ -72,7 +72,7 @@ const ProductScreen = () => {
                 { theme: "colored", hideProgressBar: true }
             )
         } catch (error) {
-            toast.error(
+            toast.info(
                 error?.data?.message || error.error,
                 { theme: "colored", hideProgressBar: true }
             )
@@ -113,17 +113,18 @@ const ProductScreen = () => {
 
                                 <ListGroup.Item className="border-0">
                                     <hr />
-                                    
+
                                     {product.reviews.length > 0 &&
                                         <h5>Reviews ({product.reviews.length})</h5>
                                     }
 
                                     {product.reviews.map((review) => (
-                                        <ListGroup.Item key={review._id} className="border-0 p-0">
+                                        <ListGroup.Item key={review._id} className="border-0 p-0 mt-3">
                                             <strong>{review.name}</strong>
-                                            <Rating value={product.rating} />
-                                            <p className="mt-2 mb-2">{review.comment}</p>
-                                            <p>{formatDateAndTime(review.createdAt, true)}</p>
+                                            <Rating value={review.rating} />
+                                            <p className="fw-lighter">{timeSince(review.createdAt)} ago</p>
+                                            <p>{review.comment}</p>
+                                            <hr />
                                         </ListGroup.Item>
                                     ))}
 
@@ -148,6 +149,7 @@ const ProductScreen = () => {
                                                             <Form.Control
                                                                 as="select"
                                                                 value={rating}
+                                                                required
                                                                 className="text-center"
                                                                 onChange={(event) => setRating(Number(event.target.value))}
                                                             >
@@ -179,7 +181,7 @@ const ProductScreen = () => {
                             </ListGroup>
                         </Col>
                         <Col md={5} lg={13} xl={3}>
-                            <Card className="mt-3">
+                            <Card className="mt-3 sticky-top sticky-card">
                                 <ListGroup variant="flush">
                                     <ListGroup.Item>
                                         <Row>
