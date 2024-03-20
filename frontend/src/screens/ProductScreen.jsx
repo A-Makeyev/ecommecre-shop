@@ -110,7 +110,9 @@ const ProductScreen = () => {
 
                                 <ListGroup.Item className="border-0">
 
-                                    {product.reviews.length > 0 && <h5>Reviews</h5>}
+                                    {product.reviews.length > 0 && 
+                                        <h5>Reviews ({product.reviews.length})</h5>
+                                    }
 
                                     {product.reviews.map((review) => (
                                         <ListGroup.Item key={review._id} className="border-0 p-0">
