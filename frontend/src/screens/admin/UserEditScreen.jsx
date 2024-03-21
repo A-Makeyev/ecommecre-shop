@@ -71,7 +71,7 @@ const UserEditScreen = () => {
                 try {
                     await logoutApiCall().unwrap()
                     dispatch(logout())
-                    toast.success(
+                    toast.info(
                         `${result.data.name} you removed yourself from an admin role`,
                         { theme: "colored", hideProgressBar: true }
                     )
