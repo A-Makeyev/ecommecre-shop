@@ -6,11 +6,12 @@ import Product from '../models/productModel.js'
 // @route (GET) /api/products
 // @access Public
 const getProducts = asyncHandler(async (request, response) => {
+    const keyword = request.query.keyword ? { name: { $regex: request.query.keyword, $options: 'i' } } : {}
     const page = Number(request.query.pageNumber) || 1
-    const pageSize = 8
+    const pageSize = 12
 
-    const count = await Product.countDocuments()
-    const products = await Product.find({})
+    const count = await Product.countDocuments({ ...keyword })
+    const products = await Product.find({ ...keyword })
         .limit(pageSize)
         .skip(pageSize * (page - 1))
 

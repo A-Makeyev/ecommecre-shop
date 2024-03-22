@@ -19,8 +19,8 @@ const HomeScreen = () => {
     //     fetchProducts()
     // }, [])
 
-    const { pageNumber } = useParams()
-    const { data, isLoading, error } = useGetProductsQuery({ pageNumber })
+    const { keyword, pageNumber } = useParams()
+    const { data, isLoading, error } = useGetProductsQuery({ keyword, pageNumber })
 
     return (
         <>
@@ -43,7 +43,7 @@ const HomeScreen = () => {
 
                         <Row className="mt-5">
                             <Col className="d-flex justify-content-center">
-                                <Paginate pages={data.pages} page={data.page} />
+                                <Paginate pages={data.pages} page={data.page} keyword={keyword ? keyword : ''} />
                             </Col>
                         </Row>
                     </>

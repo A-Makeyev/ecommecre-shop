@@ -122,7 +122,7 @@ const ProductScreen = () => {
                                         <ListGroup.Item key={review._id} className="border-0 p-0 mt-3">
                                             <strong>{review.name}</strong>
                                             <Rating value={review.rating} />
-                                            <p className="fw-lighter">{timeSince(review.createdAt)} ago</p>
+                                            <p className="fw-lighter">{timeSince(review.createdAt)}</p>
                                             <p>{review.comment}</p>
                                             <hr />
                                         </ListGroup.Item>
@@ -147,9 +147,10 @@ const ProductScreen = () => {
                                                     <Col md={6}>
                                                         <Form.Group controlId="rating">
                                                             <Form.Control
-                                                                as="select"
-                                                                value={rating}
                                                                 required
+                                                                as="select"
+                                                                role="button"
+                                                                value={rating}
                                                                 className="text-center"
                                                                 onChange={(event) => setRating(Number(event.target.value))}
                                                             >

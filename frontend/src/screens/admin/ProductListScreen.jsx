@@ -12,8 +12,8 @@ import Loader from '../../components/Loader'
 
 const ProductListScreen = () => {
     const navigate = useNavigate()
-    const { pageNumber } = useParams()
-    const { data, isLoading, error, refetch } = useGetProductsQuery({ pageNumber })
+    const { keyword, pageNumber } = useParams()
+    const { data, isLoading, refetch, error } = useGetProductsQuery({ keyword, pageNumber })
     const [createProduct, { isLoading: creatingProduct }] = useCreateProductMutation()
     const [deleteProduct] = useDeleteProductMutation()
 
@@ -120,7 +120,7 @@ const ProductListScreen = () => {
                     </Table>
                     <Row className="mt-5">
                         <Col className="d-flex justify-content-center">
-                            <Paginate pages={data.pages} page={data.page} isAdmin={true} />
+                            <Paginate pages={data.pages} page={data.page} isAdmin={true} keyword={keyword ? keyword : ''} />
                         </Col>
                     </Row>
                 </>

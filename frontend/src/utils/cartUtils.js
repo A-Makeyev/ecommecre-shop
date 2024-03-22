@@ -67,33 +67,67 @@ export const getCurrentDateAndTime = (includeTime, US) => {
     return dateAndTimeString.substring(0, 10)
 }
 
-export const timeSince = (date) => {
-    date = new Date(date)
+export const timeSince = (time) => {
+    time = new Date(time)
 
-    let seconds = Math.floor((new Date() - date) / 1000)
-    let interval = seconds / 31536000
+    switch (typeof time) {
+        case 'number':
+            break
+        case 'string':
+            time = +new Date(time)
+            break
+        case 'object':
+            if (time.constructor === Date) time = time.getTime()
+            break
+        default:
+            time = +new Date()
+    }
 
-    if (interval > 1) {
-        return Math.floor(interval) + ' years'
+    var time_formats = [
+        [60, 'seconds', 1], // 60
+        [120, '1 minute ago', '1 minute from now'], // 60*2
+        [3600, 'minutes', 60], // 60*60, 60
+        [7200, '1 hour ago', '1 hour from now'], // 60*60*2
+        [86400, 'hours', 3600], // 60*60*24, 60*60
+        [172800, 'Yesterday', 'Tomorrow'], // 60*60*24*2
+        [604800, 'days', 86400], // 60*60*24*7, 60*60*24
+        [1209600, 'Last week', 'Next week'], // 60*60*24*7*4*2
+        [2419200, 'weeks', 604800], // 60*60*24*7*4, 60*60*24*7
+        [4838400, 'Last month', 'Next month'], // 60*60*24*7*4*2
+        [29030400, 'months', 2419200], // 60*60*24*7*4*12, 60*60*24*7*4
+        [58060800, 'Last year', 'Next year'], // 60*60*24*7*4*12*2
+        [2903040000, 'years', 29030400], // 60*60*24*7*4*12*100, 60*60*24*7*4*12
+        [5806080000, 'Last century', 'Next century'], // 60*60*24*7*4*12*100*2
+        [58060800000, 'centuries', 2903040000] // 60*60*24*7*4*12*100*20, 60*60*24*7*4*12*100
+    ]
+    
+    var seconds = (+new Date() - time) / 1000,
+        token = 'ago',
+        list_choice = 1
+
+    if (seconds < 1) {
+        return 'Just now'
     }
-    interval = seconds / 2592000
-    if (interval > 1) {
-        return Math.floor(interval) + ' months'
+    
+    if (seconds < 0) {
+        seconds = Math.abs(seconds)
+        token = 'from now'
+        list_choice = 2
     }
-    interval = seconds / 86400
-    if (interval > 1) {
-        return Math.floor(interval) + ' days'
-    }
-    interval = seconds / 3600
-    if (interval > 1) {
-        return Math.floor(interval) + ' hours'
-    }
-    interval = seconds / 60
-    if (interval > 1) {
-        return Math.floor(interval) + ' minutes'
-    }
-    return Math.floor(seconds) + ' seconds'
+
+    var i = 0, format
+    while (format = time_formats[i++])
+        if (seconds < format[0]) {
+            if (typeof format[2] == 'string')
+                return format[list_choice]
+            else
+                return Math.floor(seconds / format[2]) + ' ' + format[1] + ' ' + token
+        }
+        
+    format = time_formats[time_formats.length - 1]
+    return Math.floor(seconds / format[2]) + ' ' + format[1] + ' ' + token
 }
+
 
 export const quantityAlert = (qty) => {
     return (qty === 1 || qty < 1 || ((qty < 10) && (qty > 1)))
@@ -105,8 +139,8 @@ export const alertText = (qty) => {
     return ((qty < 11) && (qty > 1))
         ? `Only ${qty} Left`
         : qty === 1 ? "Last One"
-        : qty < 1 ? "Out of Stock"
-        : ""
+            : qty < 1 ? "Out of Stock"
+                : ""
 }
 
 export const addedToCartMessage = (qty, item) => {
