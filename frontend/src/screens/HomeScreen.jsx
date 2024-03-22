@@ -2,6 +2,7 @@ import { Row, Col } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { useGetProductsQuery } from '../slices/productsApiSlice'
 import ProductDetails from '../components/ProductDetails'
+import GoBackButton from '../components/GoBackButton'
 import Paginate from '../components/Paginate'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -24,7 +25,19 @@ const HomeScreen = () => {
 
     return (
         <>
-            <h1 className="text-center mb-5">Latest Products</h1>
+            {keyword ? (
+                <Row>
+                    <Col xs={4} sm={3} md={4} lg={2} xl={3}>
+                        <GoBackButton text="Home" url="/" />
+                    </Col>
+                    <Col xs={5} sm={7} md={5} lg={8} xl={6} className="text-center">
+                        <h1 className="text-center mt-3 mb-5">Latest Products</h1>
+                    </Col>
+                </Row>
+            ) : (
+                <h1 className="text-center mt-3 mb-5">Latest Products</h1>
+            )}
+
             <Row className="sm-justify-content-center">
 
                 {isLoading ? (
