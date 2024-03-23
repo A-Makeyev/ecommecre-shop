@@ -6,6 +6,7 @@ import { addToCart, removeFromCart } from '../slices/cartSlice'
 import { adjustPrice } from '../utils/cartUtils'
 import GoBackButton from '../components/GoBackButton'
 import Message from '../components/Message'
+import Meta from '../components/Meta'
 
 
 const CartScreen = () => {
@@ -39,6 +40,12 @@ const CartScreen = () => {
 
     return (
         <>
+            <Meta 
+                title={`Shop | Cart (${totalItems})`}
+                description={JSON.stringify(cartItems.map((p) => p.category + ' ' + p.brand + ' ' + p.name + ' ').toString())} 
+                keywords={JSON.stringify(cartItems.map((p) => p.category + ' ' + p.brand + ' ' + p.name + ' ').toString())} 
+            /> 
+            
             <Row>
                 <Col sm={3} md={3} lg={2}>
                     <GoBackButton text="Home" url="/" />

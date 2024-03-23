@@ -10,6 +10,7 @@ import GoBackButton from '../components/GoBackButton'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Rating from '../components/Rating'
+import Meta from '../components/Meta'
 // import { useEffect, useState } from 'react'
 // import axios from 'axios'
 
@@ -81,6 +82,12 @@ const ProductScreen = () => {
 
     return (
         <>
+            <Meta 
+                title={`Shop | ${product.name.split(' ', 3).join(' ')}`} 
+                description={product.category + ' ' + product.brand + ' ' + product.name + ' '} 
+                keywords={product.category + ' ' + product.brand + ' ' + product.name + ' '} 
+            />
+
             <GoBackButton text="Home" url="/" />
 
             {isLoading ? (

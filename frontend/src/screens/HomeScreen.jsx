@@ -7,6 +7,7 @@ import ProductCarousel from '../components/ProductCarousel'
 import Paginate from '../components/Paginate'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import Meta from '../components/Meta'
 // import { useEffect, useState } from 'react'
 // import axios from 'axios'
 
@@ -23,7 +24,8 @@ const HomeScreen = () => {
 
     const { keyword, pageNumber } = useParams()
     const { data, isLoading, error } = useGetProductsQuery({ keyword, pageNumber })
-
+    //const products = data.products.map((p) => p.products)
+    
     return (
         <>
             {keyword ? (
@@ -54,6 +56,11 @@ const HomeScreen = () => {
                     </Message>
                 ) : (
                     <>
+                        <Meta 
+                            description={JSON.stringify(data.products.map((p) => p.category + ' ' + p.brand + ' ' + p.name + ' ').toString())} 
+                            keywords={JSON.stringify(data.products.map((p) => p.category + ' ' + p.brand + ' ' + p.name + ' ').toString())} 
+                        /> 
+
                         {data.products.map((product) => (
                             <Col key={product._id} sm={12} md={6} lg={4} xl={3} className="p-2">
                                 <ProductDetails product={product} />
