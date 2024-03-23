@@ -2,6 +2,7 @@ import express from 'express'
 import { protect, admin } from '../middleware/authMiddleware.js'
 import {
       getProducts,
+      getTopProducts,
       getProductById,
       createProduct,
       updateProduct,
@@ -15,6 +16,8 @@ const router = express.Router()
 router.route('/')
       .get(getProducts)
       .post(protect, admin, createProduct)
+
+router.get('/top', getTopProducts)
 
 router.route('/:id')
       .get(getProductById)

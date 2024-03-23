@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useGetProductsQuery } from '../slices/productsApiSlice'
 import ProductDetails from '../components/ProductDetails'
 import GoBackButton from '../components/GoBackButton'
+import ProductCarousel from '../components/ProductCarousel'
 import Paginate from '../components/Paginate'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -34,6 +35,11 @@ const HomeScreen = () => {
                         <h1 className="text-center mt-3 mb-5">Latest Products</h1>
                     </Col>
                 </Row>
+            ) : !keyword ? (
+                <>
+                    <ProductCarousel />
+                    <h1 className="text-center mt-3 mb-5">Latest Products</h1>
+                </>
             ) : (
                 <h1 className="text-center mt-3 mb-5">Latest Products</h1>
             )}

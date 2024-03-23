@@ -146,6 +146,11 @@ select::-webkit-scrollbar {
   z-index: 100 !important;
 }
 
+.carousel-image {
+  width: 450px;
+  height: 450px;
+}
+
 @media (max-width: 768px) {
   .qty-select-invisible {
     margin-top: 3px;

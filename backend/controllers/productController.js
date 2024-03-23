@@ -18,6 +18,20 @@ const getProducts = asyncHandler(async (request, response) => {
     response.json({ products, page, pages: Math.ceil(count / pageSize) })
 })
 
+// @desc Fetch top rated products
+// @route (GET) /api/products/top
+// @access Public
+const getTopProducts = asyncHandler(async (request, response) => {
+    const products = await Product.find({}).sort({ rating: -1 }).limit(3)
+
+    if (products) {
+        return response.status(200).json(products)
+    } else {
+        response.status(404)
+        throw new Error('Resource Not Found')
+    }
+})
+
 // @desc Fetch a single product
 // @route (GET) /api/products/:id
 // @access Public
@@ -126,6 +140,7 @@ const createProductReview = asyncHandler(async (request, response) => {
 
 export {
     getProducts,
+    getTopProducts,
     getProductById,
     createProduct,
     updateProduct,
