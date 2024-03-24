@@ -25,10 +25,6 @@ app.use(express.urlencoded({ extended: true }))
 // body cookie middleware
 app.use(cookieParser())
 
-app.get('/', (request, response) => {
-    response.send('<h1 style="text-align: center; margin-top: 20%;">Server is Running</h1>')
-})
-
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/products', productRoutes)
@@ -37,6 +33,16 @@ app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 // https://developer.paypal.com/dashboard/accounts
 app.use('/api/config/paypal', (request, response) => response.send({ clientId: process.env.PAYPAL_CLIENT_ID }))
+
+if (process.env.NODE_ENV === 'production') {
+    // set static folder
+    app.use(express.static(path.join(__dirname, '/frontend/build')))
+    
+    // any route that is not api will be redirected to index.html
+    app.get('*', (request, response) => response.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html')))
+} else {
+    app.get('/', (request, response) => response.send('<h1 style="text-align: center; margin-top: 20%;">Server is Running</h1>'))
+}
 
 app.use(errorHandler)
 app.use(notFound)
