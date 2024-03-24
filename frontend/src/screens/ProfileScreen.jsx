@@ -45,7 +45,8 @@ const ProfileScreen = () => {
             setName(userInfo.name)
             setEmail(userInfo.email)
         }
-    }, [userInfo])
+        refetch()
+    }, [userInfo, refetch])
 
     return (
         <>
