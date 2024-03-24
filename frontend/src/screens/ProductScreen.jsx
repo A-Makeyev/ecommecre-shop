@@ -82,12 +82,6 @@ const ProductScreen = () => {
 
     return (
         <>
-            <Meta 
-                title={`Shop | ${product.name.split(' ', 3).join(' ')}`} 
-                description={product.category + ' ' + product.brand + ' ' + product.name + ' '} 
-                keywords={product.category + ' ' + product.brand + ' ' + product.name + ' '} 
-            />
-
             <GoBackButton text="Home" url="/" />
 
             {isLoading ? (
@@ -98,6 +92,11 @@ const ProductScreen = () => {
                 </Message>
             ) : (
                 <>
+                    <Meta 
+                        title={`Shop | ${product.name.split(' ', 3).join(' ')}`} 
+                        description={product.category + ' ' + product.brand + ' ' + product.name + ' '} 
+                        keywords={product.category + ' ' + product.brand + ' ' + product.name + ' '} 
+                    />
                     <Row>
                         <Col md={11} lg={13} xl={4} className="mt-4 mb-3 text-center">
                             <Image src={product.image} alt={product.name} fluid />

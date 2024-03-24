@@ -28,24 +28,6 @@ const HomeScreen = () => {
     
     return (
         <>
-            {keyword ? (
-                <Row>
-                    <Col xs={4} sm={3} md={4} lg={2} xl={3}>
-                        <GoBackButton text="Home" url="/" />
-                    </Col>
-                    <Col xs={5} sm={7} md={5} lg={8} xl={6} className="text-center">
-                        <h1 className="text-center mt-3 mb-5">Latest Products</h1>
-                    </Col>
-                </Row>
-            ) : !keyword ? (
-                <>
-                    <ProductCarousel />
-                    <h1 className="text-center mt-3 mb-5">Latest Products</h1>
-                </>
-            ) : (
-                <h1 className="text-center mt-3 mb-5">Latest Products</h1>
-            )}
-
             <Row className="sm-justify-content-center">
 
                 {isLoading ? (
@@ -56,6 +38,24 @@ const HomeScreen = () => {
                     </Message>
                 ) : (
                     <>
+                        {keyword ? (
+                            <Row>
+                                <Col xs={4} sm={3} md={4} lg={2} xl={3}>
+                                    <GoBackButton text="Home" url="/" />
+                                </Col>
+                                <Col xs={5} sm={7} md={5} lg={8} xl={6} className="text-center">
+                                    <h1 className="text-center mt-3 mb-5">Latest Products</h1>
+                                </Col>
+                            </Row>
+                        ) : !keyword ? (
+                            <>
+                                <ProductCarousel />
+                                <h1 className="text-center mt-3 mb-5">Latest Products</h1>
+                            </>
+                        ) : (
+                            <h1 className="text-center mt-3 mb-5">Latest Products</h1>
+                        )}
+
                         <Meta 
                             description={JSON.stringify(data.products.map((p) => p.category + ' ' + p.brand + ' ' + p.name + ' ').toString())} 
                             keywords={JSON.stringify(data.products.map((p) => p.category + ' ' + p.brand + ' ' + p.name + ' ').toString())} 
