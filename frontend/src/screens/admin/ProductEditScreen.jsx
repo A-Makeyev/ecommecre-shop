@@ -76,15 +76,15 @@ const ProductEditScreen = () => {
         try {
             const response = await uploadProductImage(formData).unwrap()
             setImage(response.image)
-            // const label = document.getElementById('image-label')
-            // label.innerHTML = `<label class="fw-bold text-success">Uploaded Image</label>`
             setTimeout(() => {
-                // label.textContent = 'Image'
-                // label.classList.remove('fw-bold', 'text-success')
                 document.getElementById('update-product').click()
             }, 500)
         } catch (error) {
-            toast.error(error?.data?.message || error.error)
+            document.getElementById('image-upload').value = ''
+            toast.error(
+                error?.data?.message || error.error,
+                { theme: "colored", hideProgressBar: true }
+            )
         }
     }
 
@@ -121,7 +121,7 @@ const ProductEditScreen = () => {
                             </Col>
                             <Col>
                                 <Form.Group controlId="image-upload" className="my-3">
-                                    <Form.Label id="image-label" className="input-label">Image</Form.Label>
+                                    <Form.Label className="input-label">Image</Form.Label>
                                     <Form.Control
                                         type="file"
                                         className="inputfile"
@@ -129,15 +129,6 @@ const ProductEditScreen = () => {
                                     >
                                     </Form.Control>
                                 </Form.Group>
-                                {/* <Form.Group controlId="image" className="my-3">
-                                    <Form.Label>Image</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        value={image}
-                                        onChange={(event) => setImage(event.target.value)}
-                                    >
-                                    </Form.Control>
-                                </Form.Group> */}
                             </Col>
                         </Row>
                         <Row>

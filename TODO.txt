@@ -13,3 +13,4 @@
 - Add delete account from profile
 - Add update review?
 - Delete uploaded picture after deleting product
+- Change IP access to mongoDB

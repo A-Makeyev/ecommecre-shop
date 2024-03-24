@@ -3,7 +3,7 @@ import express from 'express'
 import multer from 'multer'
 
 
-const checkFileType = (file, cb) => {
+const fileFilter = (request, file, cb) => {
     const fileTypes = /jpg|jpeg|png/
     const mimetype = fileTypes.test(file.mimetype)
     const extname = fileTypes.test(path.extname(file.originalname).toLowerCase())
@@ -11,7 +11,7 @@ const checkFileType = (file, cb) => {
     if (mimetype && extname) {
         return cb(null, true)
     } else {
-        cb('Please upload a valid image file')
+        cb(new Error('Please upload a valid image file'), false)
     }
 }
 
@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
     }
 })
 
-const upload = multer({ storage })
+const upload = multer({ storage, fileFilter })
 
 router.post('/', upload.single('image'), (request, response) => {
     response.send({
