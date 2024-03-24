@@ -2,6 +2,18 @@
   outline: none !important;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: whitesmoke;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 a {
   text-decoration: none;
 }
