@@ -10,14 +10,16 @@ import CheckoutSteps from '../components/CheckoutSteps'
 import GoBackButton from '../components/GoBackButton'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import Meta from '../components/Meta'
 
 
 const PlaceOrderScreen = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const cart = useSelector(state => state.cart)
-    const totalItems = cart.cartItems.reduce((accumulator, item) => accumulator + item.qty, 0)
+    const { userInfo } = useSelector(state => state.auth)
     const [createOrder, { isLoading, error }] = useCreateOrderMutation()
+    const totalItems = cart.cartItems.reduce((accumulator, item) => accumulator + item.qty, 0)
 
     const placeOrderHandler = async () => {
         try {
@@ -48,23 +50,42 @@ const PlaceOrderScreen = () => {
 
     return (
         <>
+            <Meta 
+                title={`Shop | Order Summary (${totalItems})`}
+                description={JSON.stringify(cart.cartItems.map((p) => p.category + ' ' + p.brand + ' ' + p.name + ' ').toString())} 
+                keywords={JSON.stringify(cart.cartItems.map((p) => p.category + ' ' + p.brand + ' ' + p.name + ' ').toString())} 
+            /> 
+
             <Row>
                 <Col md={3} lg={2}>
                     <GoBackButton text="Payment" url="/payment" />
                 </Col>
-                <Col sm={13} md={11} lg={8} xl={7} className="mt-3">
+                <Col sm={13} md={12} lg={8} xl={7} className="mt-3">
                     <CheckoutSteps one two three />
                 </Col>
             </Row>
             <Row>
-                <Col md={10} lg={8}>
+                <Col md={12} lg={8}>
                     <ListGroup variant="flush">
+                        <ListGroup.Item>
+                            <Row>
+                                <h3>Contact Details</h3>
+                                <p className="fs-5">
+                                    {userInfo.name}
+                                </p>
+                            </Row>
+                            <Row>
+                                <p className="fs-5">
+                                    {userInfo.email}
+                                </p>
+                            </Row>
+                        </ListGroup.Item>
                         <ListGroup.Item>
                             <Row>
                                 <h3>Shipping Address</h3>
                                 <p className="fs-5">
-                                    {' '} {cart.shippingAddress.address}, {cart.shippingAddress.city},
-                                    {' '} {cart.shippingAddress.country}, {cart.shippingAddress.postalCode}
+                                    {cart.shippingAddress.address}, {cart.shippingAddress.city}, {' '} 
+                                    {cart.shippingAddress.country}, {cart.shippingAddress.postalCode}
                                 </p>
                             </Row>
                         </ListGroup.Item>
@@ -109,7 +130,7 @@ const PlaceOrderScreen = () => {
                     </ListGroup>
                 </Col >
 
-                <Col md={10} lg={4}>
+                <Col md={12} lg={4}>
                     <Card className="mt-3 sticky-top sticky-card">
                         <ListGroup variant="flush">
                             <ListGroup.Item>
