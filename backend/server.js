@@ -18,6 +18,24 @@ const app = express()
 const port = process.env.PORT || 5000
 const __dirname = path.resolve() // set __dirname to current directory
 
+// Add headers before the routes are defined
+app.use(function (req, res, next) {
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', 'https://ecommecre-shop.onrender.com')
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
+
+    // Set to true if you need the website to include cookies in the requests sent to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true)
+
+    // Pass to next layer of middleware
+    next()
+})
+
 // body parser middleware
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -41,7 +59,7 @@ if (process.env.NODE_ENV === 'production') {
     // any route that is not api will be redirected to index.html
     app.get('*', (request, response) => response.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html')))
 } else {
-    app.get('/', (request, response) => response.send('<h1 style="text-align: center; margin-top: 20%;">Server is Running</h1>'))
+    app.get('/', (request, response) => response.send('<h1 style="text-align: center margin-top: 20%">Server is Running</h1>'))
 }
 
 app.use(errorHandler)
