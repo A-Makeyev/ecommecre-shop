@@ -13,5 +13,6 @@
 - Add max price and max text to forms
 - Add delete account from profile
 - Add update review?
+- Add css root color vars
 - Delete uploaded picture after deleting product
 - Change IP access to mongoDB

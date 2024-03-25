@@ -40,10 +40,10 @@ const HomeScreen = () => {
                     <>
                         {keyword ? (
                             <Row>
-                                <Col xs={4} sm={3} md={4} lg={2} xl={3}>
+                                <Col xs={6} sm={3} md={4} lg={2} xl={3}>
                                     <GoBackButton text="Home" url="/" />
                                 </Col>
-                                <Col xs={5} sm={7} md={5} lg={8} xl={6} className="text-center">
+                                <Col sm={13} md={5} lg={8} xl={6} className="text-center">
                                     <h1 className="text-center mt-3 mb-5">Latest Products</h1>
                                 </Col>
                             </Row>

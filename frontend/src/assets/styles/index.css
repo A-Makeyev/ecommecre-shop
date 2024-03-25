@@ -163,6 +163,14 @@ select::-webkit-scrollbar {
   height: 450px;
 }
 
+.search-icon {
+  top: 10px;
+  right: 40px;
+  position: relative;
+  font-size: x-large;
+  color: rgba(0, 0, 0, 0.5);
+}
+
 @media (max-width: 768px) {
   .qty-select-invisible {
     margin-top: 3px;
@@ -192,6 +200,10 @@ select::-webkit-scrollbar {
 
   .product-details-img {
     height: 320px;
+  }
+
+  .search-bar {
+    padding: 10px 0 10px;
   }
 }
 

@@ -1,6 +1,6 @@
 import { useState } from 'react'
+import { Form} from 'react-bootstrap'
 import { FaSearch } from 'react-icons/fa'
-import { Form, Button } from 'react-bootstrap'
 import { useParams, useNavigate } from 'react-router-dom'
 
 
@@ -9,7 +9,7 @@ const SearchBox = () => {
     const { keyword: urlKeyword } = useParams()
     const [keyword, setKeyword] = useState(urlKeyword || '')
 
-    const submitHandler = (event) => {
+    const searchHandler = (event) => {
         event.preventDefault()
 
         if (keyword.trim()) {
@@ -22,7 +22,7 @@ const SearchBox = () => {
 
     return (
         <>
-            <Form onSubmit={submitHandler} className="d-flex pe-3">
+            <Form onSubmit={searchHandler} className="search-bar d-flex pe-3">
                 <Form.Control
                     name="q"
                     type="text"
@@ -32,9 +32,12 @@ const SearchBox = () => {
                     onChange={(event) => setKeyword(event.target.value)}
                 >
                 </Form.Control>
-                <Button type="submit">
-                    <FaSearch />
-                </Button>
+                <FaSearch 
+                    role="button" 
+                    type="submit"
+                    className="search-icon" 
+                    onClick={searchHandler} 
+                />
             </Form>
         </>
     )
