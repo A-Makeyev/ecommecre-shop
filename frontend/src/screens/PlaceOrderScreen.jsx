@@ -51,7 +51,7 @@ const PlaceOrderScreen = () => {
     return (
         <>
             <Meta 
-                title={`Shop | Order Summary (${totalItems})`}
+                title={`Shop | Place Order (${totalItems})`}
                 description={JSON.stringify(cart.cartItems.map((p) => p.category + ' ' + p.brand + ' ' + p.name + ' ').toString())} 
                 keywords={JSON.stringify(cart.cartItems.map((p) => p.category + ' ' + p.brand + ' ' + p.name + ' ').toString())} 
             /> 

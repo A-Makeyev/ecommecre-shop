@@ -6,6 +6,7 @@ import { adjustPrice, formatDateAndTime } from '../../utils/cartUtils'
 import GoBackButton from '../../components/GoBackButton'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
+import Meta from '../../components/Meta'
 
 
 const OrderListScreen = () => {
@@ -14,11 +15,12 @@ const OrderListScreen = () => {
 
     return (
         <>
+            <Meta title={'Shop | Orders'} /> 
             <Row>
-                <Col xs={4} sm={3} md={4} lg={2} xl={3}>
+                <Col xs={5} sm={3} md={4} lg={2} xl={3}>
                     <GoBackButton text="Home" url="/" />
                 </Col>
-                <Col xs={5} sm={7} md={5} lg={8} xl={6} className="my-3 text-center">
+                <Col sm={13} md={5} lg={8} xl={6} className="my-3 text-center">
                     <h1>{emptyOrderList ? '' : 'Orders'}</h1>
                 </Col>
             </Row>

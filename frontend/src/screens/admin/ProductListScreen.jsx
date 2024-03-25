@@ -8,6 +8,7 @@ import GoBackButton from '../../components/GoBackButton'
 import Paginate from '../../components/Paginate'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
+import Meta from '../../components/Meta'
 
 
 const ProductListScreen = () => {
@@ -48,12 +49,13 @@ const ProductListScreen = () => {
 
     return (
         <>
+            <Meta title={'Shop | Products'} />
             {!isLoading && (
                 <Row>
-                    <Col xs={4} sm={3} md={3} lg={3} xl={4}>
+                    <Col xs={5} sm={3} md={3} lg={3} xl={4}>
                         <GoBackButton text="Home" url="/" />
                     </Col>
-                    <Col xs={5} sm={7} md={6} lg={6} xl={4} className="my-3 text-center">
+                    <Col sm={13} md={6} lg={6} xl={4} className="my-3 text-center">
                         <h1>{JSON.stringify(data.products) === '[]' ? '' : 'Products'}</h1>
                     </Col>
                     <Col sm={13} md={3} lg={3} xl={4} className="text-end">

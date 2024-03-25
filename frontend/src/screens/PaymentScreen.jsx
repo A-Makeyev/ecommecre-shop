@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Form, Button } from 'react-bootstrap'
+import { savePaymentMethod } from '../slices/cartSlice'
 import FormContainer from '../components/FormContainer'
 import CheckoutSteps from '../components/CheckoutSteps'
 import GoBackButton from '../components/GoBackButton'
-import { savePaymentMethod } from '../slices/cartSlice'
+import Meta from '../components/Meta'
 
 
 const PaymentScreen = () => {
@@ -29,6 +30,7 @@ const PaymentScreen = () => {
 
     return (
         <>
+            <Meta title={'Shop | Payment'} />
             <Row>
                 <Col md={3} lg={2} xl={2}>
                     <GoBackButton text="Shipping" url="/shipping" />

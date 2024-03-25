@@ -10,6 +10,7 @@ import FormContainer from '../../components/FormContainer'
 import GoBackButton from '../../components/GoBackButton'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
+import Meta from '../../components/Meta'
 
 
 const UserEditScreen = () => {
@@ -93,7 +94,7 @@ const UserEditScreen = () => {
     }
 
     return (
-        <>
+        <> 
             <Row>
                 <Col md={3} lg={2} xl={2}>
                     <GoBackButton text="Users" url="/admin/userlist" />
@@ -109,60 +110,63 @@ const UserEditScreen = () => {
                     {error?.data?.message || error.error}
                 </Message>
             ) : (
-                <FormContainer>
-                    <Form>
-                        <Form.Group controlId="name" className="my-3">
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={name}
-                                onChange={(event) => setName(event.target.value)}
-                            >
-                            </Form.Control>
-                        </Form.Group>
+                <>
+                    <Meta title={`Shop | Edit ${user.name.split(' ', 2).join(' ')}`} />
+                    <FormContainer>
+                        <Form>
+                            <Form.Group controlId="name" className="my-3">
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    value={name}
+                                    onChange={(event) => setName(event.target.value)}
+                                >
+                                </Form.Control>
+                            </Form.Group>
 
-                        <Form.Group controlId="email" className="my-3">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control
-                                type="email"
-                                value={email}
-                                onChange={(event) => setEmail(event.target.value)}
-                            >
-                            </Form.Control>
-                        </Form.Group>
+                            <Form.Group controlId="email" className="my-3">
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control
+                                    type="email"
+                                    value={email}
+                                    onChange={(event) => setEmail(event.target.value)}
+                                >
+                                </Form.Control>
+                            </Form.Group>
 
-                        <Row>
-                            <Col xs={3} sm={3} md={2} lg={2}>
-                                <Form.Group controlId="isAdmin">
-                                    <Form.Check
-                                        type="checkbox"
-                                        label="Admin"
-                                        checked={isAdmin}
-                                        onChange={() => setIsAdmin(true)}
-                                    >
-                                    </Form.Check>
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group controlId="regularUser">
-                                    <Form.Check
-                                        type="checkbox"
-                                        label="Regular User"
-                                        checked={!isAdmin}
-                                        onChange={() => setIsAdmin(false)}
-                                        onClick={adminWarningHandler}
-                                    >
-                                    </Form.Check>
-                                </Form.Group>
-                            </Col>
-                        </Row>
+                            <Row>
+                                <Col xs={3} sm={3} md={2} lg={2}>
+                                    <Form.Group controlId="isAdmin">
+                                        <Form.Check
+                                            type="checkbox"
+                                            label="Admin"
+                                            checked={isAdmin}
+                                            onChange={() => setIsAdmin(true)}
+                                        >
+                                        </Form.Check>
+                                    </Form.Group>
+                                </Col>
+                                <Col>
+                                    <Form.Group controlId="regularUser">
+                                        <Form.Check
+                                            type="checkbox"
+                                            label="Regular User"
+                                            checked={!isAdmin}
+                                            onChange={() => setIsAdmin(false)}
+                                            onClick={adminWarningHandler}
+                                        >
+                                        </Form.Check>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
 
-                        <Button onClick={(event) => updateHandler(event)} type="submit" variant="primary" id="save-user" className="my-3 w-100">
-                            {updatingUser ? <Loader update /> : 'Save'}
-                        </Button>
+                            <Button onClick={(event) => updateHandler(event)} type="submit" variant="primary" id="save-user" className="my-3 w-100">
+                                {updatingUser ? <Loader update /> : 'Save'}
+                            </Button>
 
-                    </Form>
-                </FormContainer>
+                        </Form>
+                    </FormContainer>
+                </>
             )}
         </>
     )

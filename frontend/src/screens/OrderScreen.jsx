@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import GoBackButton from '../components/GoBackButton'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import Meta from '../components/Meta'
 
 
 const OrderScreen = () => {
@@ -105,6 +106,7 @@ const OrderScreen = () => {
 
     return (
         <>
+            <Meta title={'Shop | Order Summary'} /> 
             <Row>
                 <Col md={3} lg={2}>
                     <GoBackButton text="Profile" url="/profile" />

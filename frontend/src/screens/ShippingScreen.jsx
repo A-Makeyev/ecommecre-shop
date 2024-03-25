@@ -6,6 +6,7 @@ import { saveShippingAddress } from '../slices/cartSlice'
 import FormContainer from '../components/FormContainer'
 import GoBackButton from '../components/GoBackButton'
 import CheckoutSteps from '../components/CheckoutSteps'
+import Meta from '../components/Meta'
 
 
 const ShippingScreen = () => {
@@ -26,6 +27,7 @@ const ShippingScreen = () => {
 
     return (
         <>
+            <Meta title={'Shop | Shipping'} />
             <Row>
                 <Col md={3} lg={2} xl={2}>
                     <GoBackButton text="Cart" url="/cart" />

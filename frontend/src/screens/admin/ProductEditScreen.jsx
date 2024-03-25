@@ -7,6 +7,7 @@ import FormContainer from '../../components/FormContainer'
 import GoBackButton from '../../components/GoBackButton'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
+import Meta from '../../components/Meta'
 
 
 const ProductEditScreen = () => {
@@ -105,93 +106,96 @@ const ProductEditScreen = () => {
                     {error?.data?.message || error.error}
                 </Message>
             ) : (
-                <FormContainer>
-                    <Form>
-                        <Row>
-                            <Col>
-                                <Form.Group controlId="name" className="mt-3">
-                                    <Form.Label>Name</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        value={name}
-                                        onChange={(event) => setName(event.target.value)}
-                                    >
-                                    </Form.Control>
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group controlId="image-upload" className="my-3">
-                                    <Form.Label className="input-label">Image</Form.Label>
-                                    <Form.Control
-                                        type="file"
-                                        className="inputfile"
-                                        onChange={uploadFileHandler}
-                                    >
-                                    </Form.Control>
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Form.Group controlId="brand" className="mb-3">
-                                    <Form.Label>Brand</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        value={brand}
-                                        onChange={(event) => setBrand(event.target.value)}
-                                    >
-                                    </Form.Control>
-                                </Form.Group>
-                                <Form.Group controlId="category" className="my-3">
-                                    <Form.Label>Category</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        value={category}
-                                        onChange={(event) => setCategory(event.target.value)}
-                                    >
-                                    </Form.Control>
-                                </Form.Group>
-                                <Form.Group controlId="price" className="my-3">
-                                    <Form.Label>Price</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        value={price}
-                                        onChange={(event) => setPrice(event.target.value)}
-                                    >
-                                    </Form.Control>
-                                </Form.Group>
-                                <Form.Group controlId="countInStock" className="my-3">
-                                    <Form.Label>Count In Stock</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        value={countInStock}
-                                        onChange={(event) => setCountInStock(event.target.value)}
-                                    >
-                                    </Form.Control>
-                                </Form.Group>
+                <>
+                    <Meta title={`Shop | Edit ${product.name.split(' ', 3).join(' ')}`} />
+                    <FormContainer>
+                        <Form>
+                            <Row>
+                                <Col>
+                                    <Form.Group controlId="name" className="mt-3">
+                                        <Form.Label>Name</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            value={name}
+                                            onChange={(event) => setName(event.target.value)}
+                                        >
+                                        </Form.Control>
+                                    </Form.Group>
+                                </Col>
+                                <Col>
+                                    <Form.Group controlId="image-upload" className="my-3">
+                                        <Form.Label className="input-label">Image</Form.Label>
+                                        <Form.Control
+                                            type="file"
+                                            className="inputfile"
+                                            onChange={uploadFileHandler}
+                                        >
+                                        </Form.Control>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Form.Group controlId="brand" className="mb-3">
+                                        <Form.Label>Brand</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            value={brand}
+                                            onChange={(event) => setBrand(event.target.value)}
+                                        >
+                                        </Form.Control>
+                                    </Form.Group>
+                                    <Form.Group controlId="category" className="my-3">
+                                        <Form.Label>Category</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            value={category}
+                                            onChange={(event) => setCategory(event.target.value)}
+                                        >
+                                        </Form.Control>
+                                    </Form.Group>
+                                    <Form.Group controlId="price" className="my-3">
+                                        <Form.Label>Price</Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            value={price}
+                                            onChange={(event) => setPrice(event.target.value)}
+                                        >
+                                        </Form.Control>
+                                    </Form.Group>
+                                    <Form.Group controlId="countInStock" className="my-3">
+                                        <Form.Label>Count In Stock</Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            value={countInStock}
+                                            onChange={(event) => setCountInStock(event.target.value)}
+                                        >
+                                        </Form.Control>
+                                    </Form.Group>
 
-                            </Col>
-                            <Image src={product.image} alt={product.name} className="w-50 h-25" />
-                        </Row>
-                        <Form.Group controlId="description" className="mb-2">
-                            <Form.Label>Description</Form.Label>
-                            <Form.Control
-                                as="textarea"
-                                rows={7}
-                                maxLength={1000}
-                                value={description}
-                                onChange={(event) => setDescription(event.target.value)}
-                            >
-                            </Form.Control>
-                        </Form.Group>
+                                </Col>
+                                <Image src={product.image} alt={product.name} className="w-50 h-25" />
+                            </Row>
+                            <Form.Group controlId="description" className="mb-2">
+                                <Form.Label>Description</Form.Label>
+                                <Form.Control
+                                    as="textarea"
+                                    rows={7}
+                                    maxLength={1000}
+                                    value={description}
+                                    onChange={(event) => setDescription(event.target.value)}
+                                >
+                                </Form.Control>
+                            </Form.Group>
 
-                        <Button onClick={(event) => updateHandler(event, false)} type="submit" variant="primary" id="save-product" className="mt-2 w-100">
-                            {updatingProduct ? <Loader update /> : 'Save'}
-                        </Button>
+                            <Button onClick={(event) => updateHandler(event, false)} type="submit" variant="primary" id="save-product" className="mt-2 w-100">
+                                {updatingProduct ? <Loader update /> : 'Save'}
+                            </Button>
 
-                        <Button type="submit" id="update-product" onClick={(event) => updateHandler(event, true)}></Button>
-                    </Form>
-                </FormContainer>
+                            <Button type="submit" id="update-product" onClick={(event) => updateHandler(event, true)}></Button>
+                        </Form>
+                    </FormContainer>
+                </>
             )}
         </>
     )

@@ -11,6 +11,7 @@ import { toast } from 'react-toastify'
 import GoBackButton from '../components/GoBackButton'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import Meta from '../components/Meta'
 
 
 const ProfileScreen = () => {
@@ -50,6 +51,7 @@ const ProfileScreen = () => {
 
     return (
         <>
+            <Meta title={'Shop | Profile'} /> 
             <GoBackButton text="Home" url="/" />
             <Row className="justify-content-center">
                 <Col md={9} lg={emptyOrdersList ? 5 : 4}>

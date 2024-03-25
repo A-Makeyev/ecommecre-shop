@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import FormContainer from '../components/FormContainer'
 import GoBackButton from '../components/GoBackButton'
 import Loader from '../components/Loader'
+import Meta from '../components/Meta'
 
 
 const LoginScreen = () => {
@@ -44,6 +45,7 @@ const LoginScreen = () => {
 
     return (
         <>
+            <Meta title={'Shop | Sign In'} />
             <GoBackButton text="Home" url="/" />
             <FormContainer>
                 <h1 className="text-center">Sign In</h1>

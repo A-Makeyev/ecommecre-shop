@@ -41,7 +41,7 @@ const CartScreen = () => {
     return (
         <>
             <Meta 
-                title={`Shop | Cart (${totalItems})`}
+                title={totalItems > 0 ? `Shop | Cart (${totalItems})` : 'Shop | Cart'}
                 description={JSON.stringify(cartItems.map((p) => p.category + ' ' + p.brand + ' ' + p.name + ' ').toString())} 
                 keywords={JSON.stringify(cartItems.map((p) => p.category + ' ' + p.brand + ' ' + p.name + ' ').toString())} 
             /> 
