@@ -37,8 +37,8 @@ const UserListScreen = () => {
                 <Col xs={5} sm={3} md={4} lg={2} xl={3}>
                     <GoBackButton text="Home" url="/" />
                 </Col>
-                <Col sm={13} md={5} lg={8} xl={6} className="my-3 text-center">
-                    <h1>{emptyUserList ? '' : 'Users'}</h1>
+                <Col md={12} lg={8} xl={6} className="my-3 text-center">
+                    <h1>{emptyUserList ? '' : 'Active Users'}</h1>
                 </Col>
             </Row>
 

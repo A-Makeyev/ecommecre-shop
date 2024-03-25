@@ -52,13 +52,13 @@ const ProductListScreen = () => {
             <Meta title={'Shop | Products'} />
             {!isLoading && (
                 <Row>
-                    <Col xs={5} sm={3} md={3} lg={3} xl={4}>
+                    <Col xs={5} sm={3} md={2} lg={4} xl={2}>
                         <GoBackButton text="Home" url="/" />
                     </Col>
-                    <Col sm={13} md={6} lg={6} xl={4} className="my-3 text-center">
-                        <h1>{JSON.stringify(data.products) === '[]' ? '' : 'Products'}</h1>
+                    <Col sm={13} md={7} lg={4} xl={7} className="my-3 text-center">
+                        <h1>{JSON.stringify(data.products) === '[]' ? '' : 'Active Products'}</h1>
                     </Col>
-                    <Col sm={13} md={3} lg={3} xl={4} className="text-end">
+                    <Col sm={13} md={3} lg={4} xl={3} className="text-end">
                         <Button role="button" className="mt-3 text-center sm-width-100" onClick={createProductHandler}>
                             {creatingProduct ? <Loader create /> : (
                                 <>
