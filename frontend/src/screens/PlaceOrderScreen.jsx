@@ -66,7 +66,7 @@ const PlaceOrderScreen = () => {
             </Row>
             <Row>
                 <Col md={12} lg={8}>
-                    <ListGroup variant="flush">
+                    <ListGroup variant="flush" className="sm-text-center">
                         <ListGroup.Item>
                             <Row>
                                 <h3>Contact Details</h3>

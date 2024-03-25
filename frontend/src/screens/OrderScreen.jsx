@@ -128,7 +128,7 @@ const OrderScreen = () => {
                     </Row>
                     <Row className="justify-content-center mt-4">
                         <Col md={9} lg={5}>
-                            <ListGroup variant="flush">
+                            <ListGroup variant="flush" className="sm-text-center">
                                 <ListGroup.Item>
                                     <h2>Shipping</h2>
                                     <p>
