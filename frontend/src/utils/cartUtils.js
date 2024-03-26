@@ -144,7 +144,7 @@ export const alertText = (qty) => {
 }
 
 export const addedToCartMessage = (qty, item) => {
-    item = item.split(' ', 3).join(' ')
+    item = item.split(' ', 4).join(' ')
     const randomValue = (array) => { return array[~~(Math.random() * array.length)] }
     const positions = ['top-left', 'top-right', 'top-center', 'bottom-left', 'bottom-right', 'bottom-center']
     const emojis = ['🥳', '✨', '🤩', '🔥', '👀', '👌🏼']
