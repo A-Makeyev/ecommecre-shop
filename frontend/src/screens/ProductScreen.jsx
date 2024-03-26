@@ -98,10 +98,10 @@ const ProductScreen = () => {
                         keywords={product.category + ' ' + product.brand + ' ' + product.name + ' '} 
                     />
                     <Row>
-                        <Col md={11} lg={13} xl={4} className="mt-4 mb-3 text-center">
+                        <Col lg={13} xl={4} className="mt-4 mb-3 text-center">
                             <Image src={product.image} alt={product.name} fluid />
                         </Col>
-                        <Col md={6} lg={7} xl={5}>
+                        <Col md={7} xl={5}>
                             <ListGroup>
                                 <ListGroup.Item variant="flush" className="border-0">
                                     <h3>{product.name}</h3>
