@@ -79,7 +79,7 @@ const ProductEditScreen = () => {
             setImage(response.image)
             setTimeout(() => {
                 document.getElementById('update-product').click()
-            }, 500)
+            }, 1000)
         } catch (error) {
             document.getElementById('image-upload').value = ''
             toast.error(
