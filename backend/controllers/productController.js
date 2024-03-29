@@ -73,7 +73,7 @@ const updateProduct = asyncHandler(async (request, response) => {
     const product = await Product.findById(request.params.id)
     if (product) {
         product.name = name,
-            product.description = description
+        product.description = description
         product.image = image
         product.category = category
         product.brand = brand
