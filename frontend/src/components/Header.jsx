@@ -87,13 +87,13 @@ const Header = () => {
                                         </>
                                     )}
 
-                                    <NavDropdown.Item onClick={logoutHandler} className="text-center">
+                                    <NavDropdown.Item className="text-center" id="logout" onClick={logoutHandler}>
                                         Logout
                                     </NavDropdown.Item>
                                 </NavDropdown>
                             ) : (
                                 <LinkContainer to="/login">
-                                    <Nav.Link className="fs-5">
+                                    <Nav.Link className="fs-5" id="login">
                                         <FaUser className="me-2 mb-2" />
                                         Login
                                     </Nav.Link>
