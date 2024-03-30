@@ -29,7 +29,7 @@ app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/products', productRoutes)
 app.use('/api/upload', uploadRoutes)
-app.use('/uploads', express.static(path.join(__dirname, '/frontend/public/images')))
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 // https://developer.paypal.com/dashboard/accounts
 app.use('/api/config/paypal', (request, response) => response.send({ clientId: process.env.PAYPAL_CLIENT_ID }))
