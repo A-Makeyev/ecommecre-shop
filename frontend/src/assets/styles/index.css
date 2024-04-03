@@ -216,7 +216,8 @@ select::-webkit-scrollbar {
     margin-left: auto;
   }
 
-  .xs-price-width-100 {
+  .xs-price {
+    font-size: 1.1rem !important;
     width: 100px !important;
   }
 }

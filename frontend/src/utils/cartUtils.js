@@ -100,7 +100,7 @@ export const timeSince = (time) => {
         [5806080000, 'Last century', 'Next century'], // 60*60*24*7*4*12*100*2
         [58060800000, 'centuries', 2903040000] // 60*60*24*7*4*12*100*20, 60*60*24*7*4*12*100
     ]
-    
+
     var seconds = (+new Date() - time) / 1000,
         token = 'ago',
         list_choice = 1
@@ -108,7 +108,7 @@ export const timeSince = (time) => {
     if (seconds < 1) {
         return 'Just now'
     }
-    
+
     if (seconds < 0) {
         seconds = Math.abs(seconds)
         token = 'from now'
@@ -123,7 +123,7 @@ export const timeSince = (time) => {
             else
                 return Math.floor(seconds / format[2]) + ' ' + format[1] + ' ' + token
         }
-        
+
     format = time_formats[time_formats.length - 1]
     return Math.floor(seconds / format[2]) + ' ' + format[1] + ' ' + token
 }
@@ -131,8 +131,8 @@ export const timeSince = (time) => {
 
 export const quantityAlert = (qty) => {
     return (qty === 1 || qty < 1 || ((qty < 10) && (qty > 1)))
-        ? "quantity-alert-text xs-price-width-100 mt-1 pe-0 fs-5"
-        : "xs-price-width-100 mt-1 pe-0 fs-5"
+        ? "quantity-alert-text xs-price mt-1 pe-0 fs-5"
+        : "xs-price mt-1 pe-0 fs-5"
 }
 
 export const alertText = (qty) => {
